@@ -1,0 +1,5 @@
+Please run R Code in the following order:
+1) package_load
+2) data_prep
+3) data_load
+4) econ_activity
