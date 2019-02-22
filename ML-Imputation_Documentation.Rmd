@@ -1,7 +1,7 @@
 ---
 title: "Applications of Machine Learning in Imputation"
 author: "Vinayak Anand-Kumar"
-date: "Data Science Academy"
+date: "Data Science Project"
 output: 
   html_document:
     theme: darkly
@@ -100,8 +100,19 @@ XGBoost is a method of supervised ML where analysts specify an outcome to be est
 The ML system is trained using batch learning and generalised through a model based approach; using all the available data to construct a model that specifies the relationship between the predictor and outcome variables, which are then generalised on the test data.  
 
 # Methods
+The project evaluated the machine learning methods using:  
+1) The Census Teaching, a open dataset containing 1% of the person records from the 2011 Census in England & Wales.
+2) Survey Data
+
+The code below specifies the packages used in the preparation, study and build of machine learning systems using the Census Teaching File.
+
 ```{r packages, eval=FALSE}
-library(dplyr)
+library(tidyverse)
+library(mice)
+library(reshape2)
+library(GGally)
+library(Matrix)
+library(xgboost)
 ```
 
 ## Census Teaching File
@@ -172,7 +183,7 @@ Census.test<-Census[Census20,]
 
 The intention was to build a model to predict a given variable using training data, which would have complete cases for all variables. This model would then be evaluated with respect to its accuracy and generalisability using test and validation datasets, which would have missingness.  
 
-The Census Teaching File was a complete dataset. As a result, missingness was simulated using the following code.
+The Census Teaching File was a complete dataset. As a result, missingness was simulated using the code below, and imputation models were derived for variables listes in Table 1.
 
 ```{r missSim, eval=FALSE}
 #Ampute test dataset (i.e. simulate missingness)
@@ -183,33 +194,9 @@ Census.test.miss<-Census.test.amp$amp
 Census.test.miss[is.na(Census.test.miss)] <- -999
 ```
 
-Imputation models were derived for the following variables in the Census Teaching File:  
-- Economic Activity, which was a multi-level categorical variable that gauged the type of work respondents carried out over the reference week. For the variable in the dataset, respondents could be categorised into one of the following groups:  
-    - Employee  
-    - Self-employed  
-    - Unemployed  
-    - Full-time student  
-    - Retired  
-    - Student  
-    - Looking after home or family  
-    - Long-term sick or disabled  
-    - Economically inactive: Other Reason  
-    - No code required (under 16 years of age or students or school children living away during term time)  
-- Hours worked, which was a multi-level categorical variable that measured the number of hours worked over the reference week. Respondents could be categorised into one of the following groups:  
-    - 15 or less hours worked  
-    - 16 to 30 hours worked  
-    - 31 to 48 hours worked  
-    - 49 or more hours worked  
-    - No code required (under 16 years of age or students or school children living away during term time)  
-- Student, which was a binary variable that reflects whether respondents' study status. Respondents were grouped as follows:  
-    - A school child or in full time study  
-    - Not a school child or in full time study  
-- Social Grade, which was a multi-level categorical variable that reflects the respondents' socio economic status. Respondents could be categorised into the following groups:  
-    - Higher and intermediate managerial, administrative, professional occupations  
-    - Supervisory, clerical and junior managerial, administrative, professional occupations  
-    - Skilled manual occupations  
-    - Semi-skilled and unskilled manual occupations, unemployed and lowest grade occupations
-    
+Table 1. Variables to impute in Census Teaching File
+
+![](images/ImputableVariables.svg)
 
 <!-- ### Gradient descent -->
 <!-- The weights for each variable in the model are constantly modified in order to minimse the variation not explained by the model. This is referred to as gradient descent.  -->
