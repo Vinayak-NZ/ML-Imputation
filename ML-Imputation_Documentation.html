@@ -360,7 +360,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Applications of Machine Learning in Imputation</h1>
 <h4 class="author"><em>Vinayak Anand-Kumar</em></h4>
-<h4 class="date"><em>Data Science Academy</em></h4>
+<h4 class="date"><em>Data Science Project</em></h4>
 
 </div>
 
@@ -468,7 +468,15 @@ The different types of machine learning systems can be categorised with respect 
 </div>
 <div id="methods-1" class="section level1">
 <h1>Methods</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
+<p>The project evaluated the machine learning methods using:<br />
+1) The Census Teaching, a open dataset containing 1% of the person records from the 2011 Census in England &amp; Wales. 2) Survey Data</p>
+<p>The code below specifies the packages used in the preparation, study and build of machine learning systems using the Census Teaching File.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(mice)
+<span class="kw">library</span>(reshape2)
+<span class="kw">library</span>(GGally)
+<span class="kw">library</span>(Matrix)
+<span class="kw">library</span>(xgboost)</code></pre></div>
 <div id="census-teaching-file" class="section level2">
 <h2>Census Teaching File</h2>
 <p>The Census Teaching File was downloaded from the <a href="https://www.ons.gov.uk/census/2011census/2011censusdata/censusmicrodata/microdatateachingfile">ONS website</a> as a CSV file named “CensusTeachingFile”, and was read into R using the following line of code.</p>
