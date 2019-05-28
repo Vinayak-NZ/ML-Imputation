@@ -28,8 +28,8 @@ Census <- plyr::rename(CensusRaw, c(
   "Approximated.Social.Grade" = "social.grade"
 ))
 
-# Recode variables
-Census %>% mutate_if(is.factor, as.character) -> Census
+# Recode variables (dataset is mutated in order to recode variables)
+Census <- Census %>% mutate_if(is.factor, as.character)
 
 # Recode the Region variable so that it is numeric
 Census$region[Census$region == "E12000001"] <- 1
@@ -49,7 +49,8 @@ Census$residence.type[Census$residence.type == "H"] <- 2
 Census$student[Census$student == 1] <- 0
 Census$student[Census$student == 2] <- 1
 
-Census %>% mutate_if(is.character, as.numeric) -> Census
+Census <- Census %>% mutate_if(is.character, as.numeric)
+
 Census$person.id <- as.character(Census$person.id)
 
 Ht <- table(Census$hours.worked)
