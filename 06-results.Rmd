@@ -1,0 +1,53 @@
+# Results
+Summary statistics were produced to review the pattern of responses of individuals included in the dataset. Please note, that all comments that refer to respondents reflect only the respondents included in the 2011 Census Teaching File, and not descriptive statistics for the Census Population as a whole. Summary statistics produced using the dataset show that:  
+  
+- The majority of respondents resided in the South East and London. A relatively small proportion reside in North East and Wales.  
+- Almost all respondents resided in a non-communal establishment  
+- The majority of respondents were living in a family that was composed of a married or same-sex civil partnership couple  
+- Almost all respondents were usual residents at the collection address during time of collection  
+- There were a similar number of male and female respondents in the dataset  
+- The majority of respondents were aged 0 to 15  
+- The majority of respondents were single and had never married or registered for a same-sex civil partnership
+- The majority of respondents were not school children nor were they in full time study
+- The majority of respondents were born in the United Kingdom  
+- The majority of respondents reported as being in very good health at time of collection
+- With respect to Ethnicity, the majority of respondents identified as White  
+- With respect to religion, the majority of respondents identified as Christian. The second largest group were those that stated they had no religion.  
+- The two most prevalent categories for economic activity were employee and retired  
+- Of those that were eligible to answer the Occupation item, the majority were either in a Professional or Elementary occupation
+- Of those that were eligible to answer the Industry item, the majority were employed in the Wholesale and retail trade industry  
+- Of those that were eligible to answer the hours worked item, the majority worked between 31 and 38 hours per week  
+- Of those elgible to answer the Social Grade item, the majority would be classed into the Supervisory, Clerical, and Junior Managerial social group  
+
+```{r study-census-data, eval=FALSE}
+```
+
+Bar charts were used to review the distribution of responses for each categorical variable in the complete, training and test datasets (see Figures 2 to 4). As expected, there was a similar response pattern for a each variable between the complete, training and test datasets. The correlation matrix in Figure 5 presents the relationship between the variables in the complete dataset.    
+
+```{r compare-test-train, eval=FALSE}
+```
+
+![Figure 2. Distribution of responses for variables in complete Census Teaching File](images/dist_all.png)
+
+![Figure 3. Distribution of responses for variables in training dataset](images/dist_train.png)
+
+![Figure 4. Distribution of responses for variables in test dataset](images/dist_test.png)
+
+![Figure 5. Correlation matrix of variables in the Census dataset](images/corr_all.png)
+
+<!-- ### Gradient descent -->
+<!-- The weights for each variable in the model are constantly modified in order to minimse the variation not explained by the model. This is referred to as gradient descent.  -->
+
+# Results
+
+## Economic Activity
+
+
+## Hours worked 
+
+
+## Social Grade
+
+
+## Student
+

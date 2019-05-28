@@ -1,0 +1,49 @@
+# What is Machine Learning?
+Machine learning is the field of study that enables a program to learn from its experience of iterating through a task multiple times. A performance measure is generally specified by the programmer, which is used to evaluate how well the machine has carried out the task at each iteration. Learning of the task is evidenced by its improvement against the performance measure.  
+The different types of machine learning systems can be categorised with respect to:  
+  
+- Whether or not they are trained with human supervision  
+- Whether or not they can learn incrementally or on the fly  
+- Whether they work by comparing new data points to known data points, or instead detect patterns in the training data and build a predictive model  
+  
+## Supervision
+Machine learning systems can vary with regards to the degree of supervision. The major types of supervision:  
+  
+- Supervised learning  
+- Unsupervised learning  
+- Semi-supervised learning  
+- Reinforcement learning  
+  
+### Supervised learning
+Supervised learning is the specification of the desired output. That is, the data used to train the model includes the solutions (which are referred to as labels), which the machine learning system attempts to estimate. The desired solutions specified in the machine learning algorithm are referred to as labels.  
+
+### Unsupervised learning
+Unsupervised learning uses training data that is unlabelled. In this class of machine learning systems, the outcome/ desired solutions are not specified in the machine learning algorithm.  
+
+### Semi-supervised learning
+Machine learning systems that use partially labelled data are categorised as utilising semi-supervised learning. 
+
+
+### Reinforcement learning
+Reinforcement learning involves the use of rewards or penalties to train the machine in identifying the appropriate action for a given situation. The learning system, which is referred to as an agent, observes the environment, selects and performs actions, and gets a response in the form of a reward or penalty. After multiple iterations, it identifies the best strategy, referred to as a policy, that results in the most reward over time.  
+  
+  
+## Batch and Online learning
+Another criterion for classifying machine learning systems is the way in which the algorithm learns. That is, whether the learning takes place at once or if it happens in increments.  
+
+### Batch learning
+Batch learning uses all the available data to train the machine learning system. This is generally time consuming and computationally expensive, and as a result is carried out offline. Whilst in production, the system is no longer learning, and is simply applying what it has learnt from the full set of training data.  
+
+Any changes to the data generating mechanism (GDM) will mean that a new system would need to be trained, from scratch on the full set of data (that includes data points before and after changes to the GDM).  
+
+### Online learning
+Online learning trains the system incrementally through sequential input of data. Data can be delivered individually or in small groups, referred to as mini-batches. As each learning step is relatively fast and cheap, the system can learn about new data whilst in production, as it arrives. It is an ideal approach for when the velocity of new data is high, and when there is a need to adapt to changes rapidly or autonomously.  
+  
+## Approaches to generalisation
+Machine learning systems can also be categorised with regards to how the systems generalise. That is, there are different approaches to using the training data to develop a system that can then be generalised to new cases. The two main approaches are instance-based learning and model-based learning.  
+
+### Instance-based learning
+Instance-based learning identifies all instances of a given feature in the training data and uses a similarity measure to generalise to new cases.  
+
+### Model-based learning
+Model-based learning uses features in the training data to predict the outcome/ variable of interest; the model used to specify the relationship between the predictor(s) and outcome(s) are then generalised on new cases.
