@@ -30,6 +30,10 @@ knitr::opts_knit$set(root.dir = here::here())
 knitr::read_chunk("WF1_package_load.R")
 knitr::read_chunk("WF2_data_prep.R")
 knitr::read_chunk("WF3_data_study.R")
+knitr::read_chunk("WFM_EconAct.R")
+knitr::read_chunk("WFM_HoursCont.R")
+knitr::read_chunk("WFM_SocialGrade.R")
+knitr::read_chunk("WFM_Student.R")
 ```
 
 # What is Imputation?
@@ -265,7 +269,7 @@ xgb.plot.tree(model = model, tree=2)
 
 # Methods
 The project evaluated the machine learning methods using:  
-1) The Census Teaching, a open dataset containing 1% of the person records from the 2011 Census in England & Wales.  
+1) The Census Teaching File, an open dataset containing 1% of the person records from the 2011 Census in England & Wales.  
 2) Survey Data
 
 The code below specifies the packages used in the preparation, study and build of machine learning systems using the Census Teaching File.
@@ -308,14 +312,14 @@ Summary statistics were produced to review the pattern of responses of individua
   
 - The majority of respondents resided in the South East and London. A relatively small proportion reside in North East and Wales.  
 - Almost all respondents resided in a non-communal establishment  
-- The majority of respondents were living in a family that composed of a married or same-sex civil partnership couple  
+- The majority of respondents were living in a family that was composed of a married or same-sex civil partnership couple  
 - Almost all respondents were usual residents at the collection address during time of collection  
 - There were a similar number of male and female respondents in the dataset  
 - The majority of respondents were aged 0 to 15  
 - The majority of respondents were single and had never married or registered for a same-sex civil partnership
 - The majority of respondents were not school children nor were they in full time study
 - The majority of respondents were born in the United Kingdom  
-- The majority of respondents reported being in very good health at time of collection
+- The majority of respondents reported as being in very good health at time of collection
 - With respect to Ethnicity, the majority of respondents identified as White  
 - With respect to religion, the majority of respondents identified as Christian. The second largest group were those that stated they had no religion.  
 - The two most prevalent categories for economic activity were employee and retired  
@@ -342,4 +346,17 @@ Bar charts were used to review the distribution of responses for each categorica
 
 <!-- ### Gradient descent -->
 <!-- The weights for each variable in the model are constantly modified in order to minimse the variation not explained by the model. This is referred to as gradient descent.  -->
+
+# Results {.tabset .tabset-fade .tabset-pills}
+
+## Economic Activity
+
+
+## Hours worked 
+
+
+## Social Grade
+
+
+## Student
 

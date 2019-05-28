@@ -10,9 +10,9 @@ g + geom_bar() + scale_x_discrete(name = "Social Grade",
 
 #### Tidy/treat the training and test datasets ####
 # Remove units with NCR codes for variable & Remove the personal identifier
-Census.train.tidy <- Census.train[!Census.train$social.grade == -9, -1]
+Census.train.tidy <- Census.train[!Census.train$social.grade == -9, c(-1,-17)]
 
-Census.test.tidy <- Census.test[!Census.test$social.grade == -9, -1]
+Census.test.tidy <- Census.test[!Census.test$social.grade == -9, c(-1,-17)]
 
 #### Simulate missingness in test data & Convert all missing responses to -999 ####
 Census.test.tidy.amp <- ampute(Census.test.tidy, prop = 0.7)
@@ -25,6 +25,10 @@ NumberMissing <- sapply(Census.test.tidy.miss, function(y) sum(length(
 TestNumberMissing <- data.frame(NumberMissing)
 # Convert missing cases to -999
 Census.test.tidy.miss[is.na(Census.test.tidy.miss)] <- -999
+# Save dataset with missingenss
+save(Census.test.tidy.miss, file="data/SocialGrade/Census.test.tidy.miss.Rda")
+# Load dataset with missingenss
+load("data/SocialGrade/Census.test.tidy.miss.Rda")
 
 #### Train the model ####
 # Convert the data to matrix and assign output variable
@@ -53,6 +57,8 @@ trainSG_v1 <- xgboost(
 
 #### Test the model ####
 predicted <- predict(trainSG_v1, dtest, missing = -999, na.action = na.pass)
+# Save predicted values
+save(predicted, file = "data/SocialGrade/XGBoost/predicted.RData")
 
 #### Evaluate performance of model ####
 # Compare versions of the outcome variable (Actual, Predicted, Missing)
@@ -122,12 +128,12 @@ CANCEIS.input <- CANCEIS.input[, c(
 )]
 
 write.table(CANCEIS.input,
-            file = "data/SocialGrade/xxxUNIT01IG01.txt", sep = "\t",
+            file = "data/SocialGrade/CANCEIS/xxxUNIT01IG01.txt", sep = "\t",
             row.names = FALSE, col.names = FALSE
 )
 
 # Read in CANCEIS input and output
-CANCEIS.test.in <- read.table("data/SocialGrade/xxxUNIT01IG01.txt",
+CANCEIS.test.in <- read.table("data/SocialGrade/CANCEIS/xxxUNIT01IG01.txt",
                               header = FALSE,
                               col.names = c(
                                 "id", "social.grade", "student",
@@ -136,7 +142,7 @@ CANCEIS.test.in <- read.table("data/SocialGrade/xxxUNIT01IG01.txt",
                               )
 )[, -1]
 
-CANCEIS.test.out <- read.table("data/SocialGrade/XXXUNITIMP01IG01.txt",
+CANCEIS.test.out <- read.table("data/SocialGrade/CANCEIS/XXXUNITIMP01IG01.txt",
                                header = FALSE,
                                col.names = c(
                                  "id", "social.grade", "student",
@@ -181,3 +187,114 @@ qplot(Actuals, Predictions,
       geom = c("jitter"), main = "predicted vs. observed in validation data",
       xlab = "Observed Class", ylab = "Predicted Class"
 )
+
+#### Impute values using CANCEIS (with XGBoost to advise selection of MVs) ####
+# Create CANCEIS input file with imputable and matching variables
+CANCEISXG.input <- Census.test.tidy.miss[, c(
+  "social.grade", "occupation", "student", 
+  "industry", "hours.cont", "marital.status", 
+  "econ.act"
+)]
+
+CANCEISXG.input$canceis.id <- 1:nrow(CANCEISXG.input)
+
+CANCEISXG.input <- CANCEISXG.input[, c(
+  "canceis.id", "social.grade", "occupation", "student", 
+  "industry", "hours.cont", "marital.status", 
+  "econ.act"
+)]
+
+write.table(CANCEISXG.input,
+            file = "data/SocialGrade/MixedMethods/xxxUNIT01IG01.txt", sep = "\t",
+            row.names = FALSE, col.names = FALSE
+)
+
+# Read in CANCEIS input and output
+CANCEISXG.test.in <- read.table("data/SocialGrade/MixedMethods/xxxUNIT01IG01.txt",
+                                header = FALSE,
+                                col.names = c(
+                                  "canceis.id", "social.grade", "occupation", "student", 
+                                  "industry", "hours.cont", "marital.status", 
+                                  "econ.act"
+                                )
+)[, -1]
+
+CANCEISXG.test.out <- read.table("data/SocialGrade/MixedMethods/XXXUNITIMP01IG01.txt",
+                                 header = FALSE,
+                                 col.names = c(
+                                   "canceis.id", "social.grade", "occupation", "student", 
+                                   "industry", "hours.cont", "marital.status", 
+                                   "econ.act"
+                                 )
+)[, -1]
+
+# Compare predicted and actuals
+actuals.CANCEISXG <- Census.test.tidy$social.grade
+
+missing.CANCEISXG <- CANCEISXG.test.in$social.grade
+
+predicted.CANCEISXG <- CANCEISXG.test.out$social.grade
+
+compare_var_CANCEISXG <- tibble(
+  Actuals = actuals.CANCEISXG, Predictions =
+    predicted.CANCEISXG, Missing = missing.CANCEISXG
+)
+
+compare_missing_CANCEISXG <- compare_var_CANCEISXG[
+  compare_var_CANCEISXG$Missing == -999, ]
+
+compare_missing_CANCEISXG$indicator <- ifelse(
+  compare_missing_CANCEISXG$Actuals ==
+    compare_missing_CANCEISXG$Predictions,
+  "Correct", "Wrong"
+)
+
+counts_CANCEISXG <- table(compare_missing_CANCEISXG$indicator)
+
+barplot(counts_CANCEISXG, main = "Accuracy of predictions", xlab = "Outcome")
+
+# Using Confusion Matrix to evaluate predictions
+confusion_CANCEISXG <- confusionMatrix(
+  as.factor(compare_missing_CANCEISXG$Actuals),
+  as.factor(compare_missing_CANCEISXG$Predictions)
+)
+
+qplot(Actuals, Predictions,
+      data = compare_missing_CANCEISXG, colour = Actuals,
+      geom = c("jitter"), main = "predicted vs. observed in validation data",
+      xlab = "Observed Class", ylab = "Predicted Class"
+)
+
+#### Impute values using mode imputation ####
+# Create a vector of imputable variable excluding missing values
+mode.dat <- Census.test.tidy.miss[
+  Census.test.tidy.miss$social.grade != -999, ]
+
+mode.val <- Mode(mode.dat$social.grade)
+
+# Compare predicted and actuals
+actuals.mode <- Census.test.tidy$social.grade
+
+missing.mode <- Census.test.tidy.miss$social.grade
+
+predicted.mode <- ifelse(
+  Census.test.tidy.miss$social.grade == -999, mode.val, 
+  Census.test.tidy.miss$social.grade)
+
+compare_var_mode <- tibble(
+  Actuals = actuals.mode, Predictions =
+    predicted.mode, Missing = missing.mode
+)
+
+compare_missing_mode <- compare_var_mode[
+  compare_var_mode$Missing == -999, ]
+
+compare_missing_mode$indicator <- ifelse(
+  compare_missing_mode$Actuals ==
+    compare_missing_mode$Predictions,
+  "Correct", "Wrong"
+)
+
+counts_mode <- table(compare_missing_mode$indicator)
+
+barplot(counts_mode, main = "Accuracy of predictions", xlab = "Outcome")

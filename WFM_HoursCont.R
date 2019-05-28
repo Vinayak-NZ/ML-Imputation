@@ -24,6 +24,10 @@ NumberMissing <- sapply(Census.test.tidy.miss, function(y) sum(length(
 TestNumberMissing <- data.frame(NumberMissing)
 # Convert missing cases to -999
 Census.test.tidy.miss[is.na(Census.test.tidy.miss)] <- -999
+# Save dataset with missingenss
+save(Census.test.tidy.miss, file="data/HoursCont/Census.test.tidy.miss.Rda")
+# Load dataset with missingenss
+load("data/HoursCont/Census.test.tidy.miss.Rda")
 
 #### Train the model ####
 # Convert the data to matrix and assign output variable
@@ -52,6 +56,8 @@ trainHC_v1 <- xgboost(
 
 #### Test the model ####
 predicted <- predict(trainHC_v1, dtest, missing = -999, na.action = na.pass)
+# Save predicted values
+save(predicted, file = "data/HoursCont/XGBoost/predicted.RData")
 
 #### Evaluate performance of model ####
 # Compare versions of the outcome variable (Actual, Predicted, Missing)
@@ -107,24 +113,24 @@ CANCEIS.input <- CANCEIS.input[, c(
 )]
 
 write.table(CANCEIS.input,
-            file = "data/HoursCont/xxxUNIT01IG01.txt", sep = "\t",
+            file = "data/HoursCont/CANCEIS/xxxUNIT01IG01.txt", sep = "\t",
             row.names = FALSE, col.names = FALSE
 )
 
 # Read in CANCEIS input and output
-CANCEIS.test.in <- read.table("data/HoursCont/xxxUNIT01IG01.txt",
+CANCEIS.test.in <- read.table("data/HoursCont/CANCEIS/xxxUNIT01IG01.txt",
                               header = FALSE,
                               col.names = c(
-                                "canceis.id", "hours.cont", "social.grade", 
-                                "industry", "occupation", "student"
+                                "canceis.id", "hours.cont", "social.grade", "industry",
+                                "occupation", "student"
                               )
 )[, -1]
 
-CANCEIS.test.out <- read.table("data/HoursCont/XXXUNITIMP01IG01.txt",
+CANCEIS.test.out <- read.table("data/HoursCont/CANCEIS/XXXUNITIMP01IG01.txt",
                                header = FALSE,
                                col.names = c(
-                                 "canceis.id", "hours.cont", "social.grade", 
-                                 "industry", "occupation", "student"
+                                 "canceis.id", "hours.cont", "social.grade", "industry",
+                                 "occupation", "student"
                                )
 )[, -1]
 
@@ -147,3 +153,85 @@ compare_missing_CANCEIS <- compare_var_CANCEIS[
 MAE(compare_missing_CANCEIS$Predictions, compare_missing_CANCEIS$Actuals)
 
 RMSE(compare_missing_CANCEIS$Predictions, compare_missing_CANCEIS$Actuals)
+
+#### Impute values using CANCEIS (with XGBoost to advise selection of MVs) ####
+# Create CANCEIS input file with imputable and matching variables
+CANCEISXG.input <- Census.test.tidy.miss[, c(
+  "hours.cont", "sex", "student",
+  "occupation", "social.grade", "age", "industry"
+)]
+
+CANCEISXG.input$canceis.id <- 1:nrow(CANCEISXG.input)
+
+CANCEISXG.input <- CANCEISXG.input[, c(
+  "canceis.id", "hours.cont", "sex", "student",
+  "occupation", "social.grade", "age", "industry"
+)]
+
+write.table(CANCEISXG.input,
+            file = "data/HoursCont/MixedMethods/xxxUNIT01IG01.txt", sep = "\t",
+            row.names = FALSE, col.names = FALSE
+)
+
+# Read in CANCEISXG input and output
+CANCEISXG.test.in <- read.table("data/HoursCont/MixedMethods/xxxUNIT01IG01.txt",
+                                header = FALSE,
+                                col.names = c(
+                                  "canceis.id", "hours.cont", "sex", "student",
+                                  "occupation", "social.grade", "age", "industry"
+                                )
+)[, -1]
+
+CANCEISXG.test.out <- read.table("data/HoursCont/MixedMethods/XXXUNITIMP01IG01.txt",
+                                 header = FALSE,
+                                 col.names = c(
+                                   "canceis.id", "hours.cont", "sex", "student",
+                                   "occupation", "social.grade", "age", "industry"
+                                 )
+)[, -1]
+
+# Compare predicted and actuals
+actuals.CANCEISXG <- Census.test.tidy$hours.cont
+
+missing.CANCEISXG <- CANCEISXG.test.in$hours.cont
+
+predicted.CANCEISXG <- CANCEISXG.test.out$hours.cont
+
+compare_var_CANCEISXG <- tibble(
+  Actuals = actuals.CANCEISXG, Predictions =
+    predicted.CANCEISXG, Missing = missing.CANCEISXG
+)
+
+compare_missing_CANCEISXG <- compare_var_CANCEISXG[
+  compare_var_CANCEISXG$Missing == -999, ]
+
+# Using Mean Absolute Error and Root Mean Square error to evaluate predictions
+MAE(compare_missing_CANCEISXG$Predictions, compare_missing_CANCEISXG$Actuals)
+
+RMSE(compare_missing_CANCEISXG$Predictions, compare_missing_CANCEISXG$Actuals)
+
+#### Impute values using median imputation ####
+# Create a vector of imputable variable excluding missing values
+median.dat <- Census.test.tidy.miss[
+  Census.test.tidy.miss$hours.cont != -999, ]
+
+median.val <- median(median.dat$hours.cont)
+
+# Compare predicted and actuals
+actuals.median <- Census.test.tidy$hours.cont
+
+missing.median <- Census.test.tidy.miss$hours.cont
+
+predicted.median <- ifelse(
+  Census.test.tidy.miss$hours.cont == -999, median.val, 
+  Census.test.tidy.miss$hours.cont)
+
+compare_var_median <- tibble(
+  Actuals = actuals.median, Predictions =
+    predicted.median, Missing = missing.median
+)
+
+# Using Mean Absolute Error and Root Mean Square error to evaluate predictions
+MAE(compare_var_median$Predictions, compare_var_median$Actuals)
+
+RMSE(compare_var_median$Predictions, compare_var_median$Actuals)
