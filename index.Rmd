@@ -5,7 +5,7 @@ date: "2019"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
-    split_by: section
+    split_by: chapter
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
@@ -27,12 +27,12 @@ source("R/WF1_package_load.R")
 
 ```{r external, include=FALSE}
 knitr::read_chunk("R/WF1_package_load.R")
+knitr::read_chunk("R/xgboost_template.R")
 knitr::read_chunk("R/WF2_data_prep.R")
 knitr::read_chunk("R/WF3_data_study.R")
 knitr::read_chunk("R/WFM_EconAct.R")
-knitr::read_chunk("R/WFM_HoursCont.R")
-knitr::read_chunk("R/WFM_SocialGrade.R")
-knitr::read_chunk("R/WFM_Student.R")
+knitr::read_chunk("R/WFZ_EconAct_CompareImp.R")
+
 ```
 
 Editing and imputation are both methods of data processing. Editing refers to the detection and correction of errors in the data, whilst imputation is a method of correcting errors in a dataset [@deWaal]. This document presents findings from work carried out at the Office for National Statistics on the use of machine learning in imputation. The chapters address the following questions:  

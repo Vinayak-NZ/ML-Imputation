@@ -1,6 +1,8 @@
-#### Load datasets ####
+## ---- load-student
+# Load datasets
 # Test and Training data
 load("data/Census.train.Rda")
+
 load("data/Census.test.Rda")
 
 # Load dataset with missingenss
@@ -50,10 +52,11 @@ CANCEISXG.test.out <- read.table("data/Student/MixedMethods/XXXUNITIMP01IG01.txt
 # Load predicted values from XGBoost
 load("data/Student/XGBoost/predicted.RData")
 
-#### Load model ####
+# Load model
 trainS_v1 <- xgb.load("XGBoost/xgboost.student")
 
-#### Evaluate performance of XGBoost model ####
+## ---- eval-student
+# Evaluate performance of XGBoost model
 # Compare versions of the outcome variable (Actual, Predicted, Missing)
 actuals <- Census.test.tidy$student
 
@@ -79,13 +82,22 @@ confusionML <- confusionMatrix(
   as.factor(compareVar$Predictions)
 )
 
+compareVarP <- compareVar
+
+compareVarP$Actuals <- ifelse(compareVarP$Actuals == 0, "Yes", "No")
+
+compareVarP$Predictions <- ifelse(compareVarP$Predictions == 0, "Yes", "No")
+
 qplot(Actuals, Predictions,
-      data = compareVar, colour = Actuals,
+      data = compareVarP,
       geom = c("jitter"), main = "predicted vs. observed in test data",
       xlab = "Observed Class", ylab = "Predicted Class"
-)
+) + scale_x_discrete(labels = c("Yes", "No")
+) + scale_y_discrete(labels = c("Yes", "No"))
 
-#### Evaluate performance of CANCEIS ####
+ggsave("images/STXGqplot.png")
+
+# Evaluate performance of CANCEIS
 # Compare predicted and actuals
 actuals.CANCEIS <- Census.test.tidy$student
 
@@ -117,13 +129,22 @@ confusion_CANCEIS <- confusionMatrix(
   as.factor(compare_missing_CANCEIS$Predictions)
 )
 
+compare_missing_CANCEISP <- compare_missing_CANCEIS
+
+compare_missing_CANCEISP$Actuals <- ifelse(compare_missing_CANCEISP$Actuals == 0, "Yes", "No")
+
+compare_missing_CANCEISP$Predictions <- ifelse(compare_missing_CANCEISP$Predictions == 0, "Yes", "No")
+
 qplot(Actuals, Predictions,
-      data = compare_missing_CANCEIS, colour = Actuals,
+      data = compare_missing_CANCEISP,
       geom = c("jitter"), main = "predicted vs. observed in validation data",
       xlab = "Observed Class", ylab = "Predicted Class"
-)
+) + scale_x_discrete(labels=c("Yes","No")
+) + scale_y_discrete(labels=c("Yes","No"))
 
-#### Evaluate performance of CANCEISXG ####
+ggsave("images/STCANCEISqplot.png")
+
+# Evaluate performance of CANCEISXG
 # Compare predicted and actuals
 actuals.CANCEISXG <- Census.test.tidy$student
 
@@ -155,13 +176,22 @@ confusion_CANCEISXG <- confusionMatrix(
   as.factor(compare_missing_CANCEISXG$Predictions)
 )
 
+compare_missing_CANCEISXGP <- compare_missing_CANCEISXG
+
+compare_missing_CANCEISXGP$Actuals <- ifelse(compare_missing_CANCEISXGP$Actuals == 0, "Yes", "No")
+
+compare_missing_CANCEISXGP$Predictions <- ifelse(compare_missing_CANCEISXGP$Predictions == 0, "Yes", "No")
+
 qplot(Actuals, Predictions,
-      data = compare_missing_CANCEISXG, colour = Actuals,
+      data = compare_missing_CANCEISXGP,
       geom = c("jitter"), main = "predicted vs. observed in validation data",
       xlab = "Observed Class", ylab = "Predicted Class"
-)
+) + scale_x_discrete(labels=c("Yes","No")
+) + scale_y_discrete(labels=c("Yes","No"))
 
-#### Impute values using mode imputation ####
+ggsave("images/STCANCEISXGqplot.png")
+
+# Impute values using mode imputation
 # Create a vector of imputable variable excluding missing values
 mode.dat <- Census.test.tidy.miss[
   Census.test.tidy.miss$student != -999, ]
@@ -194,3 +224,16 @@ compare_missing_mode$indicator <- ifelse(
 counts_mode <- table(compare_missing_mode$indicator)
 
 barplot(counts_mode, main = "Accuracy of predictions", xlab = "Outcome")
+
+## ---- compare-student
+XGBoost <- confusionML$overall[c('Accuracy','Kappa')]
+
+CANCEIS <- confusion_CANCEIS$overall[c('Accuracy','Kappa')]
+
+MixedMethods <- confusion_CANCEISXG$overall[c('Accuracy','Kappa')]
+
+Mode <- c(counts_mode[['Correct']]/(counts_mode[['Correct']]+counts_mode[['Wrong']]), NA)
+
+CompareStudent <- cbind(XGBoost, CANCEIS, MixedMethods, Mode)
+
+save(CompareStudent, file = "data/Student/CompareStudent.RData")

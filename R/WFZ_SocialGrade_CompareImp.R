@@ -1,6 +1,8 @@
-#### Load datasets ####
+## ---- load-soc-grad
+# Load datasets
 # Test and Training data
 load("data/Census.train.Rda")
+
 load("data/Census.test.Rda")
 
 # Load dataset with missingenss
@@ -54,10 +56,11 @@ CANCEISXG.test.out <- read.table("data/SocialGrade/MixedMethods/XXXUNITIMP01IG01
 # Load predicted values from XGBoost
 load("data/SocialGrade/XGBoost/predicted.RData")
 
-#### Load model ####
+# Load model
 trainSG_v1 <- xgb.load("XGBoost/xgboost.socialGrade")
 
-#### Evaluate performance of XGBoost model ####
+## ---- eval-soc-grad
+# Evaluate performance of XGBoost model
 # Compare versions of the outcome variable (Actual, Predicted, Missing)
 actuals <- Census.test.tidy$social.grade
 
@@ -84,12 +87,15 @@ confusionML <- confusionMatrix(
 )
 
 qplot(Actuals, Predictions,
-      data = compareVar, colour = Actuals,
+      data = compareVar,
       geom = c("jitter"), main = "predicted vs. observed in test data",
       xlab = "Observed Class", ylab = "Predicted Class"
-)
+) + scale_x_discrete(limits=c("1","2","3","4")
+) + scale_y_discrete(limits=c("1","2","3","4"))
 
-#### Evaluate performance of CANCEIS ####
+ggsave("images/SGXGqplot.png")
+
+# Evaluate performance of CANCEIS
 # Compare predicted and actuals
 actuals.CANCEIS <- Census.test.tidy$social.grade
 
@@ -122,12 +128,15 @@ confusion_CANCEIS <- confusionMatrix(
 )
 
 qplot(Actuals, Predictions,
-      data = compare_missing_CANCEIS, colour = Actuals,
+      data = compare_missing_CANCEIS,
       geom = c("jitter"), main = "predicted vs. observed in validation data",
       xlab = "Observed Class", ylab = "Predicted Class"
-)
+) + scale_x_discrete(limits=c("1","2","3","4")
+) + scale_y_discrete(limits=c("1","2","3","4"))
 
-#### Evaluate performance of CANCEISXG ####
+ggsave("images/SGCANCEISqplot.png")
+
+# Evaluate performance of CANCEISXG
 # Compare predicted and actuals
 actuals.CANCEISXG <- Census.test.tidy$social.grade
 
@@ -160,12 +169,15 @@ confusion_CANCEISXG <- confusionMatrix(
 )
 
 qplot(Actuals, Predictions,
-      data = compare_missing_CANCEISXG, colour = Actuals,
+      data = compare_missing_CANCEISXG,
       geom = c("jitter"), main = "predicted vs. observed in validation data",
       xlab = "Observed Class", ylab = "Predicted Class"
-)
+) + scale_x_discrete(limits=c("1","2","3","4")
+) + scale_y_discrete(limits=c("1","2","3","4"))
 
-#### Impute values using mode imputation ####
+ggsave("images/SGCANCEISXGqplot.png")
+
+# Impute values using mode imputation
 # Create a vector of imputable variable excluding missing values
 mode.dat <- Census.test.tidy.miss[
   Census.test.tidy.miss$social.grade != -999, ]
@@ -198,3 +210,16 @@ compare_missing_mode$indicator <- ifelse(
 counts_mode <- table(compare_missing_mode$indicator)
 
 barplot(counts_mode, main = "Accuracy of predictions", xlab = "Outcome")
+
+## ---- compare-soc-grad
+XGBoost <- confusionML$overall[c('Accuracy','Kappa')]
+
+CANCEIS <- confusion_CANCEIS$overall[c('Accuracy','Kappa')]
+
+MixedMethods <- confusion_CANCEISXG$overall[c('Accuracy','Kappa')]
+
+Mode <- c(counts_mode[['Correct']]/(counts_mode[['Correct']]+counts_mode[['Wrong']]), NA)
+
+CompareSocGrad <- cbind(XGBoost, CANCEIS, MixedMethods, Mode)
+
+save(CompareSocGrad, file = "data/SocialGrade/CompareSocGrad.RData")

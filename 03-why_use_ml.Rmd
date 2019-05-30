@@ -16,8 +16,6 @@ The Methodology Division was interested in whether a Machine Learning System wou
 - Accuracy & Reliability: How do the two methods compare with respect to the bias and variance of estimates?  
 - Interpretability: What advantages and challenges do the ML system present with regards to making the imputation methods transparent?    
 
-The following Machine Learning tools were used in the investigation:  
+At present, the following Machine Learning library was used in the investigation:  
   
 - XGBoost  
-- Generative Adverserial Networks  
-- Autoencoder  

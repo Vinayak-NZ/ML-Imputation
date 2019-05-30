@@ -1,6 +1,8 @@
-#### Load datasets ####
+## ---- load-econ-act
+# Load datasets
 # Test and Training data
 load("data/Census.train.Rda")
+
 load("data/Census.test.Rda")
 
 # Load dataset with missingenss
@@ -49,15 +51,14 @@ CANCEISXG.test.out <- read.table("data/EconAct/MixedMethods/XXXUNITIMP01IG01.txt
                                    "sex", "health", "industry"
                                  )
 )[, -1]
-
-
 # Load predicted values from XGBoost
 load("data/EconAct/XGBoost/predicted.RData")
 
-#### Load model ####
+# Load model
 trainEA_v1 <- xgb.load("XGBoost/xgboost.econAct")
 
-#### Evaluate performance of XGBoost model ####
+## ---- eval-econ-act
+# Evaluate performance of XGBoost model
 # Compare versions of the outcome variable (Actual, Predicted, Missing)
 actuals <- Census.test.tidy$econ.act
 
@@ -84,13 +85,15 @@ confusionML <- confusionMatrix(
 )
 
 qplot(Actuals, Predictions,
-      data = compareVar, colour = Actuals,
+      data = compareVar,
       geom = c("jitter"), main = "predicted vs. observed in test data",
       xlab = "Observed Class", ylab = "Predicted Class"
-) + scale_x_discrete(breaks = pretty_breaks()
-) + scale_y_discrete(breaks = pretty_breaks())
+) + scale_x_discrete(limits=c("1","2","3","4","5","6","7","8","9")
+) + scale_y_discrete(limits=c("1","2","3","4","5","6","7","8","9"))
 
-#### Evaluate performance of CANCEIS ####
+ggsave("images/EAXGqplot.png")
+
+# Evaluate performance of CANCEIS
 # Compare predicted and actuals
 actuals.CANCEIS <- Census.test.tidy$econ.act
 
@@ -123,12 +126,15 @@ confusion_CANCEIS <- confusionMatrix(
 )
 
 qplot(Actuals, Predictions,
-      data = compare_missing_CANCEIS, colour = Actuals,
+      data = compare_missing_CANCEIS,
       geom = c("jitter"), main = "predicted vs. observed in validation data",
       xlab = "Observed Class", ylab = "Predicted Class"
-)
+) + scale_x_discrete(limits=c("1","2","3","4","5","6","7","8","9")
+) + scale_y_discrete(limits=c("1","2","3","4","5","6","7","8","9"))
 
-#### Evaluate performance of CANCEISXG ####
+ggsave("images/EACANCEISqplot.png")
+
+# Evaluate performance of CANCEISXG
 # Compare predicted and actuals
 actuals.CANCEISXG <- Census.test.tidy$econ.act
 
@@ -161,12 +167,15 @@ confusion_CANCEISXG <- confusionMatrix(
 )
 
 qplot(Actuals, Predictions,
-      data = compare_missing_CANCEISXG, colour = Actuals,
+      data = compare_missing_CANCEISXG,
       geom = c("jitter"), main = "predicted vs. observed in validation data",
       xlab = "Observed Class", ylab = "Predicted Class"
-)
+) + scale_x_discrete(limits=c("1","2","3","4","5","6","7","8","9")
+) + scale_y_discrete(limits=c("1","2","3","4","5","6","7","8","9"))
 
-#### Impute values using mode imputation ####
+ggsave("images/EACANCEISXGqplot.png")
+
+# Impute values using mode imputation
 # Create a vector of imputable variable excluding missing values
 mode.dat <- Census.test.tidy.miss[
   Census.test.tidy.miss$econ.act != -999, ]
@@ -199,3 +208,16 @@ compare_missing_mode$indicator <- ifelse(
 counts_mode <- table(compare_missing_mode$indicator)
 
 barplot(counts_mode, main = "Accuracy of predictions", xlab = "Outcome")
+  
+## ---- compare-econ-act
+XGBoost <- confusionML$overall[c('Accuracy','Kappa')]
+
+CANCEIS <- confusion_CANCEIS$overall[c('Accuracy','Kappa')]
+
+MixedMethods <- confusion_CANCEISXG$overall[c('Accuracy','Kappa')]
+
+Mode <- c(counts_mode[['Correct']]/(counts_mode[['Correct']]+counts_mode[['Wrong']]), NA)
+
+CompareEconAct <- cbind(XGBoost, CANCEIS, MixedMethods, Mode)
+
+save(CompareEconAct, file = "data/EconAct/CompareEconAct.RData")
