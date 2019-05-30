@@ -1,0 +1,13 @@
+book_filename: "Machine-Learning-in-Imputation"
+chapter_name: "Chapter "
+repo: https://github.com/Vinayak-NZ/ML-Imputation
+output_dir: docs
+rmd_files: ["index.Rmd", "01-what_is_imputation.Rmd", "02-what_is_ml.Rmd", 
+"03-why_use_ml.Rmd", "04-how_XGBoost.Rmd", "05-methods.Rmd", "06-results.Rmd", "07-next_steps.Rmd",
+"08-resources.Rmd"]
+clean: [packages.bib, bookdown.bib]
+language:
+  ui:
+    chapter_name: "Chapter "
+delete_merged_file: true
+

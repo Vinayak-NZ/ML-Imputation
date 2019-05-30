@@ -1,0 +1,69 @@
+# XGBoost
+XGBoost is a set of open source functions and steps, referred to as a library, that use supervised ML where analysts specify an outcome to be estimated/ predicted. The XGBoost library uses multiple decision trees to predict an outcome.  
+  
+The ML system is trained using batch learning and generalised through a model based approach. It uses all available data to construct a model that specifies the relationship between the predictor and outcome variables, which are then generalised to the test dataset.  
+
+XGBoost stands for eXtreme Gradient Boosting. The word "extreme" reflects its goal to push the limit of computational resources. Whereas gradient boosting is a machine learning technique for regression and classification problems that optimises a collection of weak prediction models in an attempt to build an accurate and reliable predictor.   
+
+In order to build a better understanding of how XGBoost works, the documentation will briefly review:  
+  
+- Decision trees: How decision trees play a role in XGBoost?  
+- Boosting: What is it?  
+
+The final section of this chapter provides a step by step guide on building models using XGBoost; the reader is encouraged to use this code to predict an outcome variable using available auxiliary variables.  
+  
+## Decision trees
+Decision trees can be used as a method for grouping units in a dataset by asking questions, such as "Does an individual have a Bachelor's degree?". In this example, two groups would be created; one for those with a Bachelor's degree, and one for those without. Figure 2 provides a visual depiction of this grouping in an attempt to explain Income. 
+
+![Figure 2. Decision tree that splits units in a dataset based on whether individual has a Bachelor's degree or not, in order to predict Income. The tree shows that those with a Bachelors degree (> 0) on average earn more than than those wihtout a Bachelor's degree (< 0).](images/dt_bach.png)
+
+Each subsequent question in a decision tree will produce a smaller group of units. This grouping is carried out to identify units with similar characteristics with respect to an outcome variable. The model in Figure 3 attempts to use University qualifications to predict Income.   
+
+![Figure 3. Decision tree that splits units in a dataset based on whether individual has a Bachelor's degree (yes/no), a Master's degree and pHD (yes/no), in order to predict Income. The tree shows that those with a higher qualification tend to earn more.](images/dt_all.png)
+
+The following characteristics are true of decision trees:  
+  
+- A single question is asked at each decision node, and there are only two possible choices. With the example in Figure 3, the questions include 1) Does individual have a pHD, 2) Does individual have a Master's and 3) Does individual have a Bachelor's degree.  
+- At the bottom of every decision tree, there is a single possible decision. Every possible decision will eventually lead to a choice. Some decisions will lead to a choice sooner. The model in Figure 3 attempts to predict Income using University Qualifications. Each node presents a question about whether an individual possesses a given qualification. The end nodes present the distribution of income for individuals with the specified qualifications. As a result, the choices would be the expected value of Income for an individual, given the qualificaitons obtained.  
+
+Decision trees are a learning method that involve a tree like graph to model either continuous or categorical choice given some data. It is composed of a series of binary questions, which when answered in succession yield a prediciton about data at hand. XGBoost uses Classification and Regression Trees (CART), which are presented in the above examples, to predict the outcome variable.  
+
+### Boosting
+A single decision tree is considered a weak/ base learner as it only slightly better than chance at predicting the outcome variable. Whereas strong learners are any algorithm that can be tuned to achieve peak performance for supervised learning. XGBoost uses decision trees as base learners; combining many weak learners to form a strong learner. As a result it is referred to as an ensemble learning method; using the output of many models (i.e. trees) in the final prediction.  
+
+The concept of combining many weak learners to produce a strong learner is referred as boosting. XGBoost will iteratively build a set of weak models on subsets of the data; weighting each weak prediction according to the weak learner's performance. A prediction is derived by taking the weighted sum of all base learners.  
+
+### Building models with XGBoost
+In the training data, a target variable $y_{i}$ is specified, whilst all other features $x_{i}$ are used as predictors of the target variable. A collection of decision trees are used to predict values of $y_{i}$ using $x_{i}$. Individually, each decision tree, would be a weak predictor of the outcome variable. However, as a collective, the decision trees may enable analysts to make accurate and reliable predictions of $y_{i}$. As a result, the method for predicting the target variable using $x_{i}$ in XGBoost is referred to as decision tree ensembles. The steps below demonstrate how XGBoost was used to build a model, to predict income, using Univeristy Qualifications. 
+
+1) Load the following packages
+```{r load-XG, eval=FALSE}
+```
+
+2) Load the dataset and remove the identifer
+```{r data-prepXG, eval=FALSE}
+```
+
+3) Split the dataset into training and test
+```{r split-XG, eval=FALSE}
+```
+
+4) Convert the data into DMatrix objects, which is the recommended input type for xgboost
+```{r matrix-XG, eval=FALSE}
+```
+
+5) Train the model
+```{r train-XG, eval=FALSE}
+```
+
+6) Test the model
+```{r test-XG, eval=FALSE}
+```
+
+7) Examine the importance of each feature in the model
+```{r feature-XG, eval=FALSE}
+```
+
+8) Plot the individual trees in the model
+```{r trees-XG, eval=FALSE}
+```

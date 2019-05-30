@@ -1,0 +1,40 @@
+# What is Imputation?
+Editing and imputing are both methods of data processing. Editing refers to the detection and correction of errors in the data. Whilst imputation is a method of correcting errors and estimating and filling in missing values in a dataset. Where there are errors in the dataset, and when these are considered to add no value in the correction process, these values are set to missing and are imputed with a plausible estimate. Alternatively, missing values may already exist in the data, and imputation may be carried out to produce a complete dataset for analysis.  
+  
+This research project evaluated the use of machine learning methods for imputation. In order to provide a context for using machine learning in the imputation process, the reader is presented with:  
+  
+- A rationale for carrying out imputation  
+- An introduction to the methods of imputation
+
+## Why is imputation carried out?
+Missingness and erroneous values can impact the quality of data. A large volume of incorrect and/or missing values increase the risk of the product failing to capture the target concept or target population. That is, ommissions (introduced in collection or processing) may result in certain sub-groups of the target population from being excluded in the analysis dataset, and in turn increasing the risk of biased estimates, reducing the power of inferential statistics and increasing the uncertainty of estimates and inferences derived from the data. Similarly, errors in a dataset may impact the degree to which the final estimate or output represents the reality it was designed to capture.  
+   
+Correcting erroneous responses and filling in missing values helps manage the quality of data. A complete dataset can improve the accuracy and reliability of estimates, and help maintain the consistency of counts across published tables. Moreover, a dataset with fewer errors and more units may more accuately capture the underlying distribution of the variable of interest. Selecting a method for estimating values in a datset is generally advised by the nature of errors or missingness in the data, and the output desired from the analysis dataset.  
+
+## Methods
+An imputation process of a dataset can be broken down into the following three phases:  
+  
+1) Review, whereby data is examined for potential problems; identifying instances of missingness and erroneous values  
+2) Select, whereby data is identified for further treatment. Of the potential problems identified in the review phase, a method is applied to determine which of these erroneous or missing cases need to be treated
+3) Amend, whereby changes are applied to the data identified in the select phase by either correcting errors/ filling in missing values  
+
+The focus of this project was in applying Machine Learning methods to amend values in a dataset. That is, it was of interest to compare existing approaches, of treating missing or erroneous values by estimating replacement figures, to machine learning methods. Methods of variable amendment can be grouped into one of the following categories:  
+  
+- interactive treatment  
+- deductive imputation  
+- model based imputation  
+- donor based imputation  
+
+The mechanisms for a given imputation method could be deterministic or stochastic. The former refers to instances where repeated trials of the same method yield identical output. Whereas the latter refers to instances where there is element of randomness; repeated iterations will produce different results.  
+
+### Interactive treatment
+Interactive treatment refers to a class of methods whereby the data are adjusted by a human editor by either re-contacting the respondent/ data provider, replacing values from another variable/ data source, or creating a value based on subject matter expertise.
+
+### Deductive imputation
+Deductive imputation uses logic or an understanding about the relationship between variables and units to fill in missing values. Examples include deriving a value as a function of other values, adopting a value from a related unit, and adopting a value from an earlier time point. Generally, this method is used when the true value can be derived with certainty or with a very high probability.  
+
+### Model based imputation 
+Model based imputation refers to a class of methods that estimate missing values using assumptions about the distribution of the data, which include mean and median imputation. Or assumptions about the relationship between auxiliary variables (or x variables) and the target y variable to predict missing values.
+
+### Donor based imputation
+Donor based imputation adopt values from an observed unit, which are then used for the missing unit. For each recipient with a missing value for variable y, a donor is identified that is similar to the recipient with respect to certain background characteristics (often referred to as matching variables) that are related to the target variable y. Such methods are relatively easy to apply when there are several related missing values in one record, and if the intention is to preserve the relationship between variables.

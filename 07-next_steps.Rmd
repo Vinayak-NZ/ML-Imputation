@@ -1,0 +1,11 @@
+# Next steps
+
+Preliminary results indicate that XGBoost performs well, relative to donor based methods, in univariate imputation. The models were especially effective at predicting the different classes of multi-class and binary variables. The ability to program an end to end imputation process is an added advantage of XGBoost; it reduces the time taken to implement an imputation method, and presents clients with the option of automating the imputation process. Current donor based methods utilise either closed, or proprietary code, which cannot easily be integrated into open source platforms.  
+
+The intention is to build on this work, and examine the efficacy of machine learning systems on household survey imputation by carrying out the following:  
+
+- Compare XGBoost, as well as Deep Learning methods (such as Autoencoders) to current donor based methods on ONS household survey data  
+- Study how changes to XGBoost hyper-parameters can influence the performance of the imputation model. As the current investigation, using Census data, did not iterate through different combinations of hyper-parameters, it would be of interest to see if this improves the performance of this ML system in household survey imputation.  
+- If time permits, it would be of interest to explore the use of XGBoost as a method to advise donor selection. That is, how the selection and importance of features could be used to identify matching variables and weights respectively.
+
+

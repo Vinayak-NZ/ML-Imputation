@@ -1,0 +1,33 @@
+# Resources
+
+## R scripts
+All R scripts pretaining to this investigation are saved in the folder "R". If you are intending to run any of the code, please load all the packages first, which can be found in the script "WF1_package_load.R".  
+
+The program "WF2_data_prep.R" cleans and edits the data for the investigation, whilst the script "WF3_data_study.R" studies the dataset. Scripts with the prefix "WFM" refer to programs that produce the XGBoost models for each imputable variable, and create the CANCEIS input files. Do not run these scripts unless you would like to replicate the investigation.  
+
+If you would simply like to view the results, please load the packages and use the following scripts to compare the results of the different imputation methods:  
+
+- WFZ_EconAct_CompareImp.R: Comparing methods for the variable, economic activity  
+- WFZ_HoursCont_CompareImp.R: Compareing methdos for the variable, hours worked (continuous)  
+- WFZ_SocialGrade_CompareImp.R: Comparing methods for the variable, social grade  
+- WFZ_Student_CompareImp.R: Comparing methods for the variable, student status  
+
+## Data
+The folder named "data" includes:  
+
+- full Census Teaching File
+- test and training data
+- the predicted values from each imputation method and variable  
+
+## XGBoost
+The models produced for each imputable variable can be found in the following folder (located in the main directory):  
+
+- XGBoost
+
+## Donor imputation
+The CANCEIS specifications used for the two rounds of donor based imputation can be found in the following folders (located in the main directory):  
+
+- CANCEIS  
+- MixedMethods  
+
+

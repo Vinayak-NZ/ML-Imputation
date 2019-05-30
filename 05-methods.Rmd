@@ -1,0 +1,88 @@
+# Methods
+The project evaluated the machine learning methods using:  
+
+1) The Census Teaching File, an open dataset containing 1% of the person records from the 2011 Census in England & Wales.  
+2) Survey Data
+
+## Census Teaching File
+The Census Teaching File was downloaded from the [ONS website](https://www.ons.gov.uk/census/2011census/2011censusdata/censusmicrodata/microdatateachingfile) as a CSV file named "CensusTeachingFile", and was read into R using the following line of code. The dataset consisted of 569,741 individuals and 18 categorical variables from the 2011 Census population.  
+```{r census-load, eval=FALSE}
+```
+
+The code below specifies the packages used in the preparation, study and build of machine learning systems using the Census Teaching File.
+
+```{r package-load, eval=FALSE}
+```
+
+The steps below present the methods used to compare the performance of model based imputation (using XGBoost) with that of donor based imputation (using CANCEIS). Code chunks are provided to demonstrate how each step was carried out; with the imputable variable, economic activity, as the example.
+
+1) Variables in the dataset were renamed and recoded so that:  
+  
+- Variable names were consistent with [Google's R style guide](https://google.github.io/styleguide/Rguide.xml)
+- The response categories for all variables were numeric
+
+```{r rename-recode-derive, eval=FALSE}
+```
+
+A preview of the dataset is provided below.
+
+```{r preview, echo=FALSE}
+load("data/Census.Rda")
+kable(head(Census))
+```
+
+2) For the purposes of training and testing a machine learning system, the data was divided into training and test datasets using the following code.
+
+```{r test-train-split, eval=FALSE}
+```
+
+The intention was to build models to predict a selection of variable using training data, which had no missingness. This model would then be evaluated with respect to its accuracy and generalisability using a test dataset, which would have missingness. The Census Teaching File was a complete dataset. As a result, missingness was simulated in the test dataset, and the imputation models (derived for each variable) were evaluated with regards to how well they predicted the true values.  
+
+Models were tested for the following variables:  
+- Economic activity (a multi-class variable) 
+- Hours worked (a derived continuous variable)  
+- Social Grade (a multi-class variable)  
+- Student status (a binary variable) 
+A more detailed description of all the variables can be found [here](https://www.ons.gov.uk/census/2011census/2011censusdata/censusmicrodata/microdatateachingfile/variablelist).
+
+3) The distribution of the imputable variable was studied
+```{r study-econ-act, eval=FALSE}
+```
+
+4) The dataset was cleaned for model training; the personal identifier and the categorical hours worked variable were removed. Moreover, units that were classified as no code required for the imputable variable were removed from the training and test datasets  
+```{r tidy-econ-act, eval=FALSE}
+```
+
+4) Missingness was simulated in the test dataset
+```{r miss-econ-act, eval=FALSE}
+```
+
+5) A model was built using the training data
+```{r train-econ-act, eval=FALSE}
+```
+
+6) The model was used to predict values in the test dataset
+```{r test-econ-act, eval=FALSE}
+```
+
+7) Donor based imputation was carried out on the test data (with missingness):  
+    i) CANCEIS: One round of CANCEIS selected matching variables based on a correlation matrix. Variables that had a correlation coefficient of |0.4| or greater were included as matching variables in the CANCEIS imputation specification. All variables were given the same weight.  
+    ii) Mixed Methods: One round of CANCEIS selected matching variables based on the feature importance figures from the XGBoost model. The six most important variables from the feature importance output were selected as matching variables; with more important variables assigned a larger weight.
+    
+```{r imp-econact-CANCEIS, eval=FALSE}
+```
+
+
+```{r imp-econact-CANCEISXG, eval=FALSE}
+```
+
+8) The two rounds of donor based imputation (using CANCEIS) and the (XGBoost) model based imputation were compared using either root mean squared error, absolute error (for continuous variables) and the confusion matrix (for categorical variables).  
+    i) First, information and data from the previous steps was loaded into working memory  
+    ii) Next, Each of the methods was evaluated with respect to the performance measure, and compared to either median (for continuous) or mode (for categorical) variables
+  
+```{r load-econ-act, eval=FALSE}
+```
+
+
+```{r eval-econ-act, eval=FALSE}
+```

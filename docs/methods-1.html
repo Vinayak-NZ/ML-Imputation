@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Methods | Applications of Machine Learning in Imputation</title>
+  <meta name="description" content="This document presents the findings from the 2018/19 project into the use of machine learning in imputation." />
+  <meta name="generator" content="bookdown 0.10.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Methods | Applications of Machine Learning in Imputation" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This document presents the findings from the 2018/19 project into the use of machine learning in imputation." />
+  <meta name="github-repo" content="Vinayak-NZ/ML-Imputation" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Methods | Applications of Machine Learning in Imputation" />
+  
+  <meta name="twitter:description" content="This document presents the findings from the 2018/19 project into the use of machine learning in imputation." />
+  
+
+<meta name="author" content="Methodology" />
+
+
+<meta name="date" content="2019-01-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="xgboost.html">
+<link rel="next" href="results.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><img src="images/ONS.png"></li>
+<li><a href="https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts">Office for National Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="what-is-imputation.html"><a href="what-is-imputation.html"><i class="fa fa-check"></i><b>2</b> What is Imputation?</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-imputation.html"><a href="what-is-imputation.html#why-is-imputation-carried-out"><i class="fa fa-check"></i><b>2.1</b> Why is imputation carried out?</a></li>
+<li class="chapter" data-level="2.2" data-path="what-is-imputation.html"><a href="what-is-imputation.html#methods"><i class="fa fa-check"></i><b>2.2</b> Methods</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="what-is-imputation.html"><a href="what-is-imputation.html#interactive-treatment"><i class="fa fa-check"></i><b>2.2.1</b> Interactive treatment</a></li>
+<li class="chapter" data-level="2.2.2" data-path="what-is-imputation.html"><a href="what-is-imputation.html#deductive-imputation"><i class="fa fa-check"></i><b>2.2.2</b> Deductive imputation</a></li>
+<li class="chapter" data-level="2.2.3" data-path="what-is-imputation.html"><a href="what-is-imputation.html#model-based-imputation"><i class="fa fa-check"></i><b>2.2.3</b> Model based imputation</a></li>
+<li class="chapter" data-level="2.2.4" data-path="what-is-imputation.html"><a href="what-is-imputation.html#donor-based-imputation"><i class="fa fa-check"></i><b>2.2.4</b> Donor based imputation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html"><i class="fa fa-check"></i><b>3</b> What is Machine Learning?</a><ul>
+<li class="chapter" data-level="3.1" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html#supervision"><i class="fa fa-check"></i><b>3.1</b> Supervision</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html#supervised-learning"><i class="fa fa-check"></i><b>3.1.1</b> Supervised learning</a></li>
+<li class="chapter" data-level="3.1.2" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html#unsupervised-learning"><i class="fa fa-check"></i><b>3.1.2</b> Unsupervised learning</a></li>
+<li class="chapter" data-level="3.1.3" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html#semi-supervised-learning"><i class="fa fa-check"></i><b>3.1.3</b> Semi-supervised learning</a></li>
+<li class="chapter" data-level="3.1.4" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html#reinforcement-learning"><i class="fa fa-check"></i><b>3.1.4</b> Reinforcement learning</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html#batch-and-online-learning"><i class="fa fa-check"></i><b>3.2</b> Batch and Online learning</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html#batch-learning"><i class="fa fa-check"></i><b>3.2.1</b> Batch learning</a></li>
+<li class="chapter" data-level="3.2.2" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html#online-learning"><i class="fa fa-check"></i><b>3.2.2</b> Online learning</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html#approaches-to-generalisation"><i class="fa fa-check"></i><b>3.3</b> Approaches to generalisation</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html#instance-based-learning"><i class="fa fa-check"></i><b>3.3.1</b> Instance-based learning</a></li>
+<li class="chapter" data-level="3.3.2" data-path="what-is-machine-learning.html"><a href="what-is-machine-learning.html#model-based-learning"><i class="fa fa-check"></i><b>3.3.2</b> Model-based learning</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="why-use-machine-learning.html"><a href="why-use-machine-learning.html"><i class="fa fa-check"></i><b>4</b> Why use Machine Learning?</a></li>
+<li class="chapter" data-level="5" data-path="xgboost.html"><a href="xgboost.html"><i class="fa fa-check"></i><b>5</b> XGBoost</a><ul>
+<li class="chapter" data-level="5.1" data-path="xgboost.html"><a href="xgboost.html#decision-trees"><i class="fa fa-check"></i><b>5.1</b> Decision trees</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="xgboost.html"><a href="xgboost.html#boosting"><i class="fa fa-check"></i><b>5.1.1</b> Boosting</a></li>
+<li class="chapter" data-level="5.1.2" data-path="xgboost.html"><a href="xgboost.html#building-models-with-xgboost"><i class="fa fa-check"></i><b>5.1.2</b> Building models with XGBoost</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="methods-1.html"><a href="methods-1.html"><i class="fa fa-check"></i><b>6</b> Methods</a><ul>
+<li class="chapter" data-level="6.1" data-path="methods-1.html"><a href="methods-1.html#census-teaching-file"><i class="fa fa-check"></i><b>6.1</b> Census Teaching File</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>7</b> Results</a><ul>
+<li class="chapter" data-level="7.1" data-path="results.html"><a href="results.html#summary-statistics"><i class="fa fa-check"></i><b>7.1</b> Summary statistics</a></li>
+<li class="chapter" data-level="7.2" data-path="results.html"><a href="results.html#comparison-of-imputation-methods"><i class="fa fa-check"></i><b>7.2</b> Comparison of imputation methods</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="results.html"><a href="results.html#economic-activity"><i class="fa fa-check"></i><b>7.2.1</b> Economic Activity</a></li>
+<li class="chapter" data-level="7.2.2" data-path="results.html"><a href="results.html#hours-worked"><i class="fa fa-check"></i><b>7.2.2</b> Hours worked</a></li>
+<li class="chapter" data-level="7.2.3" data-path="results.html"><a href="results.html#social-grade"><i class="fa fa-check"></i><b>7.2.3</b> Social Grade</a></li>
+<li class="chapter" data-level="7.2.4" data-path="results.html"><a href="results.html#student"><i class="fa fa-check"></i><b>7.2.4</b> Student</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="next-steps.html"><a href="next-steps.html"><i class="fa fa-check"></i><b>8</b> Next steps</a></li>
+<li class="chapter" data-level="9" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>9</b> Resources</a><ul>
+<li class="chapter" data-level="9.1" data-path="resources.html"><a href="resources.html#r-scripts"><i class="fa fa-check"></i><b>9.1</b> R scripts</a></li>
+<li class="chapter" data-level="9.2" data-path="resources.html"><a href="resources.html#data"><i class="fa fa-check"></i><b>9.2</b> Data</a></li>
+<li class="chapter" data-level="9.3" data-path="resources.html"><a href="resources.html#xgboost-1"><i class="fa fa-check"></i><b>9.3</b> XGBoost</a></li>
+<li class="chapter" data-level="9.4" data-path="resources.html"><a href="resources.html#donor-imputation"><i class="fa fa-check"></i><b>9.4</b> Donor imputation</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Applications of Machine Learning in Imputation</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="methods-1" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Methods</h1>
+<p>The project evaluated the machine learning methods using:</p>
+<ol style="list-style-type: decimal">
+<li>The Census Teaching File, an open dataset containing 1% of the person records from the 2011 Census in England &amp; Wales.<br />
+</li>
+<li>Survey Data</li>
+</ol>
+<div id="census-teaching-file" class="section level2">
+<h2><span class="header-section-number">6.1</span> Census Teaching File</h2>
+<p>The Census Teaching File was downloaded from the <a href="https://www.ons.gov.uk/census/2011census/2011censusdata/censusmicrodata/microdatateachingfile">ONS website</a> as a CSV file named “CensusTeachingFile”, and was read into R using the following line of code. The dataset consisted of 569,741 individuals and 18 categorical variables from the 2011 Census population.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read CSV into R</span>
+CensusRaw &lt;-<span class="st"> </span><span class="kw">read.csv</span>(
+  <span class="dt">file =</span> <span class="st">&quot;Data/CensusTeachingFile.csv&quot;</span>, <span class="dt">skip =</span> <span class="dv">1</span>,
+  <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>
+)</code></pre></div>
+<p>The code below specifies the packages used in the preparation, study and build of machine learning systems using the Census Teaching File.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(mice)
+<span class="kw">library</span>(reshape2)
+<span class="kw">library</span>(GGally)
+<span class="kw">library</span>(Matrix)
+<span class="kw">library</span>(xgboost)
+<span class="kw">library</span>(caret)
+<span class="kw">library</span>(DiagrammeR)
+<span class="kw">library</span>(MLmetrics)
+<span class="kw">library</span>(rpart)
+<span class="kw">library</span>(scales)
+<span class="kw">library</span>(knitr)
+<span class="kw">library</span>(kableExtra)
+<span class="kw">library</span>(DescTools)</code></pre></div>
+<p>The steps below present the methods used to compare the performance of model based imputation (using XGBoost) with that of donor based imputation (using CANCEIS). Code chunks are provided to demonstrate how each step was carried out; with the imputable variable, economic activity, as the example.</p>
+<ol style="list-style-type: decimal">
+<li>Variables in the dataset were renamed and recoded so that:</li>
+</ol>
+<ul>
+<li>Variable names were consistent with <a href="https://google.github.io/styleguide/Rguide.xml">Google’s R style guide</a></li>
+<li>The response categories for all variables were numeric</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Rename variables</span>
+Census &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">rename</span>(CensusRaw, <span class="kw">c</span>(
+  <span class="st">&quot;Person.ID&quot;</span> =<span class="st"> &quot;person.id&quot;</span>,
+  <span class="st">&quot;Region&quot;</span> =<span class="st"> &quot;region&quot;</span>,
+  <span class="st">&quot;Residence.Type&quot;</span> =<span class="st"> &quot;residence.type&quot;</span>,
+  <span class="st">&quot;Family.Composition&quot;</span> =<span class="st"> &quot;fam.comp&quot;</span>,
+  <span class="st">&quot;Population.Base&quot;</span> =<span class="st"> &quot;resident.type&quot;</span>,
+  <span class="st">&quot;Sex&quot;</span>=<span class="st">&quot;sex&quot;</span>,
+  <span class="st">&quot;Age&quot;</span>=<span class="st">&quot;age&quot;</span>,
+  <span class="st">&quot;Marital.Status&quot;</span> =<span class="st"> &quot;marital.status&quot;</span>,
+  <span class="st">&quot;Student&quot;</span>=<span class="st">&quot;student&quot;</span>,
+  <span class="st">&quot;Country.of.Birth&quot;</span> =<span class="st"> &quot;birth.country&quot;</span>,
+  <span class="st">&quot;Health&quot;</span>=<span class="st">&quot;health&quot;</span>,
+  <span class="st">&quot;Ethnic.Group&quot;</span> =<span class="st"> &quot;ethnicity&quot;</span>,
+  <span class="st">&quot;Religion&quot;</span>=<span class="st">&quot;religion&quot;</span>,
+  <span class="st">&quot;Economic.Activity&quot;</span> =<span class="st"> &quot;econ.act&quot;</span>,
+  <span class="st">&quot;Occupation&quot;</span> =<span class="st"> &quot;occupation&quot;</span>,
+  <span class="st">&quot;Industry&quot;</span> =<span class="st"> &quot;industry&quot;</span>,
+  <span class="st">&quot;Hours.worked.per.week&quot;</span> =<span class="st"> &quot;hours.worked&quot;</span>,
+  <span class="st">&quot;Approximated.Social.Grade&quot;</span> =<span class="st"> &quot;social.grade&quot;</span>
+))
+
+<span class="co"># Recode variables (dataset is mutated in order to recode variables)</span>
+Census &lt;-<span class="st"> </span>Census <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.factor, as.character)
+
+<span class="co"># Recode the Region variable so that it is numeric</span>
+Census<span class="op">$</span>region[Census<span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;E12000001&quot;</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
+Census<span class="op">$</span>region[Census<span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;E12000002&quot;</span>] &lt;-<span class="st"> </span><span class="dv">2</span>
+Census<span class="op">$</span>region[Census<span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;E12000003&quot;</span>] &lt;-<span class="st"> </span><span class="dv">3</span>
+Census<span class="op">$</span>region[Census<span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;E12000004&quot;</span>] &lt;-<span class="st"> </span><span class="dv">4</span>
+Census<span class="op">$</span>region[Census<span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;E12000005&quot;</span>] &lt;-<span class="st"> </span><span class="dv">5</span>
+Census<span class="op">$</span>region[Census<span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;E12000006&quot;</span>] &lt;-<span class="st"> </span><span class="dv">6</span>
+Census<span class="op">$</span>region[Census<span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;E12000007&quot;</span>] &lt;-<span class="st"> </span><span class="dv">7</span>
+Census<span class="op">$</span>region[Census<span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;E12000008&quot;</span>] &lt;-<span class="st"> </span><span class="dv">8</span>
+Census<span class="op">$</span>region[Census<span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;E12000009&quot;</span>] &lt;-<span class="st"> </span><span class="dv">9</span>
+Census<span class="op">$</span>region[Census<span class="op">$</span>region <span class="op">==</span><span class="st"> &quot;W92000004&quot;</span>] &lt;-<span class="st"> </span><span class="dv">10</span>
+
+Census<span class="op">$</span>residence.type[Census<span class="op">$</span>residence.type <span class="op">==</span><span class="st"> &quot;C&quot;</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
+Census<span class="op">$</span>residence.type[Census<span class="op">$</span>residence.type <span class="op">==</span><span class="st"> &quot;H&quot;</span>] &lt;-<span class="st"> </span><span class="dv">2</span>
+
+Census<span class="op">$</span>student[Census<span class="op">$</span>student <span class="op">==</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">0</span>
+Census<span class="op">$</span>student[Census<span class="op">$</span>student <span class="op">==</span><span class="st"> </span><span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">1</span>
+
+Census &lt;-<span class="st"> </span>Census <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_if</span>(is.character, as.numeric)
+
+Census<span class="op">$</span>person.id &lt;-<span class="st"> </span><span class="kw">as.character</span>(Census<span class="op">$</span>person.id)
+
+Ht &lt;-<span class="st"> </span><span class="kw">table</span>(Census<span class="op">$</span>hours.worked)
+Census<span class="op">$</span>hours.cont &lt;-<span class="st"> </span><span class="kw">ifelse</span>(Census<span class="op">$</span>hours.worked <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">runif</span>(
+  <span class="dv">1</span><span class="op">:</span>Ht[<span class="kw">names</span>(Ht) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>],
+  <span class="dv">1</span>, <span class="dv">15</span>
+),
+<span class="kw">ifelse</span>(Census<span class="op">$</span>hours.worked <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="kw">runif</span>(<span class="dv">1</span><span class="op">:</span>Ht[<span class="kw">names</span>(Ht) <span class="op">==</span><span class="st"> </span><span class="dv">2</span>], <span class="dv">16</span>, <span class="dv">30</span>),
+  <span class="kw">ifelse</span>(Census<span class="op">$</span>hours.worked <span class="op">==</span><span class="st"> </span><span class="dv">3</span>, <span class="kw">runif</span>(<span class="dv">1</span><span class="op">:</span>Ht[<span class="kw">names</span>(Ht) <span class="op">==</span><span class="st"> </span><span class="dv">3</span>], <span class="dv">31</span>, <span class="dv">48</span>),
+    <span class="kw">ifelse</span>(Census<span class="op">$</span>hours.worked <span class="op">==</span><span class="st"> </span><span class="dv">4</span>, <span class="kw">runif</span>(<span class="dv">1</span><span class="op">:</span>Ht[<span class="kw">names</span>(Ht) <span class="op">==</span><span class="st"> </span><span class="dv">4</span>], <span class="dv">49</span>, <span class="dv">60</span>),
+      Census<span class="op">$</span>hours.worked
+    )
+  )
+)
+)
+
+<span class="kw">save</span>(Census, <span class="dt">file =</span> <span class="st">&quot;data/Census.Rda&quot;</span>)</code></pre></div>
+<p>A preview of the dataset is provided below.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+person.id
+</th>
+<th style="text-align:right;">
+region
+</th>
+<th style="text-align:right;">
+residence.type
+</th>
+<th style="text-align:right;">
+fam.comp
+</th>
+<th style="text-align:right;">
+resident.type
+</th>
+<th style="text-align:right;">
+sex
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+marital.status
+</th>
+<th style="text-align:right;">
+student
+</th>
+<th style="text-align:right;">
+birth.country
+</th>
+<th style="text-align:right;">
+health
+</th>
+<th style="text-align:right;">
+ethnicity
+</th>
+<th style="text-align:right;">
+religion
+</th>
+<th style="text-align:right;">
+econ.act
+</th>
+<th style="text-align:right;">
+occupation
+</th>
+<th style="text-align:right;">
+industry
+</th>
+<th style="text-align:right;">
+hours.worked
+</th>
+<th style="text-align:right;">
+social.grade
+</th>
+<th style="text-align:right;">
+hours.cont
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+7394816
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+-9
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+-9.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7394745
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+56.92578
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7395066
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+36.79397
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7395329
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+36.28146
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7394712
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+41.81308
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7394750
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+39.98968
+</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" style="list-style-type: decimal">
+<li>For the purposes of training and testing a machine learning system, the data was divided into training and test datasets using the following code.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Randomly select 80% of Census units and split into Train and Test data</span>
+<span class="kw">set.seed</span>(<span class="dv">5</span>)
+Census80 &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Census), <span class="fl">0.8</span> <span class="op">*</span><span class="st"> </span><span class="kw">nrow</span>(Census), <span class="dt">replace =</span> <span class="ot">FALSE</span>)
+Census20 &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Census), Census80)
+
+Census.train &lt;-<span class="st"> </span>Census[Census80, ]
+Census.test &lt;-<span class="st"> </span>Census[Census20, ]
+
+<span class="kw">save</span>(Census.train, <span class="dt">file =</span> <span class="st">&quot;data/Census.train.Rda&quot;</span>)
+<span class="kw">save</span>(Census.test, <span class="dt">file =</span> <span class="st">&quot;data/Census.test.Rda&quot;</span>)</code></pre></div>
+<p>The intention was to build models to predict a selection of variable using training data, which had no missingness. This model would then be evaluated with respect to its accuracy and generalisability using a test dataset, which would have missingness. The Census Teaching File was a complete dataset. As a result, missingness was simulated in the test dataset, and the imputation models (derived for each variable) were evaluated with regards to how well they predicted the true values.</p>
+<p>Models were tested for the following variables:<br />
+- Economic activity (a multi-class variable) - Hours worked (a derived continuous variable)<br />
+- Social Grade (a multi-class variable)<br />
+- Student status (a binary variable) A more detailed description of all the variables can be found <a href="https://www.ons.gov.uk/census/2011census/2011censusdata/censusmicrodata/microdatateachingfile/variablelist">here</a>.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>The distribution of the imputable variable was studied</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Study the variable: How many units in each category?</span>
+EAt &lt;-<span class="st"> </span><span class="kw">table</span>(Census<span class="op">$</span>econ.act)
+
+EAt
+
+<span class="co"># What is the distribution of the variable: Remove NCR and plot to look at distribution</span>
+g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(Census[<span class="op">!</span>Census<span class="op">$</span>econ.act <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">9</span>, ], <span class="kw">aes</span>(econ.act))
+
+g <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_discrete</span>(
+  <span class="dt">name =</span> <span class="st">&quot;Economic Activity&quot;</span>,
+  <span class="dt">breaks =</span> <span class="kw">pretty_breaks</span>()
+)</code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>The dataset was cleaned for model training; the personal identifier and the categorical hours worked variable were removed. Moreover, units that were classified as no code required for the imputable variable were removed from the training and test datasets</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Tidy/treat the training and test datasets</span>
+<span class="co"># Remove units with NCR codes for variable &amp; Remove the personal identifier</span>
+Census.train.tidy &lt;-<span class="st"> </span>Census.train[<span class="op">!</span>Census.train<span class="op">$</span>econ.act <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">9</span>, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">17</span>)]
+
+Census.test.tidy &lt;-<span class="st"> </span>Census.test[<span class="op">!</span>Census.test<span class="op">$</span>econ.act <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">9</span>, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">17</span>)]</code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Missingness was simulated in the test dataset</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulate missingness in test data &amp; Convert all missing responses to -999</span>
+Census.test.tidy.amp &lt;-<span class="st"> </span><span class="kw">ampute</span>(Census.test.tidy, <span class="dt">prop =</span> <span class="fl">0.7</span>)
+
+Census.test.tidy.miss &lt;-<span class="st"> </span>Census.test.tidy.amp<span class="op">$</span>amp
+
+<span class="co"># Study the test dataset with missingness: How much missingness per variable?</span>
+NumberMissing &lt;-<span class="st"> </span><span class="kw">sapply</span>(Census.test.tidy.miss, <span class="cf">function</span>(y) <span class="kw">sum</span>(<span class="kw">length</span>(
+    <span class="kw">which</span>(<span class="kw">is.na</span>(y))
+  )))
+
+TestNumberMissing &lt;-<span class="st"> </span><span class="kw">data.frame</span>(NumberMissing)
+
+<span class="co"># Convert missing cases to -999</span>
+Census.test.tidy.miss[<span class="kw">is.na</span>(Census.test.tidy.miss)] &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">999</span>
+
+<span class="co"># Save dataset with missingenss</span>
+<span class="kw">save</span>(Census.test.tidy.miss, <span class="dt">file =</span> <span class="st">&quot;data/EconAct/Census.test.tidy.miss.Rda&quot;</span>)</code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>A model was built using the training data</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Train the model</span>
+<span class="co"># Convert the data to matrix and assign output variable</span>
+train.outcome &lt;-<span class="st"> </span>Census.train.tidy<span class="op">$</span>econ.act
+
+train.predictors &lt;-<span class="st"> </span><span class="kw">sparse.model.matrix</span>(econ.act <span class="op">~</span><span class="st"> </span>.,
+  <span class="dt">data =</span> Census.train.tidy
+)[, <span class="op">-</span><span class="dv">1</span>]
+
+test.outcome &lt;-<span class="st"> </span>Census.test.tidy.miss<span class="op">$</span>econ.act
+
+test.predictors &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(econ.act <span class="op">~</span><span class="st"> </span>.,
+  <span class="dt">data =</span> Census.test.tidy.miss
+)[, <span class="op">-</span><span class="dv">1</span>]
+
+<span class="co"># Convert the matrix objects to DMatrix objects</span>
+dtrain &lt;-<span class="st"> </span><span class="kw">xgb.DMatrix</span>(train.predictors, <span class="dt">label =</span> train.outcome)
+
+dtest &lt;-<span class="st"> </span><span class="kw">xgb.DMatrix</span>(test.predictors, <span class="dt">missing =</span> <span class="op">-</span><span class="dv">999</span>)
+
+<span class="co"># Train a model using training set</span>
+trainEA_v1 &lt;-<span class="st"> </span><span class="kw">xgboost</span>(
+  <span class="dt">data =</span> dtrain, <span class="dt">max_depth =</span> <span class="dv">2</span>, <span class="dt">eta =</span> <span class="dv">1</span>, <span class="dt">nthread =</span> <span class="dv">2</span>, <span class="dt">nrounds =</span> <span class="dv">10</span>,
+  <span class="dt">objective =</span> <span class="st">&quot;multi:softmax&quot;</span>, <span class="dt">num_class =</span> <span class="dv">10</span>, <span class="dt">missing =</span> <span class="op">-</span><span class="dv">999</span>
+)
+
+<span class="co"># Examine feature importance</span>
+importance_matrix &lt;-<span class="st"> </span><span class="kw">xgb.importance</span>(<span class="dt">model =</span> trainEA_v1)
+
+<span class="kw">print</span>(importance_matrix)
+
+<span class="kw">xgb.plot.importance</span>(<span class="dt">importance_matrix =</span> importance_matrix)
+
+<span class="co"># Save model</span>
+<span class="kw">xgb.save</span>(trainEA_v1, <span class="st">&quot;XGBoost/xgboost.econAct&quot;</span>)</code></pre></div>
+<ol start="6" style="list-style-type: decimal">
+<li>The model was used to predict values in the test dataset</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Test the model</span>
+predicted &lt;-<span class="st"> </span><span class="kw">predict</span>(trainEA_v1, dtest, <span class="dt">missing =</span> <span class="op">-</span><span class="dv">999</span>, <span class="dt">na.action =</span> na.pass)
+
+<span class="co"># Save predicted values</span>
+<span class="kw">save</span>(predicted, <span class="dt">file =</span> <span class="st">&quot;data/EconAct/XGBoost/predicted.RData&quot;</span>)</code></pre></div>
+<ol start="7" style="list-style-type: decimal">
+<li>Donor based imputation was carried out on the test data (with missingness):
+<ol style="list-style-type: lower-roman">
+<li>CANCEIS: One round of CANCEIS selected matching variables based on a correlation matrix. Variables that had a correlation coefficient of |0.4| or greater were included as matching variables in the CANCEIS imputation specification. All variables were given the same weight.<br />
+</li>
+<li>Mixed Methods: One round of CANCEIS selected matching variables based on the feature importance figures from the XGBoost model. The six most important variables from the feature importance output were selected as matching variables; with more important variables assigned a larger weight.</li>
+</ol></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Impute values using CANCEIS</span>
+<span class="co"># Create CANCEIS input file with imputable and matching variables</span>
+CANCEIS.input &lt;-<span class="st"> </span>Census.test.tidy.miss[, <span class="kw">c</span>(
+  <span class="st">&quot;econ.act&quot;</span>, <span class="st">&quot;student&quot;</span>, <span class="st">&quot;industry&quot;</span>,
+  <span class="st">&quot;age&quot;</span>, <span class="st">&quot;occupation&quot;</span>, <span class="st">&quot;social.grade&quot;</span>
+)]
+
+CANCEIS.input<span class="op">$</span>canceis.id &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(CANCEIS.input)
+CANCEIS.input &lt;-<span class="st"> </span>CANCEIS.input[, <span class="kw">c</span>(
+  <span class="st">&quot;canceis.id&quot;</span>, <span class="st">&quot;econ.act&quot;</span>, <span class="st">&quot;student&quot;</span>, <span class="st">&quot;industry&quot;</span>,
+  <span class="st">&quot;age&quot;</span>, <span class="st">&quot;occupation&quot;</span>, <span class="st">&quot;social.grade&quot;</span>
+)]
+
+<span class="kw">write.table</span>(CANCEIS.input,
+  <span class="dt">file =</span> <span class="st">&quot;data/EconAct/CANCEIS/xxxUNIT01IG01.txt&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>,
+  <span class="dt">row.names =</span> <span class="ot">FALSE</span>, <span class="dt">col.names =</span> <span class="ot">FALSE</span>
+)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Impute values using CANCEIS (with XGBoost to advise selection of MVs)</span>
+<span class="co"># Create CANCEIS input file with imputable and matching variables</span>
+CANCEISXG.input &lt;-<span class="st"> </span>Census.test.tidy.miss[, <span class="kw">c</span>(
+  <span class="st">&quot;econ.act&quot;</span>, <span class="st">&quot;hours.cont&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;student&quot;</span>,
+  <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;health&quot;</span>, <span class="st">&quot;industry&quot;</span>
+)]
+
+CANCEISXG.input<span class="op">$</span>canceis.id &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(CANCEISXG.input)
+CANCEISXG.input &lt;-<span class="st"> </span>CANCEISXG.input[, <span class="kw">c</span>(
+  <span class="st">&quot;canceis.id&quot;</span>, <span class="st">&quot;econ.act&quot;</span>, <span class="st">&quot;hours.cont&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;student&quot;</span>,
+  <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;health&quot;</span>, <span class="st">&quot;industry&quot;</span>
+)]
+
+<span class="kw">write.table</span>(CANCEISXG.input,
+  <span class="dt">file =</span> <span class="st">&quot;data/EconAct/MixedMethods/xxxUNIT01IG01.txt&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>,
+  <span class="dt">row.names =</span> <span class="ot">FALSE</span>, <span class="dt">col.names =</span> <span class="ot">FALSE</span>
+)</code></pre></div>
+<ol start="8" style="list-style-type: decimal">
+<li>The two rounds of donor based imputation (using CANCEIS) and the (XGBoost) model based imputation were compared using either root mean squared error, absolute error (for continuous variables) and the confusion matrix (for categorical variables).
+<ol style="list-style-type: lower-roman">
+<li>First, information and data from the previous steps was loaded into working memory<br />
+</li>
+<li>Next, Each of the methods was evaluated with respect to the performance measure, and compared to either median (for continuous) or mode (for categorical) variables</li>
+</ol></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load datasets</span>
+<span class="co"># Test and Training data</span>
+<span class="kw">load</span>(<span class="st">&quot;data/Census.train.Rda&quot;</span>)
+
+<span class="kw">load</span>(<span class="st">&quot;data/Census.test.Rda&quot;</span>)
+
+<span class="co"># Load dataset with missingenss</span>
+<span class="kw">load</span>(<span class="st">&quot;data/EconAct/Census.test.tidy.miss.Rda&quot;</span>)
+
+<span class="co"># Create test.tidy and train.tidy datasets (Remove units with NCR codes for variable </span>
+<span class="co"># &amp; Remove the personal identifier)</span>
+Census.train.tidy &lt;-<span class="st"> </span>Census.train[<span class="op">!</span>Census.train<span class="op">$</span>econ.act <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">9</span>, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">17</span>)]
+
+Census.test.tidy &lt;-<span class="st"> </span>Census.test[<span class="op">!</span>Census.test<span class="op">$</span>econ.act <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">9</span>, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">17</span>)]
+
+<span class="co"># Read in CANCEIS input and output</span>
+CANCEIS.test.in &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/EconAct/CANCEIS/xxxUNIT01IG01.txt&quot;</span>,
+                              <span class="dt">header =</span> <span class="ot">FALSE</span>,
+                              <span class="dt">col.names =</span> <span class="kw">c</span>(
+                                <span class="st">&quot;canceis.id&quot;</span>, <span class="st">&quot;econ.act&quot;</span>, <span class="st">&quot;student&quot;</span>,
+                                <span class="st">&quot;industry&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;occupation&quot;</span>,
+                                <span class="st">&quot;social.grade&quot;</span>
+                              )
+)[, <span class="op">-</span><span class="dv">1</span>]
+
+CANCEIS.test.out &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/EconAct/CANCEIS/XXXUNITIMP01IG01.txt&quot;</span>,
+                               <span class="dt">header =</span> <span class="ot">FALSE</span>,
+                               <span class="dt">col.names =</span> <span class="kw">c</span>(
+                                 <span class="st">&quot;canceis.id&quot;</span>, <span class="st">&quot;econ.act&quot;</span>, <span class="st">&quot;student&quot;</span>,
+                                 <span class="st">&quot;industry&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;occupation&quot;</span>,
+                                 <span class="st">&quot;social.grade&quot;</span>
+                               )
+)[, <span class="op">-</span><span class="dv">1</span>]
+
+<span class="co"># Read in CANCEISXG input and output</span>
+CANCEISXG.test.in &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/EconAct/MixedMethods/xxxUNIT01IG01.txt&quot;</span>,
+                                <span class="dt">header =</span> <span class="ot">FALSE</span>,
+                                <span class="dt">col.names =</span> <span class="kw">c</span>(
+                                  <span class="st">&quot;canceis.id&quot;</span>, <span class="st">&quot;econ.act&quot;</span>, <span class="st">&quot;hours.cont&quot;</span>, 
+                                  <span class="st">&quot;age&quot;</span>, <span class="st">&quot;student&quot;</span>,
+                                  <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;health&quot;</span>, <span class="st">&quot;industry&quot;</span>
+                                )
+)[, <span class="op">-</span><span class="dv">1</span>]
+
+CANCEISXG.test.out &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;data/EconAct/MixedMethods/XXXUNITIMP01IG01.txt&quot;</span>,
+                                 <span class="dt">header =</span> <span class="ot">FALSE</span>,
+                                 <span class="dt">col.names =</span> <span class="kw">c</span>(
+                                   <span class="st">&quot;canceis.id&quot;</span>, <span class="st">&quot;econ.act&quot;</span>, <span class="st">&quot;hours.cont&quot;</span>, 
+                                   <span class="st">&quot;age&quot;</span>, <span class="st">&quot;student&quot;</span>,
+                                   <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;health&quot;</span>, <span class="st">&quot;industry&quot;</span>
+                                 )
+)[, <span class="op">-</span><span class="dv">1</span>]
+<span class="co"># Load predicted values from XGBoost</span>
+<span class="kw">load</span>(<span class="st">&quot;data/EconAct/XGBoost/predicted.RData&quot;</span>)
+
+<span class="co"># Load model</span>
+trainEA_v1 &lt;-<span class="st"> </span><span class="kw">xgb.load</span>(<span class="st">&quot;XGBoost/xgboost.econAct&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluate performance of XGBoost model</span>
+<span class="co"># Compare versions of the outcome variable (Actual, Predicted, Missing)</span>
+actuals &lt;-<span class="st"> </span>Census.test.tidy<span class="op">$</span>econ.act
+
+missing &lt;-<span class="st"> </span>Census.test.tidy.miss<span class="op">$</span>econ.act
+
+compareVar &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">Actuals =</span> actuals, <span class="dt">Predictions =</span> predicted,
+  <span class="dt">Missing =</span> missing
+)
+
+compareMissing &lt;-<span class="st"> </span>compareVar[compareVar<span class="op">$</span>Missing <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">999</span>, ]
+
+compareMissing<span class="op">$</span>indicator &lt;-<span class="st"> </span><span class="kw">ifelse</span>(compareMissing<span class="op">$</span>Actuals <span class="op">==</span>
+<span class="st">                                     </span>compareMissing<span class="op">$</span>Predictions,<span class="st">&quot;Correct&quot;</span>, <span class="st">&quot;Wrong&quot;</span>)
+
+counts &lt;-<span class="st"> </span><span class="kw">table</span>(compareMissing<span class="op">$</span>indicator)
+
+<span class="kw">barplot</span>(counts, <span class="dt">main =</span> <span class="st">&quot;Accuracy of predictions&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Outcome&quot;</span>)
+
+<span class="co"># Using Confusion Matrix to evaluate predictions</span>
+confusionML &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(
+  <span class="kw">as.factor</span>(compareVar<span class="op">$</span>Actuals),
+  <span class="kw">as.factor</span>(compareVar<span class="op">$</span>Predictions)
+)
+
+<span class="kw">qplot</span>(Actuals, Predictions,
+      <span class="dt">data =</span> compareVar,
+      <span class="dt">geom =</span> <span class="kw">c</span>(<span class="st">&quot;jitter&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;predicted vs. observed in test data&quot;</span>,
+      <span class="dt">xlab =</span> <span class="st">&quot;Observed Class&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Predicted Class&quot;</span>
+) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>,<span class="st">&quot;5&quot;</span>,<span class="st">&quot;6&quot;</span>,<span class="st">&quot;7&quot;</span>,<span class="st">&quot;8&quot;</span>,<span class="st">&quot;9&quot;</span>)
+) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_discrete</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>,<span class="st">&quot;5&quot;</span>,<span class="st">&quot;6&quot;</span>,<span class="st">&quot;7&quot;</span>,<span class="st">&quot;8&quot;</span>,<span class="st">&quot;9&quot;</span>))
+
+<span class="kw">ggsave</span>(<span class="st">&quot;images/EAXGqplot.png&quot;</span>)
+
+<span class="co"># Evaluate performance of CANCEIS</span>
+<span class="co"># Compare predicted and actuals</span>
+actuals.CANCEIS &lt;-<span class="st"> </span>Census.test.tidy<span class="op">$</span>econ.act
+
+missing.CANCEIS &lt;-<span class="st"> </span>CANCEIS.test.in<span class="op">$</span>econ.act
+
+predicted.CANCEIS &lt;-<span class="st"> </span>CANCEIS.test.out<span class="op">$</span>econ.act
+
+compare_var_CANCEIS &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">Actuals =</span> actuals.CANCEIS, <span class="dt">Predictions =</span>
+    predicted.CANCEIS, <span class="dt">Missing =</span> missing.CANCEIS
+)
+
+compare_missing_CANCEIS &lt;-<span class="st"> </span>compare_var_CANCEIS[
+  compare_var_CANCEIS<span class="op">$</span>Missing <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">999</span>, ]
+
+compare_missing_CANCEIS<span class="op">$</span>indicator &lt;-<span class="st"> </span><span class="kw">ifelse</span>(
+  compare_missing_CANCEIS<span class="op">$</span>Actuals <span class="op">==</span>
+<span class="st">    </span>compare_missing_CANCEIS<span class="op">$</span>Predictions,
+  <span class="st">&quot;Correct&quot;</span>, <span class="st">&quot;Wrong&quot;</span>
+)
+
+counts_CANCEIS &lt;-<span class="st"> </span><span class="kw">table</span>(compare_missing_CANCEIS<span class="op">$</span>indicator)
+
+<span class="kw">barplot</span>(counts_CANCEIS, <span class="dt">main =</span> <span class="st">&quot;Accuracy of predictions&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Outcome&quot;</span>)
+
+<span class="co"># Using Confusion Matrix to evaluate predictions</span>
+confusion_CANCEIS &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(
+  <span class="kw">as.factor</span>(compare_missing_CANCEIS<span class="op">$</span>Actuals),
+  <span class="kw">as.factor</span>(compare_missing_CANCEIS<span class="op">$</span>Predictions)
+)
+
+<span class="kw">qplot</span>(Actuals, Predictions,
+      <span class="dt">data =</span> compare_missing_CANCEIS,
+      <span class="dt">geom =</span> <span class="kw">c</span>(<span class="st">&quot;jitter&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;predicted vs. observed in validation data&quot;</span>,
+      <span class="dt">xlab =</span> <span class="st">&quot;Observed Class&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Predicted Class&quot;</span>
+) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>,<span class="st">&quot;5&quot;</span>,<span class="st">&quot;6&quot;</span>,<span class="st">&quot;7&quot;</span>,<span class="st">&quot;8&quot;</span>,<span class="st">&quot;9&quot;</span>)
+) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_discrete</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>,<span class="st">&quot;5&quot;</span>,<span class="st">&quot;6&quot;</span>,<span class="st">&quot;7&quot;</span>,<span class="st">&quot;8&quot;</span>,<span class="st">&quot;9&quot;</span>))
+
+<span class="kw">ggsave</span>(<span class="st">&quot;images/EACANCEISqplot.png&quot;</span>)
+
+<span class="co"># Evaluate performance of CANCEISXG</span>
+<span class="co"># Compare predicted and actuals</span>
+actuals.CANCEISXG &lt;-<span class="st"> </span>Census.test.tidy<span class="op">$</span>econ.act
+
+missing.CANCEISXG &lt;-<span class="st"> </span>CANCEISXG.test.in<span class="op">$</span>econ.act
+
+predicted.CANCEISXG &lt;-<span class="st"> </span>CANCEISXG.test.out<span class="op">$</span>econ.act
+
+compare_var_CANCEISXG &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">Actuals =</span> actuals.CANCEISXG, <span class="dt">Predictions =</span>
+    predicted.CANCEISXG, <span class="dt">Missing =</span> missing.CANCEISXG
+)
+
+compare_missing_CANCEISXG &lt;-<span class="st"> </span>compare_var_CANCEISXG[
+  compare_var_CANCEISXG<span class="op">$</span>Missing <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">999</span>, ]
+
+compare_missing_CANCEISXG<span class="op">$</span>indicator &lt;-<span class="st"> </span><span class="kw">ifelse</span>(
+  compare_missing_CANCEISXG<span class="op">$</span>Actuals <span class="op">==</span>
+<span class="st">    </span>compare_missing_CANCEISXG<span class="op">$</span>Predictions,
+  <span class="st">&quot;Correct&quot;</span>, <span class="st">&quot;Wrong&quot;</span>
+)
+
+counts_CANCEISXG &lt;-<span class="st"> </span><span class="kw">table</span>(compare_missing_CANCEISXG<span class="op">$</span>indicator)
+
+<span class="kw">barplot</span>(counts_CANCEISXG, <span class="dt">main =</span> <span class="st">&quot;Accuracy of predictions&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Outcome&quot;</span>)
+
+<span class="co"># Using Confusion Matrix to evaluate predictions</span>
+confusion_CANCEISXG &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(
+  <span class="kw">as.factor</span>(compare_missing_CANCEISXG<span class="op">$</span>Actuals),
+  <span class="kw">as.factor</span>(compare_missing_CANCEISXG<span class="op">$</span>Predictions)
+)
+
+<span class="kw">qplot</span>(Actuals, Predictions,
+      <span class="dt">data =</span> compare_missing_CANCEISXG,
+      <span class="dt">geom =</span> <span class="kw">c</span>(<span class="st">&quot;jitter&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;predicted vs. observed in validation data&quot;</span>,
+      <span class="dt">xlab =</span> <span class="st">&quot;Observed Class&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Predicted Class&quot;</span>
+) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>,<span class="st">&quot;5&quot;</span>,<span class="st">&quot;6&quot;</span>,<span class="st">&quot;7&quot;</span>,<span class="st">&quot;8&quot;</span>,<span class="st">&quot;9&quot;</span>)
+) <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_discrete</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>,<span class="st">&quot;5&quot;</span>,<span class="st">&quot;6&quot;</span>,<span class="st">&quot;7&quot;</span>,<span class="st">&quot;8&quot;</span>,<span class="st">&quot;9&quot;</span>))
+
+<span class="kw">ggsave</span>(<span class="st">&quot;images/EACANCEISXGqplot.png&quot;</span>)
+
+<span class="co"># Impute values using mode imputation</span>
+<span class="co"># Create a vector of imputable variable excluding missing values</span>
+mode.dat &lt;-<span class="st"> </span>Census.test.tidy.miss[
+  Census.test.tidy.miss<span class="op">$</span>econ.act <span class="op">!=</span><span class="st"> </span><span class="op">-</span><span class="dv">999</span>, ]
+
+mode.val &lt;-<span class="st"> </span><span class="kw">Mode</span>(mode.dat<span class="op">$</span>econ.act)
+
+<span class="co"># Compare predicted and actuals</span>
+actuals.mode &lt;-<span class="st"> </span>Census.test.tidy<span class="op">$</span>econ.act
+
+missing.mode &lt;-<span class="st"> </span>Census.test.tidy.miss<span class="op">$</span>econ.act
+
+predicted.mode &lt;-<span class="st"> </span><span class="kw">ifelse</span>(
+  Census.test.tidy.miss<span class="op">$</span>econ.act <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">999</span>, mode.val, 
+  Census.test.tidy.miss<span class="op">$</span>econ.act)
+
+compare_var_mode &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">Actuals =</span> actuals.mode, <span class="dt">Predictions =</span>
+    predicted.mode, <span class="dt">Missing =</span> missing.mode
+)
+
+compare_missing_mode &lt;-<span class="st"> </span>compare_var_mode[
+  compare_var_mode<span class="op">$</span>Missing <span class="op">==</span><span class="st"> </span><span class="op">-</span><span class="dv">999</span>, ]
+
+compare_missing_mode<span class="op">$</span>indicator &lt;-<span class="st"> </span><span class="kw">ifelse</span>(
+  compare_missing_mode<span class="op">$</span>Actuals <span class="op">==</span>
+<span class="st">    </span>compare_missing_mode<span class="op">$</span>Predictions,
+  <span class="st">&quot;Correct&quot;</span>, <span class="st">&quot;Wrong&quot;</span>
+)
+
+counts_mode &lt;-<span class="st"> </span><span class="kw">table</span>(compare_missing_mode<span class="op">$</span>indicator)
+
+<span class="kw">barplot</span>(counts_mode, <span class="dt">main =</span> <span class="st">&quot;Accuracy of predictions&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Outcome&quot;</span>)</code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="xgboost.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-methods.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["Machine-Learning-in-Imputation.pdf", "Machine-Learning-in-Imputation.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
