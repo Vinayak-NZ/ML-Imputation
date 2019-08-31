@@ -24,7 +24,7 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Applications of Machine Learning in Imputation},
-            pdfauthor={Methodology},
+            pdfauthor={Vinayak Anand-Kumar},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -119,7 +119,7 @@
   \title{Applications of Machine Learning in Imputation}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-    \author{Methodology}
+    \author{Vinayak Anand-Kumar}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
       \predate{\centering\large\emph}
@@ -146,10 +146,9 @@
 
 Editing and imputation are both methods of data processing. Editing
 refers to the detection and correction of errors in the data, whilst
-imputation is a method of correcting errors in a dataset \citep{deWaal}.
-This document presents findings from work carried out at the Office for
-National Statistics on the use of machine learning in imputation. The
-chapters address the following questions:
+imputation is a method of correcting errors in a dataset. This document
+presents findings from work carried out on the use of machine learning
+in imputation. The chapters address the following questions:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -175,11 +174,11 @@ chapters address the following questions:
 Editing and imputing are both methods of data processing. Editing refers
 to the detection and correction of errors in the data. Whilst imputation
 is a method of correcting errors and estimating and filling in missing
-values in a dataset. Where there are errors in the dataset, and when
+values in a data set. Where there are errors in the data set, and when
 these are considered to add no value in the correction process, these
 values are set to missing and are imputed with a plausible estimate.
 Alternatively, missing values may already exist in the data, and
-imputation may be carried out to produce a complete dataset for
+imputation may be carried out to produce a complete data set for
 analysis.
 
 This research project evaluated the use of machine learning methods for
@@ -200,27 +199,27 @@ out?}\label{why-is-imputation-carried-out}
 Missingness and erroneous values can impact the quality of data. A large
 volume of incorrect and/or missing values increase the risk of the
 product failing to capture the target concept or target population. That
-is, ommissions (introduced in collection or processing) may result in
+is, omissions (introduced in collection or processing) may result in
 certain sub-groups of the target population from being excluded in the
-analysis dataset, and in turn increasing the risk of biased estimates,
+analysis data set, and in turn increasing the risk of biased estimates,
 reducing the power of inferential statistics and increasing the
 uncertainty of estimates and inferences derived from the data.
-Similarly, errors in a dataset may impact the degree to which the final
+Similarly, errors in a data set may impact the degree to which the final
 estimate or output represents the reality it was designed to capture.
 
 Correcting erroneous responses and filling in missing values helps
-manage the quality of data. A complete dataset can improve the accuracy
+manage the quality of data. A complete data set can improve the accuracy
 and reliability of estimates, and help maintain the consistency of
-counts across published tables. Moreover, a dataset with fewer errors
-and more units may more accuately capture the underlying distribution of
-the variable of interest. Selecting a method for estimating values in a
-datset is generally advised by the nature of errors or missingness in
-the data, and the output desired from the analysis dataset.
+counts across published tables. Moreover, a data set with fewer errors
+and more units may more accurately capture the underlying distribution
+of the variable of interest. Selecting a method for estimating values in
+a data set is generally advised by the nature of errors or missingness
+in the data, and the output desired from the analysis data set.
 
 \section{Methods}\label{methods}
 
-An imputation process of a dataset can be broken down into the following
-three phases:
+An imputation process of a data set can be broken down into the
+following three phases:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -239,7 +238,7 @@ three phases:
 \end{enumerate}
 
 The focus of this project was in applying Machine Learning methods to
-amend values in a dataset. That is, it was of interest to compare
+amend values in a data set. That is, it was of interest to compare
 existing approaches, of treating missing or erroneous values by
 estimating replacement figures, to machine learning methods. Methods of
 variable amendment can be grouped into one of the following categories:
@@ -418,16 +417,16 @@ generalised on new cases.
 \chapter{Why use Machine Learning?}\label{why-use-machine-learning}
 
 It was of interest to explore the utility of Machine Learning to
-directly impute for missing values in datasets. More specifically, the
-Methods Division was interested in examining whether Machine Learning
-models can improve the timeliness, reliability and accuracy of the
-imputation process in social survey data. Figure 1 presents the
-imputation pipeline for social survey data. Prior to imputation, units
-and values are reviewed, and those that are missing and should be routed
-to the item in question, are selected (i.e.~flagged) for imputation.
-Data is then further processed by the Social Survey Division before
-imputed and observed data are compiled in an analysis dataset, used for
-publishing Official Statistics estimates.
+directly impute for missing values in data sets. More specifically, the
+analysts were interested in examining whether Machine Learning models
+can improve the timeliness, reliability and accuracy of the imputation
+process in social survey data. Figure 1 presents the imputation pipeline
+for social survey data. Prior to imputation, units and values are
+reviewed, and those that are missing and should be routed to the item in
+question, are selected (i.e.~flagged) for imputation. Data is then
+further processed before imputed and observed data are compiled in an
+analysis data set, used for publishing estimates and carrying out
+analyses.
 
 \begin{figure}
 \centering
@@ -459,13 +458,13 @@ process is not data driven, it introduces an element of subjectivity and
 does not guarantee that matching variables selected are the best
 predictors of the variable of interest. In contrast, a data driven
 approach would be reproducible and identify the best predictors, in the
-dataset, to estimate missing values. Moreover, applying the machine
+data set, to estimate missing values. Moreover, applying the machine
 learning system may offer a more parsimonious approach as fewer input
-paramters and files would be required in executing imputation.
+parameters and files would be required in executing imputation.
 
-The Methodology Division was interested in whether a Machine Learning
-System would perform better compared to the current imputation process
-with regards to:
+Analysts were interested in whether a Machine Learning System would
+perform better compared to the current imputation process with regards
+to:
 
 \begin{itemize}
 \tightlist
@@ -499,7 +498,7 @@ to predict an outcome.
 The ML system is trained using batch learning and generalised through a
 model based approach. It uses all available data to construct a model
 that specifies the relationship between the predictor and outcome
-variables, which are then generalised to the test dataset.
+variables, which are then generalised to the test data set.
 
 XGBoost stands for eXtreme Gradient Boosting. The word ``extreme''
 reflects its goal to push the limit of computational resources. Whereas
@@ -524,7 +523,7 @@ to predict an outcome variable using available auxiliary variables.
 
 \section{Decision trees}\label{decision-trees}
 
-Decision trees can be used as a method for grouping units in a dataset
+Decision trees can be used as a method for grouping units in a data set
 by asking questions, such as ``Does an individual have a Bachelor's
 degree?''. In this example, two groups would be created; one for those
 with a Bachelor's degree, and one for those without. Figure 2 provides a
@@ -550,7 +549,7 @@ characteristics with respect to an outcome variable. The model in Figure
 \includegraphics{images/dt_all.png}
 \caption{Figure 3. Decision tree that splits units in a dataset based on
 whether individual has a Bachelor's degree (yes/no), a Master's degree
-and pHD (yes/no), in order to predict Income. The tree shows that those
+and PhD (yes/no), in order to predict Income. The tree shows that those
 with a higher qualification tend to earn more.}
 \end{figure}
 
@@ -561,8 +560,8 @@ The following characteristics are true of decision trees:
 \item
   A single question is asked at each decision node, and there are only
   two possible choices. With the example in Figure 3, the questions
-  include 1) Does individual have a pHD, 2) Does individual have a
-  Master's and 3) Does individual have a Bachelor's degree.\\
+  include 1) Does the individual have a PhD, 2) Does the individual have
+  a Master's and 3) Does the individual have a Bachelor's degree.\\
 \item
   At the bottom of every decision tree, there is a single possible
   decision. Every possible decision will eventually lead to a choice.
@@ -572,19 +571,19 @@ The following characteristics are true of decision trees:
   qualification. The end nodes present the distribution of income for
   individuals with the specified qualifications. As a result, the
   choices would be the expected value of Income for an individual, given
-  the qualificaitons obtained.
+  the qualifications obtained.
 \end{itemize}
 
 Decision trees are a learning method that involve a tree like graph to
 model either continuous or categorical choice given some data. It is
 composed of a series of binary questions, which when answered in
-succession yield a prediciton about data at hand. XGBoost uses
+succession yield a prediction about data at hand. XGBoost uses
 Classification and Regression Trees (CART), which are presented in the
 above examples, to predict the outcome variable.
 
 \subsection{Boosting}\label{boosting}
 
-A single decision tree is considered a weak/ base learner as it only
+A single decision tree is considered a weak/ base learner as it is only
 slightly better than chance at predicting the outcome variable. Whereas
 strong learners are any algorithm that can be tuned to achieve peak
 performance for supervised learning. XGBoost uses decision trees as base
@@ -610,7 +609,7 @@ decision trees may enable analysts to make accurate and reliable
 predictions of \(y_{i}\). As a result, the method for predicting the
 target variable using \(x_{i}\) in XGBoost is referred to as decision
 tree ensembles. The steps below demonstrate how XGBoost was used to
-build a model, to predict income, using Univeristy Qualifications.
+build a model, to predict income, using University Qualifications.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -632,7 +631,7 @@ build a model, to predict income, using Univeristy Qualifications.
 \setcounter{enumi}{1}
 \tightlist
 \item
-  Load the dataset and remove the identifer
+  Load the data set and remove the identifier
 \end{enumerate}
 
 \begin{Shaded}
@@ -650,7 +649,7 @@ build a model, to predict income, using Univeristy Qualifications.
 \setcounter{enumi}{2}
 \tightlist
 \item
-  Split the dataset into training and test
+  Split the data set into training and test
 \end{enumerate}
 
 \begin{Shaded}
@@ -779,8 +778,8 @@ The project evaluated the machine learning methods using:
 \def\labelenumi{\arabic{enumi})}
 \tightlist
 \item
-  The Census Teaching File, an open dataset containing 1\% of the person
-  records from the 2011 Census in England \& Wales.\\
+  The Census Teaching File, an open data set containing 1\% of the
+  person records from the 2011 Census in England \& Wales.\\
 \item
   Survey Data
 \end{enumerate}
@@ -790,7 +789,7 @@ The project evaluated the machine learning methods using:
 The Census Teaching File was downloaded from the
 \href{https://www.ons.gov.uk/census/2011census/2011censusdata/censusmicrodata/microdatateachingfile}{ONS
 website} as a CSV file named ``CensusTeachingFile'', and was read into R
-using the following line of code. The dataset consisted of 569,741
+using the following line of code. The data set consisted of 569,741
 individuals and 18 categorical variables from the 2011 Census
 population.
 
@@ -798,7 +797,7 @@ population.
 \begin{Highlighting}[]
 \CommentTok{# Read CSV into R}
 \NormalTok{CensusRaw <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}
-  \DataTypeTok{file =} \StringTok{"Data/CensusTeachingFile.csv"}\NormalTok{, }\DataTypeTok{skip =} \DecValTok{1}\NormalTok{,}
+  \DataTypeTok{file =} \StringTok{"data/source/CensusTeachingFile.csv"}\NormalTok{, }\DataTypeTok{skip =} \DecValTok{1}\NormalTok{,}
   \DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{sep =} \StringTok{","}
 \NormalTok{)}
 \end{Highlighting}
@@ -823,6 +822,7 @@ build of machine learning systems using the Census Teaching File.
 \KeywordTok{library}\NormalTok{(knitr)}
 \KeywordTok{library}\NormalTok{(kableExtra)}
 \KeywordTok{library}\NormalTok{(DescTools)}
+\KeywordTok{library}\NormalTok{(dummies)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -836,7 +836,7 @@ activity, as the example.
 \def\labelenumi{\arabic{enumi})}
 \tightlist
 \item
-  Variables in the dataset were renamed and recoded so that:
+  Variables in the data set were renamed and recoded so that:
 \end{enumerate}
 
 \begin{itemize}
@@ -858,14 +858,14 @@ activity, as the example.
   \StringTok{"Residence.Type"}\NormalTok{ =}\StringTok{ "residence.type"}\NormalTok{,}
   \StringTok{"Family.Composition"}\NormalTok{ =}\StringTok{ "fam.comp"}\NormalTok{,}
   \StringTok{"Population.Base"}\NormalTok{ =}\StringTok{ "resident.type"}\NormalTok{,}
-  \StringTok{"Sex"}\NormalTok{=}\StringTok{"sex"}\NormalTok{,}
-  \StringTok{"Age"}\NormalTok{=}\StringTok{"age"}\NormalTok{,}
+  \StringTok{"Sex"}\NormalTok{ =}\StringTok{ "sex"}\NormalTok{,}
+  \StringTok{"Age"}\NormalTok{ =}\StringTok{ "age"}\NormalTok{,}
   \StringTok{"Marital.Status"}\NormalTok{ =}\StringTok{ "marital.status"}\NormalTok{,}
-  \StringTok{"Student"}\NormalTok{=}\StringTok{"student"}\NormalTok{,}
+  \StringTok{"Student"}\NormalTok{ =}\StringTok{ "student"}\NormalTok{,}
   \StringTok{"Country.of.Birth"}\NormalTok{ =}\StringTok{ "birth.country"}\NormalTok{,}
-  \StringTok{"Health"}\NormalTok{=}\StringTok{"health"}\NormalTok{,}
+  \StringTok{"Health"}\NormalTok{ =}\StringTok{ "health"}\NormalTok{,}
   \StringTok{"Ethnic.Group"}\NormalTok{ =}\StringTok{ "ethnicity"}\NormalTok{,}
-  \StringTok{"Religion"}\NormalTok{=}\StringTok{"religion"}\NormalTok{,}
+  \StringTok{"Religion"}\NormalTok{ =}\StringTok{ "religion"}\NormalTok{,}
   \StringTok{"Economic.Activity"}\NormalTok{ =}\StringTok{ "econ.act"}\NormalTok{,}
   \StringTok{"Occupation"}\NormalTok{ =}\StringTok{ "occupation"}\NormalTok{,}
   \StringTok{"Industry"}\NormalTok{ =}\StringTok{ "industry"}\NormalTok{,}
@@ -888,11 +888,17 @@ activity, as the example.
 \NormalTok{Census}\OperatorTok{$}\NormalTok{region[Census}\OperatorTok{$}\NormalTok{region }\OperatorTok{==}\StringTok{ "E12000009"}\NormalTok{] <-}\StringTok{ }\DecValTok{9}
 \NormalTok{Census}\OperatorTok{$}\NormalTok{region[Census}\OperatorTok{$}\NormalTok{region }\OperatorTok{==}\StringTok{ "W92000004"}\NormalTok{] <-}\StringTok{ }\DecValTok{10}
 
-\NormalTok{Census}\OperatorTok{$}\NormalTok{residence.type[Census}\OperatorTok{$}\NormalTok{residence.type }\OperatorTok{==}\StringTok{ "C"}\NormalTok{] <-}\StringTok{ }\DecValTok{1}
-\NormalTok{Census}\OperatorTok{$}\NormalTok{residence.type[Census}\OperatorTok{$}\NormalTok{residence.type }\OperatorTok{==}\StringTok{ "H"}\NormalTok{] <-}\StringTok{ }\DecValTok{2}
+\NormalTok{Census}\OperatorTok{$}\NormalTok{residence.type[Census}\OperatorTok{$}\NormalTok{residence.type }\OperatorTok{==}\StringTok{ "C"}\NormalTok{] <-}\StringTok{ }\DecValTok{0}
+\NormalTok{Census}\OperatorTok{$}\NormalTok{residence.type[Census}\OperatorTok{$}\NormalTok{residence.type }\OperatorTok{==}\StringTok{ "H"}\NormalTok{] <-}\StringTok{ }\DecValTok{1}
 
 \NormalTok{Census}\OperatorTok{$}\NormalTok{student[Census}\OperatorTok{$}\NormalTok{student }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\DecValTok{0}
 \NormalTok{Census}\OperatorTok{$}\NormalTok{student[Census}\OperatorTok{$}\NormalTok{student }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{1}
+
+\NormalTok{Census}\OperatorTok{$}\NormalTok{sex[Census}\OperatorTok{$}\NormalTok{sex }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\DecValTok{0}
+\NormalTok{Census}\OperatorTok{$}\NormalTok{sex[Census}\OperatorTok{$}\NormalTok{sex }\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{1}
+
+\NormalTok{Census}\OperatorTok{$}\NormalTok{birth.country[Census}\OperatorTok{$}\NormalTok{birth.country}\OperatorTok{==}\DecValTok{1}\NormalTok{] <-}\StringTok{ }\DecValTok{0}
+\NormalTok{Census}\OperatorTok{$}\NormalTok{birth.country[Census}\OperatorTok{$}\NormalTok{birth.country}\OperatorTok{==}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{1}
 
 \NormalTok{Census <-}\StringTok{ }\NormalTok{Census }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate_if}\NormalTok{(is.character, as.numeric)}
 
@@ -912,11 +918,30 @@ activity, as the example.
 \NormalTok{)}
 \NormalTok{)}
 
-\KeywordTok{save}\NormalTok{(Census, }\DataTypeTok{file =} \StringTok{"data/Census.Rda"}\NormalTok{)}
+\KeywordTok{save}\NormalTok{(Census, }\DataTypeTok{file =} \StringTok{"data/core/Census.Rda"}\NormalTok{)}
+
+\NormalTok{Census.pre.ohe <-}\StringTok{ }\NormalTok{Census}
+
+\CommentTok{# Prepare Census data for one hot encoding}
+\NormalTok{Census.pre.ohe}\OperatorTok{$}\NormalTok{fam.comp[Census.pre.ohe}\OperatorTok{$}\NormalTok{fam.comp }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{] <-}\StringTok{ "NCR"}
+
+\NormalTok{Census.pre.ohe}\OperatorTok{$}\NormalTok{health[Census.pre.ohe}\OperatorTok{$}\NormalTok{health }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{] <-}\StringTok{ "NCR"}
+
+\NormalTok{Census.pre.ohe}\OperatorTok{$}\NormalTok{ethnicity[Census.pre.ohe}\OperatorTok{$}\NormalTok{ethnicity }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{] <-}\StringTok{ "NCR"}
+
+\NormalTok{Census.pre.ohe}\OperatorTok{$}\NormalTok{religion[Census.pre.ohe}\OperatorTok{$}\NormalTok{religion }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{] <-}\StringTok{ "NCR"}
+
+\NormalTok{Census.pre.ohe}\OperatorTok{$}\NormalTok{econ.act[Census.pre.ohe}\OperatorTok{$}\NormalTok{econ.act }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{] <-}\StringTok{ "NCR"}
+
+\NormalTok{Census.pre.ohe}\OperatorTok{$}\NormalTok{occupation[Census.pre.ohe}\OperatorTok{$}\NormalTok{occupation }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{] <-}\StringTok{ "NCR"}
+
+\NormalTok{Census.pre.ohe}\OperatorTok{$}\NormalTok{industry[Census.pre.ohe}\OperatorTok{$}\NormalTok{industry }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{] <-}\StringTok{ "NCR"}
+
+\NormalTok{Census.pre.ohe}\OperatorTok{$}\NormalTok{social.grade[Census.pre.ohe}\OperatorTok{$}\NormalTok{social.grade }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{] <-}\StringTok{ "NCR"}
 \end{Highlighting}
 \end{Shaded}
 
-A preview of the dataset is provided below.
+A preview of the data set is provided below.
 
 person.id
 
@@ -960,13 +985,13 @@ hours.cont
 
 1
 
-2
+1
 
 2
 
 1
 
-2
+1
 
 6
 
@@ -974,7 +999,7 @@ hours.cont
 
 1
 
-1
+0
 
 2
 
@@ -998,13 +1023,13 @@ hours.cont
 
 1
 
-2
+1
 
 5
 
 1
 
-1
+0
 
 4
 
@@ -1012,7 +1037,7 @@ hours.cont
 
 1
 
-1
+0
 
 1
 
@@ -1030,19 +1055,19 @@ hours.cont
 
 3
 
-56.92578
+52.97915
 
 7395066
 
 1
 
-2
+1
 
 3
 
 1
 
-2
+1
 
 4
 
@@ -1050,7 +1075,7 @@ hours.cont
 
 1
 
-1
+0
 
 1
 
@@ -1068,27 +1093,27 @@ hours.cont
 
 4
 
-36.79397
+37.80685
 
 7395329
 
 1
 
-2
+1
 
 3
 
 1
 
+1
+
 2
 
-2
-
 1
 
 1
 
-1
+0
 
 2
 
@@ -1106,19 +1131,19 @@ hours.cont
 
 2
 
-36.28146
+39.52916
 
 7394712
 
 1
 
-2
+1
 
 3
 
 1
 
-1
+0
 
 5
 
@@ -1126,7 +1151,7 @@ hours.cont
 
 1
 
-1
+0
 
 1
 
@@ -1144,19 +1169,19 @@ hours.cont
 
 2
 
-41.81308
+31.29265
 
 7394750
 
 1
 
-2
+1
 
 2
 
 1
 
-1
+0
 
 6
 
@@ -1164,7 +1189,7 @@ hours.cont
 
 1
 
-1
+0
 
 2
 
@@ -1182,7 +1207,7 @@ hours.cont
 
 3
 
-39.98968
+31.04491
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -1190,7 +1215,7 @@ hours.cont
 \tightlist
 \item
   For the purposes of training and testing a machine learning system,
-  the data was divided into training and test datasets using the
+  the data was divided into training and test data sets using the
   following code.
 \end{enumerate}
 
@@ -1198,23 +1223,29 @@ hours.cont
 \begin{Highlighting}[]
 \CommentTok{# Randomly select 80% of Census units and split into Train and Test data}
 \KeywordTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{)}
-\NormalTok{Census80 <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(Census), }\FloatTok{0.8} \OperatorTok{*}\StringTok{ }\KeywordTok{nrow}\NormalTok{(Census), }\DataTypeTok{replace =} \OtherTok{FALSE}\NormalTok{)}
-\NormalTok{Census20 <-}\StringTok{ }\KeywordTok{setdiff}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(Census), Census80)}
+\NormalTok{Census80 <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(Census_ohe), }\FloatTok{0.8} \OperatorTok{*}\StringTok{ }\KeywordTok{nrow}\NormalTok{(Census_ohe), }\DataTypeTok{replace =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{Census20 <-}\StringTok{ }\KeywordTok{setdiff}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(Census_ohe), Census80)}
 
-\NormalTok{Census.train <-}\StringTok{ }\NormalTok{Census[Census80, ]}
-\NormalTok{Census.test <-}\StringTok{ }\NormalTok{Census[Census20, ]}
+\NormalTok{Census.train.ohe <-}\StringTok{ }\NormalTok{Census_ohe[Census80, }\OperatorTok{!}\NormalTok{(}\KeywordTok{names}\NormalTok{(Census_ohe)}\OperatorTok{==}\StringTok{"hours.worked"}\NormalTok{)]}
+\NormalTok{Census.test.ohe <-}\StringTok{ }\NormalTok{Census_ohe[Census20, }\OperatorTok{!}\NormalTok{(}\KeywordTok{names}\NormalTok{(Census_ohe)}\OperatorTok{==}\StringTok{"hours.worked"}\NormalTok{)]}
 
-\KeywordTok{save}\NormalTok{(Census.train, }\DataTypeTok{file =} \StringTok{"data/Census.train.Rda"}\NormalTok{)}
-\KeywordTok{save}\NormalTok{(Census.test, }\DataTypeTok{file =} \StringTok{"data/Census.test.Rda"}\NormalTok{)}
+\NormalTok{Census.train.label <-}\StringTok{ }\NormalTok{Census[Census80, }\OperatorTok{!}\NormalTok{(}\KeywordTok{names}\NormalTok{(Census)}\OperatorTok{==}\StringTok{"hours.worked"}\NormalTok{)]}
+\NormalTok{Census.test.label <-}\StringTok{ }\NormalTok{Census[Census20, }\OperatorTok{!}\NormalTok{(}\KeywordTok{names}\NormalTok{(Census)}\OperatorTok{==}\StringTok{"hours.worked"}\NormalTok{)]}
+
+\KeywordTok{save}\NormalTok{(Census.train.ohe, }\DataTypeTok{file =} \StringTok{"data/ohe/Census.train.ohe.Rda"}\NormalTok{)}
+\KeywordTok{save}\NormalTok{(Census.test.ohe, }\DataTypeTok{file =} \StringTok{"data/ohe/Census.test.ohe.Rda"}\NormalTok{)}
+
+\KeywordTok{save}\NormalTok{(Census.train.label, }\DataTypeTok{file =} \StringTok{"data/label/Census.train.label.Rda"}\NormalTok{)}
+\KeywordTok{save}\NormalTok{(Census.test.label, }\DataTypeTok{file =} \StringTok{"data/label/Census.test.label.Rda"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 The intention was to build models to predict a selection of variable
 using training data, which had no missingness. This model would then be
 evaluated with respect to its accuracy and generalisability using a test
-dataset, which would have missingness. The Census Teaching File was a
-complete dataset. As a result, missingness was simulated in the test
-dataset, and the imputation models (derived for each variable) were
+data set, which would have missingness. The Census Teaching File was a
+complete data set. As a result, missingness was simulated in the test
+data set, and the imputation models (derived for each variable) were
 evaluated with regards to how well they predicted the true values.
 
 Models were tested for the following variables:\\
@@ -1253,51 +1284,102 @@ the variables can be found
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
 \setcounter{enumi}{3}
-\tightlist
 \item
-  The dataset was cleaned for model training; the personal identifier
+  The data set was cleaned for model training; the personal identifier
   and the categorical hours worked variable were removed. Moreover,
   units that were classified as no code required for the imputable
-  variable were removed from the training and test datasets
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Tidy/treat the training and test datasets}
-\CommentTok{# Remove units with NCR codes for variable & Remove the personal identifier}
-\NormalTok{Census.train.tidy <-}\StringTok{ }\NormalTok{Census.train[}\OperatorTok{!}\NormalTok{Census.train}\OperatorTok{$}\NormalTok{econ.act }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\OperatorTok{-}\DecValTok{17}\NormalTok{)]}
-
-\NormalTok{Census.test.tidy <-}\StringTok{ }\NormalTok{Census.test[}\OperatorTok{!}\NormalTok{Census.test}\OperatorTok{$}\NormalTok{econ.act }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\OperatorTok{-}\DecValTok{17}\NormalTok{)]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\setcounter{enumi}{3}
-\tightlist
+  variable were removed from the training and test data sets
 \item
-  Missingness was simulated in the test dataset
+  Missingness was simulated in the test data set
 \end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Simulate missingness in test data & Convert all missing responses to -999}
-\NormalTok{Census.test.tidy.amp <-}\StringTok{ }\KeywordTok{ampute}\NormalTok{(Census.test.tidy, }\DataTypeTok{prop =} \FloatTok{0.7}\NormalTok{)}
-
-\NormalTok{Census.test.tidy.miss <-}\StringTok{ }\NormalTok{Census.test.tidy.amp}\OperatorTok{$}\NormalTok{amp}
-
-\CommentTok{# Study the test dataset with missingness: How much missingness per variable?}
-\NormalTok{NumberMissing <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(Census.test.tidy.miss, }\ControlFlowTok{function}\NormalTok{(y) }\KeywordTok{sum}\NormalTok{(}\KeywordTok{length}\NormalTok{(}
-    \KeywordTok{which}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(y))}
-\NormalTok{  )))}
-
-\NormalTok{TestNumberMissing <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(NumberMissing)}
-
-\CommentTok{# Convert missing cases to -999}
-\NormalTok{Census.test.tidy.miss[}\KeywordTok{is.na}\NormalTok{(Census.test.tidy.miss)] <-}\StringTok{ }\OperatorTok{-}\DecValTok{999}
-
-\CommentTok{# Save dataset with missingenss}
-\KeywordTok{save}\NormalTok{(Census.test.tidy.miss, }\DataTypeTok{file =} \StringTok{"data/EconAct/Census.test.tidy.miss.Rda"}\NormalTok{)}
+\CommentTok{# Purpose: Simulate missingness in one hot encoded dataset (with respect to imputable variable)}
+\CommentTok{# Input: Dataset without missingness}
+\CommentTok{# Output: Dataset with missingness}
+\CommentTok{# Parameters for the function are included below}
+\NormalTok{## dat: Name of input dataset}
+\NormalTok{## ident: Name of unique identifier in the dataset}
+\NormalTok{## var.aux: List of auxiliary variables in dataset}
+\NormalTok{## ohe.vars: List of variables that have been one hot encoded}
+\NormalTok{## imp.vars: List of imputable variables}
+\NormalTok{## var: Name of imputable variable to have increased missingness for}
+\NormalTok{## ohe: An indicator of whether imputable variable (in var) is one hot encoded}
+\NormalTok{## exc: Exclude rows that are not eligible to answer imputable item}
+\NormalTok{## crop: Exclude columns not eligible to answer imputable item (only eligible if imputable variable is one hot encoded)}
+\NormalTok{SimMissV <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(dat,ident,var.aux,ohe.vars,imp.vars,var,ohe,exc,drop)\{}
+  
+  \CommentTok{# Order dataset by identifier}
+\NormalTok{  dat <-}\StringTok{ }\NormalTok{dat[}\KeywordTok{order}\NormalTok{(dat[,}\KeywordTok{as.character}\NormalTok{(ident)]),]}
+  
+  \CommentTok{# Remove all instances where imputable variable is NCR}
+  \ControlFlowTok{if}\NormalTok{(ohe}\OperatorTok{==}\DecValTok{1}\NormalTok{)\{}
+\NormalTok{    dat.tidy <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(dat, }\OperatorTok{!}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(exc, dat[,drop])))}
+\NormalTok{    dat.tidy <-}\StringTok{ }\NormalTok{dat.tidy[,}\OperatorTok{!}\KeywordTok{names}\NormalTok{(dat.tidy)}\OperatorTok{==}\NormalTok{drop]}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{\{}
+\NormalTok{    dat.tidy <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(dat, }\OperatorTok{!}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(exc, dat[,var])))}
+\NormalTok{  \}}
+  
+  \CommentTok{# Remove the personal identifier in order to stimulate missingness}
+\NormalTok{  person.id <-}\StringTok{ }\NormalTok{dat.tidy[,}\KeywordTok{as.character}\NormalTok{(ident)]}
+\NormalTok{  dat.tidy <-}\StringTok{ }\NormalTok{dat.tidy[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+  
+  \CommentTok{# Subset dataset to auxiliary variables}
+\NormalTok{  dat.aux <-}\StringTok{ }\KeywordTok{sub.dat.ohe}\NormalTok{(}\DataTypeTok{dat=}\NormalTok{dat.tidy, }
+                                 \DataTypeTok{varlist=}\KeywordTok{c}\NormalTok{(var.aux))}
+  
+  \CommentTok{#Setting up two missingness patterns for the auxiliary variables}
+  \CommentTok{#One pattern for core auxiliary variables}
+  \CommentTok{#One pattern for other auxiliary variables}
+\NormalTok{  pattern_core <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{28}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{46}\NormalTok{))}
+\NormalTok{  pattern_oth <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{28}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{46}\NormalTok{))}
+\NormalTok{  pattern_aux <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(pattern_core, pattern_oth))}
+  
+\NormalTok{  dat.aux.amp <-}\StringTok{ }\KeywordTok{ampute}\NormalTok{(dat.aux, }\DataTypeTok{prop =} \FloatTok{0.4}\NormalTok{, }\DataTypeTok{mech =} \StringTok{"MAR"}\NormalTok{, }
+                                \KeywordTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{), }\DataTypeTok{pattern=}\NormalTok{pattern_aux, }\DataTypeTok{freq=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.8}\NormalTok{))}
+  
+\NormalTok{  dat.aux.miss <-}\StringTok{ }\NormalTok{dat.aux.amp}\OperatorTok{$}\NormalTok{amp}
+  
+\NormalTok{  instance_sub <-}\StringTok{ }\KeywordTok{setdiff}\NormalTok{(imp.vars,var)}
+  
+  \CommentTok{# Subset data to mputable variables}
+\NormalTok{  dat.imp <-}\StringTok{ }\KeywordTok{sub.dat.ohe}\NormalTok{(}\DataTypeTok{dat=}\NormalTok{dat.tidy, }
+                                 \DataTypeTok{varlist=}\KeywordTok{c}\NormalTok{(}
+\NormalTok{                                   var,}
+\NormalTok{                                   instance_sub))}
+  
+  \CommentTok{#Setting up two missingness patterns for the imputable variables}
+  \CommentTok{#One pattern for the imputable variable of interest}
+  \CommentTok{#One pattern for other imputable variables}
+\NormalTok{  iteration <-}\StringTok{ }\KeywordTok{select_vars}\NormalTok{(}\KeywordTok{names}\NormalTok{(dat.imp), }\KeywordTok{starts_with}\NormalTok{(var, }\DataTypeTok{ignore.case =} \OtherTok{TRUE}\NormalTok{))}
+  
+\NormalTok{  pattern_pr <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{length}\NormalTok{(iteration)), }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\KeywordTok{eval}\NormalTok{(}\KeywordTok{ncol}\NormalTok{(dat.imp)}\OperatorTok{-}\KeywordTok{length}\NormalTok{(iteration))))}
+\NormalTok{  pattern_sc <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\KeywordTok{length}\NormalTok{(iteration)), }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{eval}\NormalTok{(}\KeywordTok{ncol}\NormalTok{(dat.imp)}\OperatorTok{-}\KeywordTok{length}\NormalTok{(iteration))))}
+\NormalTok{  pattern_imp <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(pattern_pr, pattern_sc))}
+  
+\NormalTok{  dat.imp.amp <-}\StringTok{ }\KeywordTok{ampute}\NormalTok{(dat.imp, }\DataTypeTok{prop =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{mech =} \StringTok{"MAR"}\NormalTok{, }
+                                \KeywordTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{), }\DataTypeTok{pattern=}\NormalTok{pattern_imp, }\DataTypeTok{freq=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{,}\FloatTok{0.2}\NormalTok{))}
+  
+\NormalTok{  dat.imp.miss <-}\StringTok{ }\NormalTok{dat.imp.amp}\OperatorTok{$}\NormalTok{amp}
+  
+\NormalTok{  dat.tidy.miss <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(dat.imp.miss, dat.aux.miss)}
+  
+  \CommentTok{# Convert missing cases to -999}
+\NormalTok{  dat.tidy.miss[}\KeywordTok{is.na}\NormalTok{(dat.tidy.miss)] <-}\StringTok{ }\OperatorTok{-}\DecValTok{999}
+  
+\NormalTok{  instance_miss <-}\StringTok{ }\KeywordTok{setdiff}\NormalTok{(ohe.vars,var)}
+    
+\NormalTok{  dat.tidy.miss <-}\StringTok{ }\KeywordTok{ohe.miss}\NormalTok{(}\DataTypeTok{dat=}\NormalTok{dat.tidy.miss, }
+                              \DataTypeTok{varlist=}\KeywordTok{c}\NormalTok{(instance_miss))}
+  
+\NormalTok{  dat.miss <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(person.id, dat.tidy.miss)}
+  
+  \CommentTok{# Return dataset with missingenss}
+  \KeywordTok{return}\NormalTok{(dat.miss)}
+  
+  
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1306,45 +1388,183 @@ the variables can be found
 \setcounter{enumi}{4}
 \tightlist
 \item
-  A model was built using the training data
+  A model was built using the training data and used to predict values
+  in the test data
 \end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Train the model}
-\CommentTok{# Convert the data to matrix and assign output variable}
-\NormalTok{train.outcome <-}\StringTok{ }\NormalTok{Census.train.tidy}\OperatorTok{$}\NormalTok{econ.act}
+\CommentTok{# Purpose: Train XGBoost model to impute variable}
+\CommentTok{# Input: Dataset with multiple auxiliary variables and single imputable variable }
+\CommentTok{# Output: Model for using auxiliary variables to predict imputable variable}
+\CommentTok{# Parameters for the function are included below}
+\NormalTok{## train: Name of training dataset}
+\NormalTok{## test.orig: Name of test dataset without missingess}
+\NormalTok{## test.miss: Name of test dataset with missingness simulated}
+\NormalTok{## ident: Name of unique identifier in dataset}
+\NormalTok{## cat: An indicator if imputable variable is categorical. cat = 1 if categorical and cat = 0 if continuous}
+\NormalTok{## var: Name of imputable variable}
+\NormalTok{## exc: Values of imputable variable to exclude from model training}
+\NormalTok{## col_order: The order in which to arrange the features in the training and test matrices}
+\NormalTok{## objective: The objective function to use in the XGBoost model}
+\NormalTok{## max_depth: Maximum depth of trees for the XGBoost model}
+\NormalTok{## eta: Learning rate for the XGBoost model}
+\NormalTok{## nrounds: Number of rounds (i.e. trees) to use in the XGBoost model}
+\NormalTok{## num_class: Number of classes in categorical variable + 1. Only use if imputable variable is categorical (i.e. if cat = 1)}
+\NormalTok{trainDT <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(train, test.orig, test.miss, ident, cat, var, exc, col_order,}
+\NormalTok{                    objective, max_depth, eta, nrounds, num_class)\{}
+\NormalTok{  ## ---- tidy-data}
+  \CommentTok{# Sort all test datasets by identifier to ensure final comparison is valid}
+\NormalTok{  test.full <-}\StringTok{ }\NormalTok{test.orig[}\KeywordTok{order}\NormalTok{(test.orig[,}\KeywordTok{as.character}\NormalTok{(ident)]),]}
+  
+\NormalTok{  test.miss <-}\StringTok{ }\NormalTok{test.miss[}\KeywordTok{order}\NormalTok{(test.miss[,}\KeywordTok{as.character}\NormalTok{(ident)]),]}
+  
+  \CommentTok{# Tidy/treat the training and test datasets}
+  \CommentTok{# Remove units with NCR codes and remove the personal identifier}
+\NormalTok{  train.tidy <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(train, }\OperatorTok{!}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(exc, train[,var])), }\DataTypeTok{select =}\NormalTok{ col_order)}
+  
+\NormalTok{  test.full.tidy <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(test.full, }\OperatorTok{!}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(exc, test.full[,var])), }\DataTypeTok{select =}\NormalTok{ col_order)}
+  
+\NormalTok{  test.miss.tidy <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(test.miss, }\DataTypeTok{select =}\NormalTok{ col_order)}
+  
+\NormalTok{  train.tidy <-}\StringTok{ }\NormalTok{train.tidy[, col_order]}
+  
+\NormalTok{  test.full.tidy <-}\StringTok{ }\NormalTok{test.full.tidy[, col_order]}
+  
+\NormalTok{  test.miss.tidy <-}\StringTok{ }\NormalTok{test.miss.tidy[, col_order]}
+  
+\NormalTok{  ## ---- missingness-examine}
+  \CommentTok{# Study the test dataset with missingness: How much missingness per variable?}
+\NormalTok{  NumberMissing <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(test.miss.tidy, }\ControlFlowTok{function}\NormalTok{(y) }\KeywordTok{sum}\NormalTok{(}\KeywordTok{length}\NormalTok{(}
+    \KeywordTok{which}\NormalTok{((y)}\OperatorTok{==-}\DecValTok{999}\NormalTok{)}
+\NormalTok{  )))}
+  
+\NormalTok{  TestNumberMissing <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(NumberMissing)}
+  
+\NormalTok{  ## ---- train-model}
+  \CommentTok{# Train the model}
+  \CommentTok{# Convert the data to matrix and assign output variable}
+\NormalTok{  train.outcome <-}\StringTok{ }\NormalTok{train.tidy[,var]}
+  
+\NormalTok{  train.ex <-}\StringTok{ }\NormalTok{train.tidy[,}\OperatorTok{!}\NormalTok{(}\KeywordTok{names}\NormalTok{(train.tidy)}\OperatorTok{==}\NormalTok{var)]}
+  
+\NormalTok{  train.predictors <-}\StringTok{ }\KeywordTok{sparse.model.matrix}\NormalTok{(train.tidy[,var] }\OperatorTok{~}\StringTok{ }\NormalTok{.,}
+                                          \DataTypeTok{data =}\NormalTok{ train.ex}
+\NormalTok{  )[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+  
+\NormalTok{  test.outcome <-}\StringTok{ }\NormalTok{test.miss.tidy[,var]}
+  
+\NormalTok{  test.ex <-}\StringTok{ }\NormalTok{test.miss.tidy[,}\OperatorTok{!}\NormalTok{(}\KeywordTok{names}\NormalTok{(test.miss.tidy)}\OperatorTok{==}\NormalTok{var)]}
+  
+\NormalTok{  test.predictors <-}\StringTok{ }\KeywordTok{model.matrix}\NormalTok{(test.miss.tidy[,var] }\OperatorTok{~}\StringTok{ }\NormalTok{.,}
+                                  \DataTypeTok{data =}\NormalTok{ test.ex}
+\NormalTok{  )[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+  
+  \CommentTok{# Convert the matrix objects to DMatrix objects}
+\NormalTok{  dtrain <-}\StringTok{ }\KeywordTok{xgb.DMatrix}\NormalTok{(train.predictors, }\DataTypeTok{label =}\NormalTok{ train.outcome)}
+  
+\NormalTok{  dtest <-}\StringTok{ }\KeywordTok{xgb.DMatrix}\NormalTok{(test.predictors, }\DataTypeTok{missing =} \OperatorTok{-}\DecValTok{999}\NormalTok{)}
+  
+  \CommentTok{# Train a model using training set}
+  \ControlFlowTok{if}\NormalTok{(objective }\OperatorTok{==}\StringTok{ "multi:softmax"}\NormalTok{)\{}
+\NormalTok{    model <-}\StringTok{ }\KeywordTok{xgboost}\NormalTok{(}
+      \DataTypeTok{data =}\NormalTok{ dtrain, }\DataTypeTok{max_depth =}\NormalTok{ max_depth, }\DataTypeTok{eta =}\NormalTok{ eta, }\DataTypeTok{nthread =} \DecValTok{2}\NormalTok{, }\DataTypeTok{nrounds =}\NormalTok{ nrounds,}
+      \DataTypeTok{objective =} \StringTok{"multi:softmax"}\NormalTok{, }\DataTypeTok{num_class =}\NormalTok{ num_class, }\DataTypeTok{missing =} \OperatorTok{-}\DecValTok{999}
+\NormalTok{    )}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (objective }\OperatorTok{==}\StringTok{ "reg:linear"}\NormalTok{)\{}
+\NormalTok{    model <-}\StringTok{ }\KeywordTok{xgboost}\NormalTok{(}
+      \DataTypeTok{data =}\NormalTok{ dtrain, }\DataTypeTok{max_depth =}\NormalTok{ max_depth, }\DataTypeTok{eta =}\NormalTok{ eta, }\DataTypeTok{nthread =} \DecValTok{2}\NormalTok{, }\DataTypeTok{nrounds =}\NormalTok{ nrounds,}
+      \DataTypeTok{objective =} \StringTok{"reg:linear"}\NormalTok{, }\DataTypeTok{missing=}\OperatorTok{-}\DecValTok{999}
+\NormalTok{    )}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{    model <-}\StringTok{ }\KeywordTok{xgboost}\NormalTok{(}
+      \DataTypeTok{data =}\NormalTok{ dtrain, }\DataTypeTok{max_depth =}\NormalTok{ max_depth, }\DataTypeTok{eta =}\NormalTok{ eta, }\DataTypeTok{nthread =} \DecValTok{2}\NormalTok{, }\DataTypeTok{nrounds =}\NormalTok{ nrounds,}
+      \DataTypeTok{objective =} \StringTok{"reg:logistic"}\NormalTok{, }\DataTypeTok{missing=}\OperatorTok{-}\DecValTok{999}
+\NormalTok{    )}
+\NormalTok{  \}}
 
-\NormalTok{train.predictors <-}\StringTok{ }\KeywordTok{sparse.model.matrix}\NormalTok{(econ.act }\OperatorTok{~}\StringTok{ }\NormalTok{.,}
-  \DataTypeTok{data =}\NormalTok{ Census.train.tidy}
-\NormalTok{)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
-
-\NormalTok{test.outcome <-}\StringTok{ }\NormalTok{Census.test.tidy.miss}\OperatorTok{$}\NormalTok{econ.act}
-
-\NormalTok{test.predictors <-}\StringTok{ }\KeywordTok{model.matrix}\NormalTok{(econ.act }\OperatorTok{~}\StringTok{ }\NormalTok{.,}
-  \DataTypeTok{data =}\NormalTok{ Census.test.tidy.miss}
-\NormalTok{)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
-
-\CommentTok{# Convert the matrix objects to DMatrix objects}
-\NormalTok{dtrain <-}\StringTok{ }\KeywordTok{xgb.DMatrix}\NormalTok{(train.predictors, }\DataTypeTok{label =}\NormalTok{ train.outcome)}
-
-\NormalTok{dtest <-}\StringTok{ }\KeywordTok{xgb.DMatrix}\NormalTok{(test.predictors, }\DataTypeTok{missing =} \OperatorTok{-}\DecValTok{999}\NormalTok{)}
-
-\CommentTok{# Train a model using training set}
-\NormalTok{trainEA_v1 <-}\StringTok{ }\KeywordTok{xgboost}\NormalTok{(}
-  \DataTypeTok{data =}\NormalTok{ dtrain, }\DataTypeTok{max_depth =} \DecValTok{2}\NormalTok{, }\DataTypeTok{eta =} \DecValTok{1}\NormalTok{, }\DataTypeTok{nthread =} \DecValTok{2}\NormalTok{, }\DataTypeTok{nrounds =} \DecValTok{10}\NormalTok{,}
-  \DataTypeTok{objective =} \StringTok{"multi:softmax"}\NormalTok{, }\DataTypeTok{num_class =} \DecValTok{10}\NormalTok{, }\DataTypeTok{missing =} \OperatorTok{-}\DecValTok{999}
-\NormalTok{)}
-
-\CommentTok{# Examine feature importance}
-\NormalTok{importance_matrix <-}\StringTok{ }\KeywordTok{xgb.importance}\NormalTok{(}\DataTypeTok{model =}\NormalTok{ trainEA_v1)}
-
-\KeywordTok{print}\NormalTok{(importance_matrix)}
-
-\KeywordTok{xgb.plot.importance}\NormalTok{(}\DataTypeTok{importance_matrix =}\NormalTok{ importance_matrix)}
-
-\CommentTok{# Save model}
-\KeywordTok{xgb.save}\NormalTok{(trainEA_v1, }\StringTok{"XGBoost/xgboost.econAct"}\NormalTok{)}
+  \CommentTok{# Examine feature importance}
+\NormalTok{  importance_matrix <-}\StringTok{ }\KeywordTok{xgb.importance}\NormalTok{(}\DataTypeTok{model =}\NormalTok{ model)}
+  
+  \KeywordTok{print}\NormalTok{(importance_matrix)}
+  
+\NormalTok{  plot.matrix <-}\StringTok{ }\KeywordTok{xgb.plot.importance}\NormalTok{(}\DataTypeTok{importance_matrix =}\NormalTok{ importance_matrix)}
+  
+\NormalTok{  ## ---- test-model}
+  \CommentTok{# Test the model}
+  \ControlFlowTok{if}\NormalTok{(objective}\OperatorTok{==}\StringTok{"reg:logistic"}\NormalTok{)\{}
+\NormalTok{  predicted <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}
+    \KeywordTok{predict}\NormalTok{(model, dtest, }\DataTypeTok{missing =} \OperatorTok{-}\DecValTok{999}\NormalTok{, }\DataTypeTok{na.action =}\NormalTok{ na.pass) }\OperatorTok{>}\StringTok{ }\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{  predicted <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(model, dtest, }\DataTypeTok{missing =} \OperatorTok{-}\DecValTok{999}\NormalTok{, }\DataTypeTok{na.action =}\NormalTok{ na.pass)}
+\NormalTok{  \}}
+  
+\NormalTok{  ## ---- eval-model}
+  \CommentTok{# Evaluate performance of XGBoost model}
+  \CommentTok{# Compare versions of the outcome variable (Actual, Predicted, Missing)}
+  
+  \ControlFlowTok{if}\NormalTok{(cat}\OperatorTok{==}\DecValTok{1}\NormalTok{)\{}
+\NormalTok{    actuals <-}\StringTok{ }\NormalTok{test.full.tidy[,var]}
+    
+\NormalTok{    missing <-}\StringTok{ }\NormalTok{test.miss.tidy[,var]}
+    
+\NormalTok{    compareVar <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+      \DataTypeTok{Actuals =}\NormalTok{ actuals, }\DataTypeTok{Predictions =}\NormalTok{ predicted,}
+      \DataTypeTok{Missing =}\NormalTok{ missing}
+\NormalTok{    )}
+    
+\NormalTok{    compareVar}\OperatorTok{$}\NormalTok{PI <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(compareVar}\OperatorTok{$}\NormalTok{Missing}\OperatorTok{==-}\DecValTok{999}\NormalTok{, }
+\NormalTok{                            compareVar}\OperatorTok{$}\NormalTok{Predictions,}
+\NormalTok{                            compareVar}\OperatorTok{$}\NormalTok{Actuals)}
+    
+\NormalTok{    compareMissing <-}\StringTok{ }\NormalTok{compareVar[compareVar}\OperatorTok{$}\NormalTok{Missing }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{999}\NormalTok{, ]}
+    
+\NormalTok{    compareMissing}\OperatorTok{$}\NormalTok{indicator <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(compareMissing}\OperatorTok{$}\NormalTok{Actuals }\OperatorTok{==}
+\StringTok{                                         }\NormalTok{compareMissing}\OperatorTok{$}\NormalTok{Predictions,}\StringTok{"Correct"}\NormalTok{, }\StringTok{"Wrong"}\NormalTok{)}
+    
+\NormalTok{    output <-}\StringTok{ }\KeywordTok{list}\NormalTok{(TestNumberMissing, }
+\NormalTok{                   model,}
+\NormalTok{                   importance_matrix,}
+\NormalTok{                   plot.matrix,}
+\NormalTok{                   predicted,}
+\NormalTok{                   compareVar,}
+\NormalTok{                   compareMissing)}
+    
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{\{}
+\NormalTok{    actuals <-}\StringTok{ }\NormalTok{test.full.tidy[,var]}
+    
+\NormalTok{    missing <-}\StringTok{ }\NormalTok{test.miss.tidy[,var]}
+    
+\NormalTok{    compareVar <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+      \DataTypeTok{Actuals =}\NormalTok{ actuals, }\DataTypeTok{Predictions =}\NormalTok{ predicted,}
+      \DataTypeTok{Missing =}\NormalTok{ missing)}
+    
+\NormalTok{    compareVar}\OperatorTok{$}\NormalTok{PI <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(compareVar}\OperatorTok{$}\NormalTok{Missing}\OperatorTok{==-}\DecValTok{999}\NormalTok{, }
+\NormalTok{                            compareVar}\OperatorTok{$}\NormalTok{Predictions,}
+\NormalTok{                            compareVar}\OperatorTok{$}\NormalTok{Actuals)}
+    
+\NormalTok{    compareMissing <-}\StringTok{ }\NormalTok{compareVar[compareVar}\OperatorTok{$}\NormalTok{Missing }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{999}\NormalTok{, ]}
+    
+    \CommentTok{# Using Mean Absolute Error and Root Mean Square error to evaluate predictions}
+\NormalTok{    MAE_XG <-}\StringTok{ }\KeywordTok{MAE}\NormalTok{(compareMissing}\OperatorTok{$}\NormalTok{Predictions,compareMissing}\OperatorTok{$}\NormalTok{Actuals)}
+    
+\NormalTok{    RMSE_XG <-}\StringTok{ }\KeywordTok{RMSE}\NormalTok{(compareMissing}\OperatorTok{$}\NormalTok{Predictions,compareMissing}\OperatorTok{$}\NormalTok{Actuals)}
+    
+\NormalTok{    output <-}\StringTok{ }\KeywordTok{list}\NormalTok{(TestNumberMissing, }
+\NormalTok{                   model,}
+\NormalTok{                   importance_matrix,}
+\NormalTok{                   plot.matrix,}
+\NormalTok{                   predicted,}
+\NormalTok{                   compareVar,}
+\NormalTok{                   compareMissing,}
+\NormalTok{                   MAE_XG,}
+\NormalTok{                   RMSE_XG)}
+    
+\NormalTok{  \}}
+  
+  \KeywordTok{return}\NormalTok{(output)}
+  
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1353,16 +1573,103 @@ the variables can be found
 \setcounter{enumi}{5}
 \tightlist
 \item
-  The model was used to predict values in the test dataset
+  Predictions from the test data were evaluated using graphs and quality
+  metrics
 \end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Test the model}
-\NormalTok{predicted <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(trainEA_v1, dtest, }\DataTypeTok{missing =} \OperatorTok{-}\DecValTok{999}\NormalTok{, }\DataTypeTok{na.action =}\NormalTok{ na.pass)}
+\CommentTok{# Save feature importance plot}
+\KeywordTok{png}\NormalTok{(}\DataTypeTok{filename=}\StringTok{"images/featuresXG_econAct.png"}\NormalTok{)}
+\KeywordTok{xgb.plot.importance}\NormalTok{(}\DataTypeTok{importance_matrix =}\NormalTok{ econAct[[}\DecValTok{3}\NormalTok{]])}
+\KeywordTok{dev.off}\NormalTok{()}
+
+\CommentTok{# Examine quality metrics}
+\NormalTok{compareMissing <-}\StringTok{ }\NormalTok{econAct[[}\DecValTok{7}\NormalTok{]]}
+
+\NormalTok{counts <-}\StringTok{ }\KeywordTok{table}\NormalTok{(compareMissing}\OperatorTok{$}\NormalTok{indicator)}
+
+\NormalTok{counts.melt <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(counts)}
+
+\NormalTok{counts.melt}\OperatorTok{$}\NormalTok{Outcome <-}\StringTok{ }\NormalTok{counts.melt}\OperatorTok{$}\NormalTok{Var1}
+
+\NormalTok{accuracy_plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\NormalTok{counts.melt, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Outcome, }\DataTypeTok{y=}\NormalTok{value)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat=}\StringTok{"identity"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Accuracy of Predictions: XGBoost"}\NormalTok{)}
+
+\NormalTok{accuracy_plot}
+
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/accuracyXG_econAct.png"}\NormalTok{)}
+
+\NormalTok{confusion_XGBoost <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(}
+  \KeywordTok{factor}\NormalTok{(compareMissing}\OperatorTok{$}\NormalTok{Actuals, }\DataTypeTok{levels =} \DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{),}
+  \KeywordTok{factor}\NormalTok{(compareMissing}\OperatorTok{$}\NormalTok{Predictions, }\DataTypeTok{levels =} \DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{)}
+\NormalTok{)}
+
+\KeywordTok{qplot}\NormalTok{(Actuals, Predictions,}
+      \DataTypeTok{data =}\NormalTok{ compareMissing,}
+      \DataTypeTok{geom =} \KeywordTok{c}\NormalTok{(}\StringTok{"jitter"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"XGBoost: predicted vs. observed in test data"}\NormalTok{,}
+      \DataTypeTok{xlab =} \StringTok{"Observed Class"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Predicted Class"}
+\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_discrete}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{,}\StringTok{"2"}\NormalTok{,}\StringTok{"3"}\NormalTok{,}\StringTok{"4"}\NormalTok{,}\StringTok{"5"}\NormalTok{,}\StringTok{"6"}\NormalTok{,}\StringTok{"7"}\NormalTok{,}\StringTok{"8"}\NormalTok{,}\StringTok{"9"}\NormalTok{)}
+\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_discrete}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{,}\StringTok{"2"}\NormalTok{,}\StringTok{"3"}\NormalTok{,}\StringTok{"4"}\NormalTok{,}\StringTok{"5"}\NormalTok{,}\StringTok{"6"}\NormalTok{,}\StringTok{"7"}\NormalTok{,}\StringTok{"8"}\NormalTok{,}\StringTok{"9"}\NormalTok{))}
+
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/EAXGBoostqplot.png"}\NormalTok{)}
+
+\CommentTok{# What is the distribution of the variable before and after imputation}
+\NormalTok{Compare_val <-}\StringTok{ }\NormalTok{econAct[[}\DecValTok{6}\NormalTok{]]}
+
+\NormalTok{actuals <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(econAct[[}\DecValTok{6}\NormalTok{]], }\KeywordTok{aes}\NormalTok{(Actuals))}
+
+\NormalTok{actuals }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"True Distribution"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{scale_x_discrete}\NormalTok{(}
+    \DataTypeTok{name =} \StringTok{"Economic Activity"}\NormalTok{,}
+    \DataTypeTok{breaks =} \KeywordTok{pretty_breaks}\NormalTok{()}
+\NormalTok{  )}
+
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/actuals_socialGrade.png"}\NormalTok{)}
+
+\NormalTok{actuals <-}\StringTok{ }\KeywordTok{table}\NormalTok{(Compare_val}\OperatorTok{$}\NormalTok{Actuals)}
+
+\NormalTok{actuals <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(actuals)}
+
+\NormalTok{actuals <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{rename}\NormalTok{(actuals, }\KeywordTok{c}\NormalTok{(}
+  \StringTok{"Var1"}\NormalTok{ =}\StringTok{ "econ.act"}\NormalTok{,}
+  \StringTok{"Freq"}\NormalTok{ =}\StringTok{ "actuals"}\NormalTok{))}
+
+\NormalTok{imputed <-}\StringTok{ }\KeywordTok{table}\NormalTok{(Compare_val}\OperatorTok{$}\NormalTok{PI)}
+
+\NormalTok{imputed <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(imputed)}
+
+\NormalTok{imputed <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{rename}\NormalTok{(imputed, }\KeywordTok{c}\NormalTok{(}
+  \StringTok{"Var1"}\NormalTok{ =}\StringTok{ "econ.act"}\NormalTok{,}
+  \StringTok{"Freq"}\NormalTok{ =}\StringTok{ "imputed"}\NormalTok{))}
+
+\NormalTok{plot.dat <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(actuals, imputed, }\DataTypeTok{by =} \StringTok{"econ.act"}\NormalTok{)}
+
+\NormalTok{plot.dat.melt <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(plot.dat, }\DataTypeTok{id=}\StringTok{"econ.act"}\NormalTok{)}
+
+\NormalTok{plot.dat.melt <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{rename}\NormalTok{(plot.dat.melt, }\KeywordTok{c}\NormalTok{(}
+  \StringTok{"variable"}\NormalTok{ =}\StringTok{ "output"}\NormalTok{))}
+
+\NormalTok{predictions <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(plot.dat.melt, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{econ.act,}\DataTypeTok{y=}\NormalTok{value,}\DataTypeTok{fill=}\NormalTok{output)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat=}\StringTok{"identity"}\NormalTok{, }\DataTypeTok{position =} \StringTok{"identity"}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+
+\NormalTok{predictions }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Post Imputation: XGBoost"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_discrete}\NormalTok{(}
+    \DataTypeTok{name =} \StringTok{"Economic Activity"}\NormalTok{, }
+    \DataTypeTok{breaks =} \KeywordTok{pretty_breaks}\NormalTok{()}
+\NormalTok{  )}
+
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/PIXG_econAct.png"}\NormalTok{)}
+
+\CommentTok{# Save model}
+\NormalTok{trainEA_v1 <-}\StringTok{ }\NormalTok{econAct[[}\DecValTok{2}\NormalTok{]]}
+
+\KeywordTok{xgb.save}\NormalTok{(trainEA_v1, }\StringTok{"models/XGBoost/xgboost.econAct"}\NormalTok{)}
 
 \CommentTok{# Save predicted values}
-\KeywordTok{save}\NormalTok{(predicted, }\DataTypeTok{file =} \StringTok{"data/EconAct/XGBoost/predicted.RData"}\NormalTok{)}
+\NormalTok{predicted.econAct <-}\StringTok{ }\NormalTok{econAct[[}\DecValTok{5}\NormalTok{]]}
+
+\KeywordTok{save}\NormalTok{(predicted.econAct, }\DataTypeTok{file =} \StringTok{"data/predicted/XGBoost/predicted.econAct.RData"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1394,45 +1701,175 @@ the variables can be found
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Impute values using CANCEIS}
-\CommentTok{# Create CANCEIS input file with imputable and matching variables}
-\NormalTok{CANCEIS.input <-}\StringTok{ }\NormalTok{Census.test.tidy.miss[, }\KeywordTok{c}\NormalTok{(}
-  \StringTok{"econ.act"}\NormalTok{, }\StringTok{"student"}\NormalTok{, }\StringTok{"industry"}\NormalTok{,}
-  \StringTok{"age"}\NormalTok{, }\StringTok{"occupation"}\NormalTok{, }\StringTok{"social.grade"}
-\NormalTok{)]}
+\CommentTok{# Purpose: Create a CANCEIS input dataset with matching variables for a singe imputable variable}
+\CommentTok{# Input: Dataset with multiple auxiliary variables and single imputable variable }
+\CommentTok{# Output: Dataset with most highly correlated auxiliary variables and single imputable variable}
+\CommentTok{# Parameters for the function are included below}
+\NormalTok{## dat.cor: Name of dataset to use to derive correlation coefficients between imputable variable and auxiliary variables}
+\NormalTok{## dat.miss: Name of dataset with missingness simulated}
+\NormalTok{## var: Name of imputable variable}
+\NormalTok{## exc: Exclusion condition for variables}
+\NormalTok{## varlist: List of auxiliary variables to consider for selecting matching variables}
+\NormalTok{CANCEIS.in <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(dat.cor, dat.miss, var, exc, varlist) \{}
 
-\NormalTok{CANCEIS.input}\OperatorTok{$}\NormalTok{canceis.id <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(CANCEIS.input)}
-\NormalTok{CANCEIS.input <-}\StringTok{ }\NormalTok{CANCEIS.input[, }\KeywordTok{c}\NormalTok{(}
-  \StringTok{"canceis.id"}\NormalTok{, }\StringTok{"econ.act"}\NormalTok{, }\StringTok{"student"}\NormalTok{, }\StringTok{"industry"}\NormalTok{,}
-  \StringTok{"age"}\NormalTok{, }\StringTok{"occupation"}\NormalTok{, }\StringTok{"social.grade"}
-\NormalTok{)]}
-
-\KeywordTok{write.table}\NormalTok{(CANCEIS.input,}
-  \DataTypeTok{file =} \StringTok{"data/EconAct/CANCEIS/xxxUNIT01IG01.txt"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{,}
-  \DataTypeTok{row.names =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{col.names =} \OtherTok{FALSE}
-\NormalTok{)}
+\NormalTok{  dat.cor[dat.cor}\OperatorTok{==}\NormalTok{exc] <-}\StringTok{ }\OtherTok{NA}
+  
+\NormalTok{  dat.tidy <-}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(dat.cor)}
+  
+\NormalTok{  variable <-}\StringTok{ }\OtherTok{NULL}
+  
+\NormalTok{  correlation <-}\StringTok{ }\OtherTok{NULL}
+  
+  \ControlFlowTok{if}\NormalTok{(var}\OperatorTok{==}\StringTok{'hours.cont'}\NormalTok{)\{}
+    
+\NormalTok{    inputvar <-}\StringTok{ }\KeywordTok{setdiff}\NormalTok{(varlist, }\StringTok{'hours.worked'}\NormalTok{)}
+    
+    \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(inputvar))\{}
+      
+\NormalTok{      variable[i] <-}\StringTok{ }\NormalTok{inputvar[i]}
+      
+\NormalTok{      correlation[i] <-}\StringTok{ }\KeywordTok{Lambda}\NormalTok{(dat.tidy[,}\StringTok{'hours.worked'}\NormalTok{], dat.tidy[,inputvar[i]])}
+\NormalTok{      \}}
+    
+\NormalTok{    \} }\ControlFlowTok{else}\NormalTok{\{}
+      
+\NormalTok{      inputvar <-}\StringTok{ }\KeywordTok{setdiff}\NormalTok{(varlist, var)}
+      
+      \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(inputvar))\{}
+        
+\NormalTok{        variable[i] <-}\StringTok{ }\NormalTok{inputvar[i]}
+        
+\NormalTok{        correlation[i] <-}\StringTok{ }\KeywordTok{Lambda}\NormalTok{(dat.tidy[,var], dat.tidy[,inputvar[i]])}
+\NormalTok{        \}}
+\NormalTok{      \}}
+  
+\NormalTok{  corlist <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(variable, correlation)}
+  
+\NormalTok{  corlist_high <-}\StringTok{ }\NormalTok{corlist[}\KeywordTok{order}\NormalTok{(corlist}\OperatorTok{$}\NormalTok{correlation, }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{),]}
+  
+\NormalTok{  corlist_high <-}\StringTok{ }\NormalTok{corlist_high[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{,]}
+  
+\NormalTok{  CANCEIS.var <-}\StringTok{ }\NormalTok{corlist_high}\OperatorTok{$}\NormalTok{variable}
+  
+\NormalTok{  var_imp <-}\StringTok{ }\NormalTok{dat.miss[,var]}
+  
+\NormalTok{  canceis.id <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(dat.miss)}
+  
+\NormalTok{  CANCEIS.phase1 <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(canceis.id, var_imp)}
+  
+\NormalTok{  matching <-}\StringTok{ }\NormalTok{dat.miss[, }\KeywordTok{names}\NormalTok{(dat.miss) }\OperatorTok{%in%}\StringTok{ }\NormalTok{CANCEIS.var]}
+  
+\NormalTok{  CANCEIS.input <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(CANCEIS.phase1, matching)}
+  
+\NormalTok{  CANCEIS.input <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{rename}\NormalTok{(CANCEIS.input, }\KeywordTok{c}\NormalTok{(}
+    \StringTok{"var_imp"}\NormalTok{ =}\StringTok{ }\NormalTok{var))}
+  
+\NormalTok{  output <-}\StringTok{ }\KeywordTok{list}\NormalTok{(corlist_high,}
+\NormalTok{                 CANCEIS.input)}
+  
+  \KeywordTok{return}\NormalTok{(output)}
+  
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Impute values using CANCEIS (with XGBoost to advise selection of MVs)}
-\CommentTok{# Create CANCEIS input file with imputable and matching variables}
-\NormalTok{CANCEISXG.input <-}\StringTok{ }\NormalTok{Census.test.tidy.miss[, }\KeywordTok{c}\NormalTok{(}
-  \StringTok{"econ.act"}\NormalTok{, }\StringTok{"hours.cont"}\NormalTok{, }\StringTok{"age"}\NormalTok{, }\StringTok{"student"}\NormalTok{,}
-  \StringTok{"sex"}\NormalTok{, }\StringTok{"health"}\NormalTok{, }\StringTok{"industry"}
-\NormalTok{)]}
+\CommentTok{# Purpose: Create a CANCEIS input dataset with matching variables for a singe imputable variable, using feature importance from XGBoost}
+\CommentTok{# Input: Dataset with multiple auxiliary variables and single imputable variable, along with feature importance from XGBoost model }
+\CommentTok{# Output: Dataset with auxiliary variables (from highest scores feature importance list) and single imputable variable}
+\CommentTok{# Parameters for the function are included below}
+\NormalTok{## dat.miss: Name of dataset with missingness simulated}
+\NormalTok{## var: Name of imputable variable}
+\NormalTok{## featureList: List of features used in XGBoost model with corresponding scores}
+\NormalTok{CANCEISXG <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(dat.miss, var, featureList)\{}
+  
+\NormalTok{  featureList <-}\StringTok{ }\NormalTok{featureList[}\KeywordTok{order}\NormalTok{(featureList}\OperatorTok{$}\NormalTok{Cover, }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{),]}
+  
+\NormalTok{  featureImp <-}\StringTok{ }\NormalTok{featureList[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{,]}
+  
+\NormalTok{  featureSel <-}\StringTok{ }\NormalTok{featureImp}\OperatorTok{$}\NormalTok{Feature}
+  
+\NormalTok{  canceis.id <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(dat.miss)}
+  
+\NormalTok{  var_imp <-}\StringTok{ }\NormalTok{dat.miss[,var]}
+  
+\NormalTok{  CANCESXG.phase1 <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(canceis.id, var_imp)}
+  
+\NormalTok{  CANCEISXG.matching <-}\StringTok{ }\NormalTok{dat.miss[, featureSel]}
+  
+\NormalTok{  CANCEISXG.input <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(CANCESXG.phase1, CANCEISXG.matching)}
+  
+\NormalTok{  CANCEISXG.input <-}\StringTok{ }\NormalTok{plyr}\OperatorTok{::}\KeywordTok{rename}\NormalTok{(CANCEISXG.input, }\KeywordTok{c}\NormalTok{(}
+    \StringTok{"var_imp"}\NormalTok{ =}\StringTok{ }\NormalTok{var))}
+  
+  \KeywordTok{return}\NormalTok{(CANCEISXG.input)}
+  
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
-\NormalTok{CANCEISXG.input}\OperatorTok{$}\NormalTok{canceis.id <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(CANCEISXG.input)}
-\NormalTok{CANCEISXG.input <-}\StringTok{ }\NormalTok{CANCEISXG.input[, }\KeywordTok{c}\NormalTok{(}
-  \StringTok{"canceis.id"}\NormalTok{, }\StringTok{"econ.act"}\NormalTok{, }\StringTok{"hours.cont"}\NormalTok{, }\StringTok{"age"}\NormalTok{, }\StringTok{"student"}\NormalTok{,}
-  \StringTok{"sex"}\NormalTok{, }\StringTok{"health"}\NormalTok{, }\StringTok{"industry"}
-\NormalTok{)]}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Purpose: Evaluate performance of CANCEIS imputation}
+\CommentTok{# Input: Dataset with CANCEIS imputation }
+\CommentTok{# Output: Metrics to evaluate quality of imputation}
+\CommentTok{# Parameters for the function are included below}
+\NormalTok{## cat: An indicator of whether imputable variable was categorical (=1 if Yes and =0 if No)}
+\NormalTok{## var: Name of imputable variable}
+\NormalTok{## exc: Values of imputable variable to exclude from from evaluating quality of predictions}
+\NormalTok{## actuals: Name of dataset without missingness}
+\NormalTok{## missing: Name of dataset with missingness simulated}
+\NormalTok{## predicted: Name of dataset with imputed values}
+\NormalTok{evalCANCEIS <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(cat, var, exc, actuals, missing, predicted)\{}
+  
+\NormalTok{  actuals.CANCEIS <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(actuals, }\OperatorTok{!}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(exc, actuals[,var])), }\DataTypeTok{select =}\NormalTok{ var)}
+  
+  \KeywordTok{colnames}\NormalTok{(actuals.CANCEIS) <-}\StringTok{ }\OtherTok{NULL}
+  
+\NormalTok{  missing.CANCEIS <-}\StringTok{ }\NormalTok{missing[, var]}
+  
+\NormalTok{  predicted.CANCEIS <-}\StringTok{ }\NormalTok{predicted[, var]}
+  
+\NormalTok{  compare_var_CANCEIS <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
+    \DataTypeTok{Actuals =}\NormalTok{ actuals.CANCEIS, }\DataTypeTok{Predictions =}
+\NormalTok{      predicted.CANCEIS, }\DataTypeTok{Missing =}\NormalTok{ missing.CANCEIS}
+\NormalTok{  )}
+  
+\NormalTok{  compare_missing_CANCEIS <-}\StringTok{ }\NormalTok{compare_var_CANCEIS[}
+\NormalTok{    compare_var_CANCEIS}\OperatorTok{$}\NormalTok{Missing }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{999}\NormalTok{, ]}
+  
+  \ControlFlowTok{if}\NormalTok{(cat}\OperatorTok{==}\DecValTok{1}\NormalTok{)\{}
+\NormalTok{  compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{indicator <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}
+\NormalTok{    compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{Actuals[[}\DecValTok{1}\NormalTok{]] }\OperatorTok{==}
+\StringTok{      }\NormalTok{compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{Predictions,}
+    \StringTok{"Correct"}\NormalTok{, }\StringTok{"Wrong"}
+\NormalTok{  )}
+  
+\NormalTok{  counts_CANCEIS <-}\StringTok{ }\KeywordTok{table}\NormalTok{(compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{indicator)}
+  
+\NormalTok{  output <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+\NormalTok{    compare_var_CANCEIS,}
+\NormalTok{    compare_missing_CANCEIS,}
+\NormalTok{    counts_CANCEIS}
+\NormalTok{  )}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
 
-\KeywordTok{write.table}\NormalTok{(CANCEISXG.input,}
-  \DataTypeTok{file =} \StringTok{"data/EconAct/MixedMethods/xxxUNIT01IG01.txt"}\NormalTok{, }\DataTypeTok{sep =} \StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{,}
-  \DataTypeTok{row.names =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{col.names =} \OtherTok{FALSE}
-\NormalTok{)}
+\NormalTok{    MAE <-}\StringTok{ }\KeywordTok{MAE}\NormalTok{(compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{Predictions,compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{Actuals[[}\DecValTok{1}\NormalTok{]])}
+    
+\NormalTok{    RMSE <-}\StringTok{ }\KeywordTok{RMSE}\NormalTok{(compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{Predictions,compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{Actuals[[}\DecValTok{1}\NormalTok{]])}
+    
+\NormalTok{    output <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+\NormalTok{      compare_var_CANCEIS,}
+\NormalTok{      compare_missing_CANCEIS,}
+\NormalTok{      MAE,}
+\NormalTok{      RMSE}
+\NormalTok{    )}
+    
+\NormalTok{  \}}
+  \KeywordTok{return}\NormalTok{(output)}
+  
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1441,8 +1878,8 @@ the variables can be found
 \setcounter{enumi}{7}
 \tightlist
 \item
-  The two rounds of donor based imputation (using CANCEIS) and the
-  (XGBoost) model based imputation were compared using either root mean
+  The two rounds of donor based imputation (using CANCEIS) and the model
+  based imputation (XGBoost) were compared using either root mean
   squared error, absolute error (for continuous variables) and the
   confusion matrix (for categorical variables).
 
@@ -1454,225 +1891,24 @@ the variables can be found
     working memory\\
   \item
     Next, Each of the methods was evaluated with respect to the
-    performance measure, and compared to either median (for continuous)
-    or mode (for categorical) variables
+    performance measure, and compared to either median (for continuous
+    imputation) or mode (for categorical imputation) imputation
   \end{enumerate}
 \end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Load datasets}
-\CommentTok{# Test and Training data}
-\KeywordTok{load}\NormalTok{(}\StringTok{"data/Census.train.Rda"}\NormalTok{)}
+\NormalTok{XGBoost <-}\StringTok{ }\KeywordTok{round}\NormalTok{(confusion_XGBoost}\OperatorTok{$}\NormalTok{overall[}\KeywordTok{c}\NormalTok{(}\StringTok{'Accuracy'}\NormalTok{,}\StringTok{'Kappa'}\NormalTok{)],}\DecValTok{2}\NormalTok{)}
 
-\KeywordTok{load}\NormalTok{(}\StringTok{"data/Census.test.Rda"}\NormalTok{)}
+\NormalTok{CANCEIS <-}\StringTok{ }\KeywordTok{round}\NormalTok{(confusion_CANCEIS}\OperatorTok{$}\NormalTok{overall[}\KeywordTok{c}\NormalTok{(}\StringTok{'Accuracy'}\NormalTok{,}\StringTok{'Kappa'}\NormalTok{)],}\DecValTok{2}\NormalTok{)}
 
-\CommentTok{# Load dataset with missingenss}
-\KeywordTok{load}\NormalTok{(}\StringTok{"data/EconAct/Census.test.tidy.miss.Rda"}\NormalTok{)}
+\NormalTok{MixedMethods <-}\StringTok{ }\KeywordTok{round}\NormalTok{(confusion_CANCEISXG}\OperatorTok{$}\NormalTok{overall[}\KeywordTok{c}\NormalTok{(}\StringTok{'Accuracy'}\NormalTok{,}\StringTok{'Kappa'}\NormalTok{)],}\DecValTok{2}\NormalTok{)}
 
-\CommentTok{# Create test.tidy and train.tidy datasets (Remove units with NCR codes for variable }
-\CommentTok{# & Remove the personal identifier)}
-\NormalTok{Census.train.tidy <-}\StringTok{ }\NormalTok{Census.train[}\OperatorTok{!}\NormalTok{Census.train}\OperatorTok{$}\NormalTok{econ.act }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{17}\NormalTok{)]}
+\NormalTok{Mode <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{round}\NormalTok{(econAct.modmed[[}\DecValTok{3}\NormalTok{]][[}\StringTok{'Correct'}\NormalTok{]]}\OperatorTok{/}\NormalTok{(econAct.modmed[[}\DecValTok{3}\NormalTok{]][[}\StringTok{'Correct'}\NormalTok{]]}\OperatorTok{+}\NormalTok{econAct.modmed[[}\DecValTok{3}\NormalTok{]][[}\StringTok{'Wrong'}\NormalTok{]]),}\DecValTok{2}\NormalTok{), }\OtherTok{NA}\NormalTok{)}
 
-\NormalTok{Census.test.tidy <-}\StringTok{ }\NormalTok{Census.test[}\OperatorTok{!}\NormalTok{Census.test}\OperatorTok{$}\NormalTok{econ.act }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{9}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{17}\NormalTok{)]}
+\NormalTok{CompareEconAct <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(XGBoost, CANCEIS, MixedMethods, Mode)}
 
-\CommentTok{# Read in CANCEIS input and output}
-\NormalTok{CANCEIS.test.in <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/EconAct/CANCEIS/xxxUNIT01IG01.txt"}\NormalTok{,}
-                              \DataTypeTok{header =} \OtherTok{FALSE}\NormalTok{,}
-                              \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}
-                                \StringTok{"canceis.id"}\NormalTok{, }\StringTok{"econ.act"}\NormalTok{, }\StringTok{"student"}\NormalTok{,}
-                                \StringTok{"industry"}\NormalTok{, }\StringTok{"age"}\NormalTok{, }\StringTok{"occupation"}\NormalTok{,}
-                                \StringTok{"social.grade"}
-\NormalTok{                              )}
-\NormalTok{)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
-
-\NormalTok{CANCEIS.test.out <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/EconAct/CANCEIS/XXXUNITIMP01IG01.txt"}\NormalTok{,}
-                               \DataTypeTok{header =} \OtherTok{FALSE}\NormalTok{,}
-                               \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}
-                                 \StringTok{"canceis.id"}\NormalTok{, }\StringTok{"econ.act"}\NormalTok{, }\StringTok{"student"}\NormalTok{,}
-                                 \StringTok{"industry"}\NormalTok{, }\StringTok{"age"}\NormalTok{, }\StringTok{"occupation"}\NormalTok{,}
-                                 \StringTok{"social.grade"}
-\NormalTok{                               )}
-\NormalTok{)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
-
-\CommentTok{# Read in CANCEISXG input and output}
-\NormalTok{CANCEISXG.test.in <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/EconAct/MixedMethods/xxxUNIT01IG01.txt"}\NormalTok{,}
-                                \DataTypeTok{header =} \OtherTok{FALSE}\NormalTok{,}
-                                \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}
-                                  \StringTok{"canceis.id"}\NormalTok{, }\StringTok{"econ.act"}\NormalTok{, }\StringTok{"hours.cont"}\NormalTok{, }
-                                  \StringTok{"age"}\NormalTok{, }\StringTok{"student"}\NormalTok{,}
-                                  \StringTok{"sex"}\NormalTok{, }\StringTok{"health"}\NormalTok{, }\StringTok{"industry"}
-\NormalTok{                                )}
-\NormalTok{)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
-
-\NormalTok{CANCEISXG.test.out <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/EconAct/MixedMethods/XXXUNITIMP01IG01.txt"}\NormalTok{,}
-                                 \DataTypeTok{header =} \OtherTok{FALSE}\NormalTok{,}
-                                 \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}
-                                   \StringTok{"canceis.id"}\NormalTok{, }\StringTok{"econ.act"}\NormalTok{, }\StringTok{"hours.cont"}\NormalTok{, }
-                                   \StringTok{"age"}\NormalTok{, }\StringTok{"student"}\NormalTok{,}
-                                   \StringTok{"sex"}\NormalTok{, }\StringTok{"health"}\NormalTok{, }\StringTok{"industry"}
-\NormalTok{                                 )}
-\NormalTok{)[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
-\CommentTok{# Load predicted values from XGBoost}
-\KeywordTok{load}\NormalTok{(}\StringTok{"data/EconAct/XGBoost/predicted.RData"}\NormalTok{)}
-
-\CommentTok{# Load model}
-\NormalTok{trainEA_v1 <-}\StringTok{ }\KeywordTok{xgb.load}\NormalTok{(}\StringTok{"XGBoost/xgboost.econAct"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Evaluate performance of XGBoost model}
-\CommentTok{# Compare versions of the outcome variable (Actual, Predicted, Missing)}
-\NormalTok{actuals <-}\StringTok{ }\NormalTok{Census.test.tidy}\OperatorTok{$}\NormalTok{econ.act}
-
-\NormalTok{missing <-}\StringTok{ }\NormalTok{Census.test.tidy.miss}\OperatorTok{$}\NormalTok{econ.act}
-
-\NormalTok{compareVar <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
-  \DataTypeTok{Actuals =}\NormalTok{ actuals, }\DataTypeTok{Predictions =}\NormalTok{ predicted,}
-  \DataTypeTok{Missing =}\NormalTok{ missing}
-\NormalTok{)}
-
-\NormalTok{compareMissing <-}\StringTok{ }\NormalTok{compareVar[compareVar}\OperatorTok{$}\NormalTok{Missing }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{999}\NormalTok{, ]}
-
-\NormalTok{compareMissing}\OperatorTok{$}\NormalTok{indicator <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(compareMissing}\OperatorTok{$}\NormalTok{Actuals }\OperatorTok{==}
-\StringTok{                                     }\NormalTok{compareMissing}\OperatorTok{$}\NormalTok{Predictions,}\StringTok{"Correct"}\NormalTok{, }\StringTok{"Wrong"}\NormalTok{)}
-
-\NormalTok{counts <-}\StringTok{ }\KeywordTok{table}\NormalTok{(compareMissing}\OperatorTok{$}\NormalTok{indicator)}
-
-\KeywordTok{barplot}\NormalTok{(counts, }\DataTypeTok{main =} \StringTok{"Accuracy of predictions"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{"Outcome"}\NormalTok{)}
-
-\CommentTok{# Using Confusion Matrix to evaluate predictions}
-\NormalTok{confusionML <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(}
-  \KeywordTok{as.factor}\NormalTok{(compareVar}\OperatorTok{$}\NormalTok{Actuals),}
-  \KeywordTok{as.factor}\NormalTok{(compareVar}\OperatorTok{$}\NormalTok{Predictions)}
-\NormalTok{)}
-
-\KeywordTok{qplot}\NormalTok{(Actuals, Predictions,}
-      \DataTypeTok{data =}\NormalTok{ compareVar,}
-      \DataTypeTok{geom =} \KeywordTok{c}\NormalTok{(}\StringTok{"jitter"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"predicted vs. observed in test data"}\NormalTok{,}
-      \DataTypeTok{xlab =} \StringTok{"Observed Class"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Predicted Class"}
-\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_discrete}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{,}\StringTok{"2"}\NormalTok{,}\StringTok{"3"}\NormalTok{,}\StringTok{"4"}\NormalTok{,}\StringTok{"5"}\NormalTok{,}\StringTok{"6"}\NormalTok{,}\StringTok{"7"}\NormalTok{,}\StringTok{"8"}\NormalTok{,}\StringTok{"9"}\NormalTok{)}
-\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_discrete}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{,}\StringTok{"2"}\NormalTok{,}\StringTok{"3"}\NormalTok{,}\StringTok{"4"}\NormalTok{,}\StringTok{"5"}\NormalTok{,}\StringTok{"6"}\NormalTok{,}\StringTok{"7"}\NormalTok{,}\StringTok{"8"}\NormalTok{,}\StringTok{"9"}\NormalTok{))}
-
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/EAXGqplot.png"}\NormalTok{)}
-
-\CommentTok{# Evaluate performance of CANCEIS}
-\CommentTok{# Compare predicted and actuals}
-\NormalTok{actuals.CANCEIS <-}\StringTok{ }\NormalTok{Census.test.tidy}\OperatorTok{$}\NormalTok{econ.act}
-
-\NormalTok{missing.CANCEIS <-}\StringTok{ }\NormalTok{CANCEIS.test.in}\OperatorTok{$}\NormalTok{econ.act}
-
-\NormalTok{predicted.CANCEIS <-}\StringTok{ }\NormalTok{CANCEIS.test.out}\OperatorTok{$}\NormalTok{econ.act}
-
-\NormalTok{compare_var_CANCEIS <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
-  \DataTypeTok{Actuals =}\NormalTok{ actuals.CANCEIS, }\DataTypeTok{Predictions =}
-\NormalTok{    predicted.CANCEIS, }\DataTypeTok{Missing =}\NormalTok{ missing.CANCEIS}
-\NormalTok{)}
-
-\NormalTok{compare_missing_CANCEIS <-}\StringTok{ }\NormalTok{compare_var_CANCEIS[}
-\NormalTok{  compare_var_CANCEIS}\OperatorTok{$}\NormalTok{Missing }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{999}\NormalTok{, ]}
-
-\NormalTok{compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{indicator <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}
-\NormalTok{  compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{Actuals }\OperatorTok{==}
-\StringTok{    }\NormalTok{compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{Predictions,}
-  \StringTok{"Correct"}\NormalTok{, }\StringTok{"Wrong"}
-\NormalTok{)}
-
-\NormalTok{counts_CANCEIS <-}\StringTok{ }\KeywordTok{table}\NormalTok{(compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{indicator)}
-
-\KeywordTok{barplot}\NormalTok{(counts_CANCEIS, }\DataTypeTok{main =} \StringTok{"Accuracy of predictions"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{"Outcome"}\NormalTok{)}
-
-\CommentTok{# Using Confusion Matrix to evaluate predictions}
-\NormalTok{confusion_CANCEIS <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(}
-  \KeywordTok{as.factor}\NormalTok{(compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{Actuals),}
-  \KeywordTok{as.factor}\NormalTok{(compare_missing_CANCEIS}\OperatorTok{$}\NormalTok{Predictions)}
-\NormalTok{)}
-
-\KeywordTok{qplot}\NormalTok{(Actuals, Predictions,}
-      \DataTypeTok{data =}\NormalTok{ compare_missing_CANCEIS,}
-      \DataTypeTok{geom =} \KeywordTok{c}\NormalTok{(}\StringTok{"jitter"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"predicted vs. observed in validation data"}\NormalTok{,}
-      \DataTypeTok{xlab =} \StringTok{"Observed Class"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Predicted Class"}
-\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_discrete}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{,}\StringTok{"2"}\NormalTok{,}\StringTok{"3"}\NormalTok{,}\StringTok{"4"}\NormalTok{,}\StringTok{"5"}\NormalTok{,}\StringTok{"6"}\NormalTok{,}\StringTok{"7"}\NormalTok{,}\StringTok{"8"}\NormalTok{,}\StringTok{"9"}\NormalTok{)}
-\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_discrete}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{,}\StringTok{"2"}\NormalTok{,}\StringTok{"3"}\NormalTok{,}\StringTok{"4"}\NormalTok{,}\StringTok{"5"}\NormalTok{,}\StringTok{"6"}\NormalTok{,}\StringTok{"7"}\NormalTok{,}\StringTok{"8"}\NormalTok{,}\StringTok{"9"}\NormalTok{))}
-
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/EACANCEISqplot.png"}\NormalTok{)}
-
-\CommentTok{# Evaluate performance of CANCEISXG}
-\CommentTok{# Compare predicted and actuals}
-\NormalTok{actuals.CANCEISXG <-}\StringTok{ }\NormalTok{Census.test.tidy}\OperatorTok{$}\NormalTok{econ.act}
-
-\NormalTok{missing.CANCEISXG <-}\StringTok{ }\NormalTok{CANCEISXG.test.in}\OperatorTok{$}\NormalTok{econ.act}
-
-\NormalTok{predicted.CANCEISXG <-}\StringTok{ }\NormalTok{CANCEISXG.test.out}\OperatorTok{$}\NormalTok{econ.act}
-
-\NormalTok{compare_var_CANCEISXG <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
-  \DataTypeTok{Actuals =}\NormalTok{ actuals.CANCEISXG, }\DataTypeTok{Predictions =}
-\NormalTok{    predicted.CANCEISXG, }\DataTypeTok{Missing =}\NormalTok{ missing.CANCEISXG}
-\NormalTok{)}
-
-\NormalTok{compare_missing_CANCEISXG <-}\StringTok{ }\NormalTok{compare_var_CANCEISXG[}
-\NormalTok{  compare_var_CANCEISXG}\OperatorTok{$}\NormalTok{Missing }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{999}\NormalTok{, ]}
-
-\NormalTok{compare_missing_CANCEISXG}\OperatorTok{$}\NormalTok{indicator <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}
-\NormalTok{  compare_missing_CANCEISXG}\OperatorTok{$}\NormalTok{Actuals }\OperatorTok{==}
-\StringTok{    }\NormalTok{compare_missing_CANCEISXG}\OperatorTok{$}\NormalTok{Predictions,}
-  \StringTok{"Correct"}\NormalTok{, }\StringTok{"Wrong"}
-\NormalTok{)}
-
-\NormalTok{counts_CANCEISXG <-}\StringTok{ }\KeywordTok{table}\NormalTok{(compare_missing_CANCEISXG}\OperatorTok{$}\NormalTok{indicator)}
-
-\KeywordTok{barplot}\NormalTok{(counts_CANCEISXG, }\DataTypeTok{main =} \StringTok{"Accuracy of predictions"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{"Outcome"}\NormalTok{)}
-
-\CommentTok{# Using Confusion Matrix to evaluate predictions}
-\NormalTok{confusion_CANCEISXG <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(}
-  \KeywordTok{as.factor}\NormalTok{(compare_missing_CANCEISXG}\OperatorTok{$}\NormalTok{Actuals),}
-  \KeywordTok{as.factor}\NormalTok{(compare_missing_CANCEISXG}\OperatorTok{$}\NormalTok{Predictions)}
-\NormalTok{)}
-
-\KeywordTok{qplot}\NormalTok{(Actuals, Predictions,}
-      \DataTypeTok{data =}\NormalTok{ compare_missing_CANCEISXG,}
-      \DataTypeTok{geom =} \KeywordTok{c}\NormalTok{(}\StringTok{"jitter"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"predicted vs. observed in validation data"}\NormalTok{,}
-      \DataTypeTok{xlab =} \StringTok{"Observed Class"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Predicted Class"}
-\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_discrete}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{,}\StringTok{"2"}\NormalTok{,}\StringTok{"3"}\NormalTok{,}\StringTok{"4"}\NormalTok{,}\StringTok{"5"}\NormalTok{,}\StringTok{"6"}\NormalTok{,}\StringTok{"7"}\NormalTok{,}\StringTok{"8"}\NormalTok{,}\StringTok{"9"}\NormalTok{)}
-\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_y_discrete}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{,}\StringTok{"2"}\NormalTok{,}\StringTok{"3"}\NormalTok{,}\StringTok{"4"}\NormalTok{,}\StringTok{"5"}\NormalTok{,}\StringTok{"6"}\NormalTok{,}\StringTok{"7"}\NormalTok{,}\StringTok{"8"}\NormalTok{,}\StringTok{"9"}\NormalTok{))}
-
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/EACANCEISXGqplot.png"}\NormalTok{)}
-
-\CommentTok{# Impute values using mode imputation}
-\CommentTok{# Create a vector of imputable variable excluding missing values}
-\NormalTok{mode.dat <-}\StringTok{ }\NormalTok{Census.test.tidy.miss[}
-\NormalTok{  Census.test.tidy.miss}\OperatorTok{$}\NormalTok{econ.act }\OperatorTok{!=}\StringTok{ }\OperatorTok{-}\DecValTok{999}\NormalTok{, ]}
-
-\NormalTok{mode.val <-}\StringTok{ }\KeywordTok{Mode}\NormalTok{(mode.dat}\OperatorTok{$}\NormalTok{econ.act)}
-
-\CommentTok{# Compare predicted and actuals}
-\NormalTok{actuals.mode <-}\StringTok{ }\NormalTok{Census.test.tidy}\OperatorTok{$}\NormalTok{econ.act}
-
-\NormalTok{missing.mode <-}\StringTok{ }\NormalTok{Census.test.tidy.miss}\OperatorTok{$}\NormalTok{econ.act}
-
-\NormalTok{predicted.mode <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}
-\NormalTok{  Census.test.tidy.miss}\OperatorTok{$}\NormalTok{econ.act }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{999}\NormalTok{, mode.val, }
-\NormalTok{  Census.test.tidy.miss}\OperatorTok{$}\NormalTok{econ.act)}
-
-\NormalTok{compare_var_mode <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}
-  \DataTypeTok{Actuals =}\NormalTok{ actuals.mode, }\DataTypeTok{Predictions =}
-\NormalTok{    predicted.mode, }\DataTypeTok{Missing =}\NormalTok{ missing.mode}
-\NormalTok{)}
-
-\NormalTok{compare_missing_mode <-}\StringTok{ }\NormalTok{compare_var_mode[}
-\NormalTok{  compare_var_mode}\OperatorTok{$}\NormalTok{Missing }\OperatorTok{==}\StringTok{ }\OperatorTok{-}\DecValTok{999}\NormalTok{, ]}
-
-\NormalTok{compare_missing_mode}\OperatorTok{$}\NormalTok{indicator <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}
-\NormalTok{  compare_missing_mode}\OperatorTok{$}\NormalTok{Actuals }\OperatorTok{==}
-\StringTok{    }\NormalTok{compare_missing_mode}\OperatorTok{$}\NormalTok{Predictions,}
-  \StringTok{"Correct"}\NormalTok{, }\StringTok{"Wrong"}
-\NormalTok{)}
-
-\NormalTok{counts_mode <-}\StringTok{ }\KeywordTok{table}\NormalTok{(compare_missing_mode}\OperatorTok{$}\NormalTok{indicator)}
-
-\KeywordTok{barplot}\NormalTok{(counts_mode, }\DataTypeTok{main =} \StringTok{"Accuracy of predictions"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{"Outcome"}\NormalTok{)}
+\KeywordTok{save}\NormalTok{(CompareEconAct, }\DataTypeTok{file =} \StringTok{"data/output/CompareEconAct.RData"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1681,10 +1917,10 @@ the variables can be found
 \section{Summary statistics}\label{summary-statistics}
 
 Summary statistics were produced to review the pattern of responses of
-individuals included in the dataset. Please note, that all comments that
-refer to respondents reflect only the respondents included in the 2011
-Census Teaching File, and not descriptive statistics for the Census
-Population as a whole. Summary statistics produced using the dataset
+individuals included in the data set. Please note, that all comments
+that refer to respondents reflect only the respondents included in the
+2011 Census Teaching File, and not descriptive statistics for the Census
+Population as a whole. Summary statistics produced using the data set
 show that:
 
 \begin{itemize}
@@ -1701,8 +1937,8 @@ show that:
   Almost all respondents were usual residents at the collection address
   during time of collection\\
 \item
-  There were a similar number of male and female respondents in the
-  dataset\\
+  There were a similar number of male and female respondents in the data
+  set\\
 \item
   The majority of respondents were aged 0 to 15\\
 \item
@@ -1736,7 +1972,7 @@ show that:
   Of those that were eligible to answer the hours worked item, the
   majority worked between 31 and 38 hours per week\\
 \item
-  Of those elgible to answer the Social Grade item, the majority would
+  Of those eligible to answer the Social Grade item, the majority would
   be classed into the Supervisory, Clerical, and Junior Managerial
   social group
 \end{itemize}
@@ -1766,29 +2002,31 @@ show that:
 \end{Shaded}
 
 Bar charts were used to review the distribution of responses for each
-categorical variable in the complete, training and test datasets (see
+categorical variable in the complete, training and test data sets (see
 Figures 2 to 4). As expected, there was a similar response pattern for a
-each variable between the complete, training and test datasets. The
-correlation matrix in Figure 5 presents the relationship between the
-variables in the complete dataset.
+each variable between the complete, training and test data sets.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Compare the test and training datasets}
-\KeywordTok{str}\NormalTok{(Census.train)}
+\KeywordTok{str}\NormalTok{(Census.train.label)}
 
-\KeywordTok{str}\NormalTok{(Census.test)}
+\KeywordTok{str}\NormalTok{(Census.test.label)}
 
-\KeywordTok{summary}\NormalTok{(Census.train)}
+\KeywordTok{summary}\NormalTok{(Census.train.label)}
 
-\KeywordTok{summary}\NormalTok{(Census.test)}
+\KeywordTok{summary}\NormalTok{(Census.test.label)}
 
-\KeywordTok{sapply}\NormalTok{(}\KeywordTok{apply}\NormalTok{(Census.train[, }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\OperatorTok{-}\DecValTok{19}\NormalTok{)], }\DecValTok{2}\NormalTok{, table), }\ControlFlowTok{function}\NormalTok{(x) x }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(x))}
+\KeywordTok{sapply}\NormalTok{(}\KeywordTok{apply}\NormalTok{(Census.train.label[, }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\OperatorTok{-}\DecValTok{19}\NormalTok{)], }\DecValTok{2}\NormalTok{, table), }\ControlFlowTok{function}\NormalTok{(x) x }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(x))}
 
-\KeywordTok{sapply}\NormalTok{(}\KeywordTok{apply}\NormalTok{(Census.test[, }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\OperatorTok{-}\DecValTok{19}\NormalTok{)], }\DecValTok{2}\NormalTok{, table), }\ControlFlowTok{function}\NormalTok{(x) x }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(x))}
+\KeywordTok{sapply}\NormalTok{(}\KeywordTok{apply}\NormalTok{(Census.test.label[, }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\OperatorTok{-}\DecValTok{19}\NormalTok{)], }\DecValTok{2}\NormalTok{, table), }\ControlFlowTok{function}\NormalTok{(x) x }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(x))}
 
 \CommentTok{# Plot distribution of variables}
-\NormalTok{melt.Census <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(Census)}
+\NormalTok{Census.graph <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(Census, }\DataTypeTok{select=}\OperatorTok{-}\NormalTok{hours.cont)}
+
+\NormalTok{melt.Census <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(Census.graph)}
+
+\NormalTok{melt.Census <-}\StringTok{ }\NormalTok{melt.Census[}\OperatorTok{!}\NormalTok{melt.Census}\OperatorTok{$}\NormalTok{value}\OperatorTok{==-}\DecValTok{9}\NormalTok{,]}
 
 \KeywordTok{head}\NormalTok{(melt.Census)}
 
@@ -1799,21 +2037,29 @@ variables in the complete dataset.
 \KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/dist_all.png"}\NormalTok{)}
 
 \CommentTok{# Plot distribution of variables}
-\NormalTok{melt.Census.train <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(Census.train)}
+\NormalTok{Census.train.graph <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(Census.train.label, }\DataTypeTok{select=}\OperatorTok{-}\NormalTok{hours.cont)}
 
-\KeywordTok{head}\NormalTok{(melt.Census.train)}
+\NormalTok{melt.Census.train.graph <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(Census.train.graph)}
 
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ melt.Census.train, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ value)) }\OperatorTok{+}
+\NormalTok{melt.Census.train.graph <-}\StringTok{ }\NormalTok{melt.Census.train.graph[}\OperatorTok{!}\NormalTok{melt.Census.train.graph}\OperatorTok{$}\NormalTok{value}\OperatorTok{==-}\DecValTok{9}\NormalTok{,]}
+
+\KeywordTok{head}\NormalTok{(melt.Census.train.graph)}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ melt.Census.train.graph, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ value)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_bar}\NormalTok{() }\OperatorTok{+}
 \StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{variable, }\DataTypeTok{scales =} \StringTok{"free"}\NormalTok{)}
 
 \KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/dist_train.png"}\NormalTok{)}
 
-\NormalTok{melt.Census.test <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(Census.test)}
+\NormalTok{Census.test.graph <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(Census.test.label, }\DataTypeTok{select=}\OperatorTok{-}\NormalTok{hours.cont)}
 
-\KeywordTok{head}\NormalTok{(melt.Census.test)}
+\NormalTok{melt.Census.test.graph <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(Census.test.graph)}
 
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ melt.Census.test, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ value)) }\OperatorTok{+}
+\NormalTok{melt.Census.test.graph <-}\StringTok{ }\NormalTok{melt.Census.test.graph[}\OperatorTok{!}\NormalTok{melt.Census.test.graph}\OperatorTok{$}\NormalTok{value}\OperatorTok{==-}\DecValTok{9}\NormalTok{,]}
+
+\KeywordTok{head}\NormalTok{(melt.Census.test.graph)}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ melt.Census.test.graph, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ value)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_bar}\NormalTok{() }\OperatorTok{+}
 \StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{variable, }\DataTypeTok{scales =} \StringTok{"free"}\NormalTok{)}
 
@@ -1839,13 +2085,6 @@ dataset}
 \centering
 \includegraphics{images/dist_test.png}
 \caption{Figure 4. Distribution of responses for variables in test
-dataset}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics{images/corr_all.png}
-\caption{Figure 5. Correlation matrix of variables in the Census
 dataset}
 \end{figure}
 
@@ -1904,27 +2143,27 @@ Mode
 
 Accuracy
 
-0.6956778
+0.78
 
-0.5448752
+0.30
 
-0.2934148
+0.2
 
-0.4944238
+0.47
 
 Kappa
 
-0.5640313
+0.61
 
-0.3329717
+0.01
 
-0.1218344
+0.0
 
 NA
 
 \begin{figure}
 \centering
-\includegraphics{images/EAXGqplot.png}
+\includegraphics{images/EAXGBoostqplot.png}
 \caption{Performance of XGBoost in predicting economic activity}
 \end{figure}
 
@@ -1967,23 +2206,23 @@ Median
 
 MAE
 
-9.31
+9.71
 
-13.29
+14.64
 
-12.63
+14.62
 
-10.64
+10.51
 
 RMSE
 
-11.83
+12.31
 
-16.92
+18.53
 
-16.43
+18.52
 
-16.43
+13.5
 
 \subsection{Social Grade}\label{social-grade}
 
@@ -2012,27 +2251,27 @@ Mode
 
 Accuracy
 
-0.6425706
+0.62
 
-0.6230961
+0.28
 
-0.6471891
+0.28
 
-0.3447798
+0.36
 
 Kappa
 
-0.5116984
+0.49
 
-0.4873809
+0.01
 
-0.5197337
+0.01
 
 NA
 
 \begin{figure}
 \centering
-\includegraphics{images/SGXGqplot.png}
+\includegraphics{images/SGXGBoostqplot.png}
 \caption{Performance of XGBoost in predicting social grade}
 \end{figure}
 
@@ -2076,27 +2315,27 @@ Mode
 
 Accuracy
 
-0.9486349
+0.9747038
 
-0.9423158
+0.6984867
 
-0.9461053
+0.6819554
 
-0.856
+0.7763281
 
 Kappa
 
-0.8613193
+0.9192150
 
-0.7668641
+-0.0015287
 
-0.7800476
+-0.0000217
 
 NA
 
 \begin{figure}
 \centering
-\includegraphics{images/STXGqplot.png}
+\includegraphics{images/STXGBoostqplot.png}
 \caption{Performance of XGBoost in predicting student status}
 \end{figure}
 
@@ -2152,37 +2391,17 @@ the following:
 
 \section{R scripts}\label{r-scripts}
 
-All R scripts pretaining to this investigation are saved in the folder
+All R scripts pertaining to this investigation are saved in the folder
 ``R''. If you are intending to run any of the code, please load all the
-packages first, which can be found in the script
-``WF1\_package\_load.R''.
+packages and functions first, which can be found in the script
+``WF1\_package\_load.R'' and ``WF2\_function\_load.R''.
 
-The program ``WF2\_data\_prep.R'' cleans and edits the data for the
-investigation, whilst the script ``WF3\_data\_study.R'' studies the
-dataset. Scripts with the prefix ``WFM'' refer to programs that produce
-the XGBoost models for each imputable variable, and create the CANCEIS
-input files. Do not run these scripts unless you would like to replicate
-the investigation.
-
-If you would simply like to view the results, please load the packages
-and use the following scripts to compare the results of the different
-imputation methods:
-
-\begin{itemize}
-\tightlist
-\item
-  WFZ\_EconAct\_CompareImp.R: Comparing methods for the variable,
-  economic activity\\
-\item
-  WFZ\_HoursCont\_CompareImp.R: Compareing methdos for the variable,
-  hours worked (continuous)\\
-\item
-  WFZ\_SocialGrade\_CompareImp.R: Comparing methods for the variable,
-  social grade\\
-\item
-  WFZ\_Student\_CompareImp.R: Comparing methods for the variable,
-  student status
-\end{itemize}
+The program ``WF3\_data\_prep.R'' cleans and edits the data for the
+investigation, whilst the scripts ``WF4\_missingness.R'' and
+``WF5\_data\_load.R'' simulate missigness and produce descriptive
+statistics of the data sets respectively. Scripts with the prefix
+``WFI'' refer to programs that carry out the imputation for each
+variable.
 
 \section{Data}\label{data}
 
@@ -2201,16 +2420,27 @@ The folder named ``data'' includes:
 \section{XGBoost}\label{xgboost-1}
 
 The models produced for each imputable variable can be found in the
-following folder (located in the main directory):\\
-- XGBoost
+following folder (located in the main directory):
+
+\begin{itemize}
+\tightlist
+\item
+  XGBoost
+\end{itemize}
 
 \section{Donor imputation}\label{donor-imputation}
 
 The CANCEIS specifications used for the two rounds of donor based
 imputation can be found in the following folders (located in the main
-directory):\\
-- CANCEIS\\
-- MixedMethods
+directory):
+
+\begin{itemize}
+\tightlist
+\item
+  CANCEIS\\
+\item
+  MixedMethods
+\end{itemize}
 
 \bibliography{book.bib,packages.bib}
 

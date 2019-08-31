@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="This document presents the findings from the 2018/19 project into the use of machine learning in imputation." />
   
 
-<meta name="author" content="Methodology" />
+<meta name="author" content="Vinayak Anand-Kumar" />
 
 
 <meta name="date" content="2019-01-01" />
@@ -100,8 +100,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><img src="images/ONS.png"></li>
-<li><a href="https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts">Office for National Statistics</a></li>
+<li><p style="text-align:center;"><img src="images/open.png" style="width:100px;height:100px"></p></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -180,7 +179,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 7</span> Results</h1>
 <div id="summary-statistics" class="section level2">
 <h2><span class="header-section-number">7.1</span> Summary statistics</h2>
-<p>Summary statistics were produced to review the pattern of responses of individuals included in the dataset. Please note, that all comments that refer to respondents reflect only the respondents included in the 2011 Census Teaching File, and not descriptive statistics for the Census Population as a whole. Summary statistics produced using the dataset show that:</p>
+<p>Summary statistics were produced to review the pattern of responses of individuals included in the data set. Please note, that all comments that refer to respondents reflect only the respondents included in the 2011 Census Teaching File, and not descriptive statistics for the Census Population as a whole. Summary statistics produced using the data set show that:</p>
 <ul>
 <li>The majority of respondents resided in the South East and London. A relatively small proportion reside in North East and Wales.<br />
 </li>
@@ -190,7 +189,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </li>
 <li>Almost all respondents were usual residents at the collection address during time of collection<br />
 </li>
-<li>There were a similar number of male and female respondents in the dataset<br />
+<li>There were a similar number of male and female respondents in the data set<br />
 </li>
 <li>The majority of respondents were aged 0 to 15<br />
 </li>
@@ -211,7 +210,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </li>
 <li>Of those that were eligible to answer the hours worked item, the majority worked between 31 and 38 hours per week<br />
 </li>
-<li>Of those elgible to answer the Social Grade item, the majority would be classed into the Supervisory, Clerical, and Junior Managerial social group</li>
+<li>Of those eligible to answer the Social Grade item, the majority would be classed into the Supervisory, Clerical, and Junior Managerial social group</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Study the data: 1) How many units, 2) How many attributes? and </span>
 <span class="co"># 3) How many missing units?</span>
@@ -232,22 +231,26 @@ missing_values &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
 )
 
 <span class="kw">ggsave</span>(<span class="st">&quot;images/cor_all.png&quot;</span>)</code></pre></div>
-<p>Bar charts were used to review the distribution of responses for each categorical variable in the complete, training and test datasets (see Figures 2 to 4). As expected, there was a similar response pattern for a each variable between the complete, training and test datasets. The correlation matrix in Figure 5 presents the relationship between the variables in the complete dataset.</p>
+<p>Bar charts were used to review the distribution of responses for each categorical variable in the complete, training and test data sets (see Figures 2 to 4). As expected, there was a similar response pattern for a each variable between the complete, training and test data sets.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compare the test and training datasets</span>
-<span class="kw">str</span>(Census.train)
+<span class="kw">str</span>(Census.train.label)
 
-<span class="kw">str</span>(Census.test)
+<span class="kw">str</span>(Census.test.label)
 
-<span class="kw">summary</span>(Census.train)
+<span class="kw">summary</span>(Census.train.label)
 
-<span class="kw">summary</span>(Census.test)
+<span class="kw">summary</span>(Census.test.label)
 
-<span class="kw">sapply</span>(<span class="kw">apply</span>(Census.train[, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">19</span>)], <span class="dv">2</span>, table), <span class="cf">function</span>(x) x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x))
+<span class="kw">sapply</span>(<span class="kw">apply</span>(Census.train.label[, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">19</span>)], <span class="dv">2</span>, table), <span class="cf">function</span>(x) x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x))
 
-<span class="kw">sapply</span>(<span class="kw">apply</span>(Census.test[, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">19</span>)], <span class="dv">2</span>, table), <span class="cf">function</span>(x) x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x))
+<span class="kw">sapply</span>(<span class="kw">apply</span>(Census.test.label[, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">19</span>)], <span class="dv">2</span>, table), <span class="cf">function</span>(x) x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x))
 
 <span class="co"># Plot distribution of variables</span>
-melt.Census &lt;-<span class="st"> </span><span class="kw">melt</span>(Census)
+Census.graph &lt;-<span class="st"> </span><span class="kw">subset</span>(Census, <span class="dt">select=</span><span class="op">-</span>hours.cont)
+
+melt.Census &lt;-<span class="st"> </span><span class="kw">melt</span>(Census.graph)
+
+melt.Census &lt;-<span class="st"> </span>melt.Census[<span class="op">!</span>melt.Census<span class="op">$</span>value<span class="op">==-</span><span class="dv">9</span>,]
 
 <span class="kw">head</span>(melt.Census)
 
@@ -258,21 +261,29 @@ melt.Census &lt;-<span class="st"> </span><span class="kw">melt</span>(Census)
 <span class="kw">ggsave</span>(<span class="st">&quot;images/dist_all.png&quot;</span>)
 
 <span class="co"># Plot distribution of variables</span>
-melt.Census.train &lt;-<span class="st"> </span><span class="kw">melt</span>(Census.train)
+Census.train.graph &lt;-<span class="st"> </span><span class="kw">subset</span>(Census.train.label, <span class="dt">select=</span><span class="op">-</span>hours.cont)
 
-<span class="kw">head</span>(melt.Census.train)
+melt.Census.train.graph &lt;-<span class="st"> </span><span class="kw">melt</span>(Census.train.graph)
 
-<span class="kw">ggplot</span>(<span class="dt">data =</span> melt.Census.train, <span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span>
+melt.Census.train.graph &lt;-<span class="st"> </span>melt.Census.train.graph[<span class="op">!</span>melt.Census.train.graph<span class="op">$</span>value<span class="op">==-</span><span class="dv">9</span>,]
+
+<span class="kw">head</span>(melt.Census.train.graph)
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> melt.Census.train.graph, <span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)
 
 <span class="kw">ggsave</span>(<span class="st">&quot;images/dist_train.png&quot;</span>)
 
-melt.Census.test &lt;-<span class="st"> </span><span class="kw">melt</span>(Census.test)
+Census.test.graph &lt;-<span class="st"> </span><span class="kw">subset</span>(Census.test.label, <span class="dt">select=</span><span class="op">-</span>hours.cont)
 
-<span class="kw">head</span>(melt.Census.test)
+melt.Census.test.graph &lt;-<span class="st"> </span><span class="kw">melt</span>(Census.test.graph)
 
-<span class="kw">ggplot</span>(<span class="dt">data =</span> melt.Census.test, <span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span>
+melt.Census.test.graph &lt;-<span class="st"> </span>melt.Census.test.graph[<span class="op">!</span>melt.Census.test.graph<span class="op">$</span>value<span class="op">==-</span><span class="dv">9</span>,]
+
+<span class="kw">head</span>(melt.Census.test.graph)
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> melt.Census.test.graph, <span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)
 
@@ -288,10 +299,6 @@ melt.Census.test &lt;-<span class="st"> </span><span class="kw">melt</span>(Cens
 <div class="figure">
 <img src="images/dist_test.png" alt="Figure 4. Distribution of responses for variables in test dataset" />
 <p class="caption">Figure 4. Distribution of responses for variables in test dataset</p>
-</div>
-<div class="figure">
-<img src="images/corr_all.png" alt="Figure 5. Correlation matrix of variables in the Census dataset" />
-<p class="caption">Figure 5. Correlation matrix of variables in the Census dataset</p>
 </div>
 </div>
 <div id="comparison-of-imputation-methods" class="section level2">
@@ -337,16 +344,16 @@ Mode
 Accuracy
 </td>
 <td style="text-align:right;">
-0.6956778
+0.78
 </td>
 <td style="text-align:right;">
-0.5448752
+0.30
 </td>
 <td style="text-align:right;">
-0.2934148
+0.2
 </td>
 <td style="text-align:right;">
-0.4944238
+0.47
 </td>
 </tr>
 <tr>
@@ -354,13 +361,13 @@ Accuracy
 Kappa
 </td>
 <td style="text-align:right;">
-0.5640313
+0.61
 </td>
 <td style="text-align:right;">
-0.3329717
+0.01
 </td>
 <td style="text-align:right;">
-0.1218344
+0.0
 </td>
 <td style="text-align:right;">
 NA
@@ -369,7 +376,7 @@ NA
 </tbody>
 </table>
 <div class="figure">
-<img src="images/EAXGqplot.png" alt="Performance of XGBoost in predicting economic activity" />
+<img src="images/EAXGBoostqplot.png" alt="Performance of XGBoost in predicting economic activity" />
 <p class="caption">Performance of XGBoost in predicting economic activity</p>
 </div>
 <div class="figure">
@@ -416,16 +423,16 @@ Median
 MAE
 </td>
 <td style="text-align:left;">
-9.31
+9.71
 </td>
 <td style="text-align:left;">
-13.29
+14.64
 </td>
 <td style="text-align:left;">
-12.63
+14.62
 </td>
 <td style="text-align:left;">
-10.64
+10.51
 </td>
 </tr>
 <tr>
@@ -433,16 +440,16 @@ MAE
 RMSE
 </td>
 <td style="text-align:left;">
-11.83
+12.31
 </td>
 <td style="text-align:left;">
-16.92
+18.53
 </td>
 <td style="text-align:left;">
-16.43
+18.52
 </td>
 <td style="text-align:left;">
-16.43
+13.5
 </td>
 </tr>
 </tbody>
@@ -481,16 +488,16 @@ Mode
 Accuracy
 </td>
 <td style="text-align:right;">
-0.6425706
+0.62
 </td>
 <td style="text-align:right;">
-0.6230961
+0.28
 </td>
 <td style="text-align:right;">
-0.6471891
+0.28
 </td>
 <td style="text-align:right;">
-0.3447798
+0.36
 </td>
 </tr>
 <tr>
@@ -498,13 +505,13 @@ Accuracy
 Kappa
 </td>
 <td style="text-align:right;">
-0.5116984
+0.49
 </td>
 <td style="text-align:right;">
-0.4873809
+0.01
 </td>
 <td style="text-align:right;">
-0.5197337
+0.01
 </td>
 <td style="text-align:right;">
 NA
@@ -513,7 +520,7 @@ NA
 </tbody>
 </table>
 <div class="figure">
-<img src="images/SGXGqplot.png" alt="Performance of XGBoost in predicting social grade" />
+<img src="images/SGXGBoostqplot.png" alt="Performance of XGBoost in predicting social grade" />
 <p class="caption">Performance of XGBoost in predicting social grade</p>
 </div>
 <div class="figure">
@@ -558,16 +565,16 @@ Mode
 Accuracy
 </td>
 <td style="text-align:right;">
-0.9486349
+0.9747038
 </td>
 <td style="text-align:right;">
-0.9423158
+0.6984867
 </td>
 <td style="text-align:right;">
-0.9461053
+0.6819554
 </td>
 <td style="text-align:right;">
-0.856
+0.7763281
 </td>
 </tr>
 <tr>
@@ -575,13 +582,13 @@ Accuracy
 Kappa
 </td>
 <td style="text-align:right;">
-0.8613193
+0.9192150
 </td>
 <td style="text-align:right;">
-0.7668641
+-0.0015287
 </td>
 <td style="text-align:right;">
-0.7800476
+-0.0000217
 </td>
 <td style="text-align:right;">
 NA
@@ -590,7 +597,7 @@ NA
 </tbody>
 </table>
 <div class="figure">
-<img src="images/STXGqplot.png" alt="Performance of XGBoost in predicting student status" />
+<img src="images/STXGBoostqplot.png" alt="Performance of XGBoost in predicting student status" />
 <p class="caption">Performance of XGBoost in predicting student status</p>
 </div>
 <div class="figure">

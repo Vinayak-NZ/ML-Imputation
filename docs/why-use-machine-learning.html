@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="This document presents the findings from the 2018/19 project into the use of machine learning in imputation." />
   
 
-<meta name="author" content="Methodology" />
+<meta name="author" content="Vinayak Anand-Kumar" />
 
 
 <meta name="date" content="2019-01-01" />
@@ -100,8 +100,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><img src="images/ONS.png"></li>
-<li><a href="https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts">Office for National Statistics</a></li>
+<li><p style="text-align:center;"><img src="images/open.png" style="width:100px;height:100px"></p></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -178,7 +177,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="why-use-machine-learning" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Why use Machine Learning?</h1>
-<p>It was of interest to explore the utility of Machine Learning to directly impute for missing values in datasets. More specifically, the Methods Division was interested in examining whether Machine Learning models can improve the timeliness, reliability and accuracy of the imputation process in social survey data. Figure 1 presents the imputation pipeline for social survey data. Prior to imputation, units and values are reviewed, and those that are missing and should be routed to the item in question, are selected (i.e. flagged) for imputation. Data is then further processed by the Social Survey Division before imputed and observed data are compiled in an analysis dataset, used for publishing Official Statistics estimates.</p>
+<p>It was of interest to explore the utility of Machine Learning to directly impute for missing values in data sets. More specifically, the analysts were interested in examining whether Machine Learning models can improve the timeliness, reliability and accuracy of the imputation process in social survey data. Figure 1 presents the imputation pipeline for social survey data. Prior to imputation, units and values are reviewed, and those that are missing and should be routed to the item in question, are selected (i.e. flagged) for imputation. Data is then further processed before imputed and observed data are compiled in an analysis data set, used for publishing estimates and carrying out analyses.</p>
 <div class="figure">
 <img src="images/CurrentPipeline.png" alt="Figure 1. Imputation pipeline in social survey data." />
 <p class="caption">Figure 1. Imputation pipeline in social survey data.</p>
@@ -189,8 +188,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </li>
 <li>Iterating through weights for matching variables so that all missing values are imputed</li>
 </ul>
-<p>Designing the selection criteria for donors can be time consuming as it requires analysts to identify matching variables (MV), along with weights for each MV. Teams currently use subject matter expertise in designing the donor imputation strategy for each variable. As this process is not data driven, it introduces an element of subjectivity and does not guarantee that matching variables selected are the best predictors of the variable of interest. In contrast, a data driven approach would be reproducible and identify the best predictors, in the dataset, to estimate missing values. Moreover, applying the machine learning system may offer a more parsimonious approach as fewer input paramters and files would be required in executing imputation.</p>
-<p>The Methodology Division was interested in whether a Machine Learning System would perform better compared to the current imputation process with regards to:</p>
+<p>Designing the selection criteria for donors can be time consuming as it requires analysts to identify matching variables (MV), along with weights for each MV. Teams currently use subject matter expertise in designing the donor imputation strategy for each variable. As this process is not data driven, it introduces an element of subjectivity and does not guarantee that matching variables selected are the best predictors of the variable of interest. In contrast, a data driven approach would be reproducible and identify the best predictors, in the data set, to estimate missing values. Moreover, applying the machine learning system may offer a more parsimonious approach as fewer input parameters and files would be required in executing imputation.</p>
+<p>Analysts were interested in whether a Machine Learning System would perform better compared to the current imputation process with regards to:</p>
 <ul>
 <li>Timeliness: Would the ML system reduce processing time and by how much?<br />
 </li>

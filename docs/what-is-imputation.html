@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="This document presents the findings from the 2018/19 project into the use of machine learning in imputation." />
   
 
-<meta name="author" content="Methodology" />
+<meta name="author" content="Vinayak Anand-Kumar" />
 
 
 <meta name="date" content="2019-01-01" />
@@ -100,8 +100,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><img src="images/ONS.png"></li>
-<li><a href="https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts">Office for National Statistics</a></li>
+<li><p style="text-align:center;"><img src="images/open.png" style="width:100px;height:100px"></p></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -178,7 +177,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="what-is-imputation" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> What is Imputation?</h1>
-<p>Editing and imputing are both methods of data processing. Editing refers to the detection and correction of errors in the data. Whilst imputation is a method of correcting errors and estimating and filling in missing values in a dataset. Where there are errors in the dataset, and when these are considered to add no value in the correction process, these values are set to missing and are imputed with a plausible estimate. Alternatively, missing values may already exist in the data, and imputation may be carried out to produce a complete dataset for analysis.</p>
+<p>Editing and imputing are both methods of data processing. Editing refers to the detection and correction of errors in the data. Whilst imputation is a method of correcting errors and estimating and filling in missing values in a data set. Where there are errors in the data set, and when these are considered to add no value in the correction process, these values are set to missing and are imputed with a plausible estimate. Alternatively, missing values may already exist in the data, and imputation may be carried out to produce a complete data set for analysis.</p>
 <p>This research project evaluated the use of machine learning methods for imputation. In order to provide a context for using machine learning in the imputation process, the reader is presented with:</p>
 <ul>
 <li>A rationale for carrying out imputation<br />
@@ -187,19 +186,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <div id="why-is-imputation-carried-out" class="section level2">
 <h2><span class="header-section-number">2.1</span> Why is imputation carried out?</h2>
-<p>Missingness and erroneous values can impact the quality of data. A large volume of incorrect and/or missing values increase the risk of the product failing to capture the target concept or target population. That is, ommissions (introduced in collection or processing) may result in certain sub-groups of the target population from being excluded in the analysis dataset, and in turn increasing the risk of biased estimates, reducing the power of inferential statistics and increasing the uncertainty of estimates and inferences derived from the data. Similarly, errors in a dataset may impact the degree to which the final estimate or output represents the reality it was designed to capture.</p>
-<p>Correcting erroneous responses and filling in missing values helps manage the quality of data. A complete dataset can improve the accuracy and reliability of estimates, and help maintain the consistency of counts across published tables. Moreover, a dataset with fewer errors and more units may more accuately capture the underlying distribution of the variable of interest. Selecting a method for estimating values in a datset is generally advised by the nature of errors or missingness in the data, and the output desired from the analysis dataset.</p>
+<p>Missingness and erroneous values can impact the quality of data. A large volume of incorrect and/or missing values increase the risk of the product failing to capture the target concept or target population. That is, omissions (introduced in collection or processing) may result in certain sub-groups of the target population from being excluded in the analysis data set, and in turn increasing the risk of biased estimates, reducing the power of inferential statistics and increasing the uncertainty of estimates and inferences derived from the data. Similarly, errors in a data set may impact the degree to which the final estimate or output represents the reality it was designed to capture.</p>
+<p>Correcting erroneous responses and filling in missing values helps manage the quality of data. A complete data set can improve the accuracy and reliability of estimates, and help maintain the consistency of counts across published tables. Moreover, a data set with fewer errors and more units may more accurately capture the underlying distribution of the variable of interest. Selecting a method for estimating values in a data set is generally advised by the nature of errors or missingness in the data, and the output desired from the analysis data set.</p>
 </div>
 <div id="methods" class="section level2">
 <h2><span class="header-section-number">2.2</span> Methods</h2>
-<p>An imputation process of a dataset can be broken down into the following three phases:</p>
+<p>An imputation process of a data set can be broken down into the following three phases:</p>
 <ol style="list-style-type: decimal">
 <li>Review, whereby data is examined for potential problems; identifying instances of missingness and erroneous values<br />
 </li>
 <li>Select, whereby data is identified for further treatment. Of the potential problems identified in the review phase, a method is applied to determine which of these erroneous or missing cases need to be treated</li>
 <li>Amend, whereby changes are applied to the data identified in the select phase by either correcting errors/ filling in missing values</li>
 </ol>
-<p>The focus of this project was in applying Machine Learning methods to amend values in a dataset. That is, it was of interest to compare existing approaches, of treating missing or erroneous values by estimating replacement figures, to machine learning methods. Methods of variable amendment can be grouped into one of the following categories:</p>
+<p>The focus of this project was in applying Machine Learning methods to amend values in a data set. That is, it was of interest to compare existing approaches, of treating missing or erroneous values by estimating replacement figures, to machine learning methods. Methods of variable amendment can be grouped into one of the following categories:</p>
 <ul>
 <li>interactive treatment<br />
 </li>
