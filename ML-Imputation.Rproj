@@ -13,4 +13,4 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Website
-WebsitePath: ~/Documents/Work/ML-Imputation
+WebsitePath: ~/Documents/Statistics/ML-Imputation

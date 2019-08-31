@@ -1,16 +1,9 @@
 # Resources
 
 ## R scripts
-All R scripts pretaining to this investigation are saved in the folder "R". If you are intending to run any of the code, please load all the packages first, which can be found in the script "WF1_package_load.R".  
+All R scripts pertaining to this investigation are saved in the folder "R". If you are intending to run any of the code, please load all the packages and functions first, which can be found in the script "WF1_package_load.R" and "WF2_function_load.R".  
 
-The program "WF2_data_prep.R" cleans and edits the data for the investigation, whilst the script "WF3_data_study.R" studies the dataset. Scripts with the prefix "WFM" refer to programs that produce the XGBoost models for each imputable variable, and create the CANCEIS input files. Do not run these scripts unless you would like to replicate the investigation.  
-
-If you would simply like to view the results, please load the packages and use the following scripts to compare the results of the different imputation methods:  
-
-- WFZ_EconAct_CompareImp.R: Comparing methods for the variable, economic activity  
-- WFZ_HoursCont_CompareImp.R: Compareing methdos for the variable, hours worked (continuous)  
-- WFZ_SocialGrade_CompareImp.R: Comparing methods for the variable, social grade  
-- WFZ_Student_CompareImp.R: Comparing methods for the variable, student status  
+The program "WF3_data_prep.R" cleans and edits the data for the investigation, whilst the scripts "WF4_missingness.R" and "WF5_data_load.R" simulate missigness and produce descriptive statistics of the data sets respectively. Scripts with the prefix "WFI" refer to programs that carry out the imputation for each variable.    
 
 ## Data
 The folder named "data" includes:  

@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="This document presents the findings from the 2018/19 project into the use of machine learning in imputation." />
   
 
-<meta name="author" content="Methodology" />
+<meta name="author" content="Vinayak Anand-Kumar" />
 
 
 <meta name="date" content="2019-01-01" />
@@ -100,8 +100,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><img src="images/ONS.png"></li>
-<li><a href="https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts">Office for National Statistics</a></li>
+<li><p style="text-align:center;"><img src="images/open.png" style="width:100px;height:100px"></p></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
@@ -180,18 +179,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 9</span> Resources</h1>
 <div id="r-scripts" class="section level2">
 <h2><span class="header-section-number">9.1</span> R scripts</h2>
-<p>All R scripts pretaining to this investigation are saved in the folder “R”. If you are intending to run any of the code, please load all the packages first, which can be found in the script “WF1_package_load.R”.</p>
-<p>The program “WF2_data_prep.R” cleans and edits the data for the investigation, whilst the script “WF3_data_study.R” studies the dataset. Scripts with the prefix “WFM” refer to programs that produce the XGBoost models for each imputable variable, and create the CANCEIS input files. Do not run these scripts unless you would like to replicate the investigation.</p>
-<p>If you would simply like to view the results, please load the packages and use the following scripts to compare the results of the different imputation methods:</p>
-<ul>
-<li>WFZ_EconAct_CompareImp.R: Comparing methods for the variable, economic activity<br />
-</li>
-<li>WFZ_HoursCont_CompareImp.R: Compareing methdos for the variable, hours worked (continuous)<br />
-</li>
-<li>WFZ_SocialGrade_CompareImp.R: Comparing methods for the variable, social grade<br />
-</li>
-<li>WFZ_Student_CompareImp.R: Comparing methods for the variable, student status</li>
-</ul>
+<p>All R scripts pertaining to this investigation are saved in the folder “R”. If you are intending to run any of the code, please load all the packages and functions first, which can be found in the script “WF1_package_load.R” and “WF2_function_load.R”.</p>
+<p>The program “WF3_data_prep.R” cleans and edits the data for the investigation, whilst the scripts “WF4_missingness.R” and “WF5_data_load.R” simulate missigness and produce descriptive statistics of the data sets respectively. Scripts with the prefix “WFI” refer to programs that carry out the imputation for each variable.</p>
 </div>
 <div id="data" class="section level2">
 <h2><span class="header-section-number">9.2</span> Data</h2>
@@ -204,20 +193,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="xgboost-1" class="section level2">
 <h2><span class="header-section-number">9.3</span> XGBoost</h2>
-<p>The models produced for each imputable variable can be found in the following folder (located in the main directory):<br />
-- XGBoost</p>
+<p>The models produced for each imputable variable can be found in the following folder (located in the main directory):</p>
+<ul>
+<li>XGBoost</li>
+</ul>
 </div>
 <div id="donor-imputation" class="section level2">
 <h2><span class="header-section-number">9.4</span> Donor imputation</h2>
-<p>The CANCEIS specifications used for the two rounds of donor based imputation can be found in the following folders (located in the main directory):<br />
-- CANCEIS<br />
-- MixedMethods</p>
+<p>The CANCEIS specifications used for the two rounds of donor based imputation can be found in the following folders (located in the main directory):</p>
+<ul>
+<li>CANCEIS<br />
+</li>
+<li>MixedMethods</li>
+</ul>
 
-<div id="refs" class="references">
-<div>
-<p>Ton de Waal, Sander Scholtus, Jeroen Pannekoek. 2011. <em>Handbook of Statistical Data Editing and Imputation</em>. 1st ed. Hoboken, New Jersey: John Wiley Sons Inc. <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470904848" class="uri">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470904848</a>.</p>
-</div>
-</div>
 </div>
 </div>
             </section>

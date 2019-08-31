@@ -1,13 +1,13 @@
 # Results
 
 ## Summary statistics
-Summary statistics were produced to review the pattern of responses of individuals included in the dataset. Please note, that all comments that refer to respondents reflect only the respondents included in the 2011 Census Teaching File, and not descriptive statistics for the Census Population as a whole. Summary statistics produced using the dataset show that:  
+Summary statistics were produced to review the pattern of responses of individuals included in the data set. Please note, that all comments that refer to respondents reflect only the respondents included in the 2011 Census Teaching File, and not descriptive statistics for the Census Population as a whole. Summary statistics produced using the data set show that:  
   
 - The majority of respondents resided in the South East and London. A relatively small proportion reside in North East and Wales.  
 - Almost all respondents resided in a non-communal establishment  
 - The majority of respondents were living in a family that was composed of a married or same-sex civil partnership couple  
 - Almost all respondents were usual residents at the collection address during time of collection  
-- There were a similar number of male and female respondents in the dataset  
+- There were a similar number of male and female respondents in the data set  
 - The majority of respondents were aged 0 to 15  
 - The majority of respondents were single and had never married or registered for a same-sex civil partnership
 - The majority of respondents were not school children nor were they in full time study
@@ -19,12 +19,12 @@ Summary statistics were produced to review the pattern of responses of individua
 - Of those that were eligible to answer the Occupation item, the majority were either in a Professional or Elementary occupation  
 - Of those that were eligible to answer the Industry item, the majority were employed in the Wholesale and retail trade industry  
 - Of those that were eligible to answer the hours worked item, the majority worked between 31 and 38 hours per week  
-- Of those elgible to answer the Social Grade item, the majority would be classed into the Supervisory, Clerical, and Junior Managerial social group  
+- Of those eligible to answer the Social Grade item, the majority would be classed into the Supervisory, Clerical, and Junior Managerial social group  
 
 ```{r study-census-data, eval=FALSE}
 ```
 
-Bar charts were used to review the distribution of responses for each categorical variable in the complete, training and test datasets (see Figures 2 to 4). As expected, there was a similar response pattern for a each variable between the complete, training and test datasets. The correlation matrix in Figure 5 presents the relationship between the variables in the complete dataset.    
+Bar charts were used to review the distribution of responses for each categorical variable in the complete, training and test data sets (see Figures 2 to 4). As expected, there was a similar response pattern for a each variable between the complete, training and test data sets.     
 
 ```{r compare-test-train, eval=FALSE}
 ```
@@ -34,8 +34,6 @@ Bar charts were used to review the distribution of responses for each categorica
 ![Figure 3. Distribution of responses for variables in training dataset](images/dist_train.png)
 
 ![Figure 4. Distribution of responses for variables in test dataset](images/dist_test.png)
-
-![Figure 5. Correlation matrix of variables in the Census dataset](images/corr_all.png)
 
 ## Comparison of imputation methods
 The results for the different imputation methods are presented for each imputable variable. Performance measures were selected based on the type of imputable variable used (i.e. categorical or continuous). Please refer to the links below for guidance on interpreting the performance measures:  
@@ -54,12 +52,12 @@ The results shows that:
 - The Mixed Methods model was the least accurate imputation method for the multi-class variable, economic activity.
 
 ```{r econRes, echo=FALSE}
-load("data/EconAct/CompareEconAct.RData")
+load("data/output/CompareEconAct.RData")
 kable(CompareEconAct)
 ```
 
 
-![Performance of XGBoost in predicting economic activity](images/EAXGqplot.png)
+![Performance of XGBoost in predicting economic activity](images/EAXGBoostqplot.png)
 
 ![Performance of CANCEIS in predicting economic activity](images/EACANCEISqplot.png)
 
@@ -74,7 +72,7 @@ The results shows that:
 - Donor based imputation had the lowest level of accuracy
 
 ```{r hoursRes, echo=FALSE}
-load("data/HoursCont/CompareHoursCont.RData")
+load("data/output/CompareHoursCont.RData")
 kable(CompareHoursCont)
 ```
 
@@ -86,11 +84,11 @@ The results shows that:
 - Compared to donor based methods, the XGBoost model appeared to have greater sensitivity for the different classes of social grade. That is, for any given class of social grade, the model based approach was more likely to predict the correct response relative to donor based methods.  
 
 ```{r socGRes, echo=FALSE}
-load("data/SocialGrade/CompareSocGrad.RData")
-kable(CompareSocGrad)
+load("data/output/CompareSocialGrade.RData")
+kable(CompareSocialGrade)
 ```
 
-![Performance of XGBoost in predicting social grade](images/SGXGqplot.png)
+![Performance of XGBoost in predicting social grade](images/SGXGBoostqplot.png)
 
 ![Performance of CANCEIS in predicting social grade](images/SGCANCEISqplot.png)
 
@@ -104,11 +102,11 @@ The results shows that:
 - Compared to donor based methods, the XGBoost model appeared to have greater sensitivity for the different classes of student status. That is, for both students and non-students, the model based approach was more likely to predict the correct response relative to donor based methods.  
 
 ```{r stuRes, echo=FALSE}
-load("data/Student/CompareStudent.RData")
+load("data/output/CompareStudent.RData")
 kable(CompareStudent)
 ```
 
-![Performance of XGBoost in predicting student status](images/STXGqplot.png)
+![Performance of XGBoost in predicting student status](images/STXGBoostqplot.png)
 
 ![Performance of CANCEIS in predicting student status](images/STCANCEISqplot.png)
 

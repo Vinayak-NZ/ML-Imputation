@@ -1,6 +1,6 @@
 --- 
 title: "Applications of Machine Learning in Imputation"
-author: "Methodology"
+author: "Vinayak Anand-Kumar"
 date: "2019"
 site: bookdown::bookdown_site
 output: 
@@ -27,15 +27,17 @@ source("R/WF1_package_load.R")
 
 ```{r external, include=FALSE}
 knitr::read_chunk("R/WF1_package_load.R")
+knitr::read_chunk("R/WF2_function_load.R")
+knitr::read_chunk("R/WF3_data_prep.R")
+knitr::read_chunk("R/WF4_missingness.R")
+knitr::read_chunk("R/WF5_data_load.R")
+knitr::read_chunk("R/WF6_data_study.R")
+knitr::read_chunk("R/WFI_EconAct.R")
 knitr::read_chunk("R/xgboost_template.R")
-knitr::read_chunk("R/WF2_data_prep.R")
-knitr::read_chunk("R/WF3_data_study.R")
-knitr::read_chunk("R/WFM_EconAct.R")
-knitr::read_chunk("R/WFZ_EconAct_CompareImp.R")
 
 ```
 
-Editing and imputation are both methods of data processing. Editing refers to the detection and correction of errors in the data, whilst imputation is a method of correcting errors in a dataset [@deWaal]. This document presents findings from work carried out at the Office for National Statistics on the use of machine learning in imputation. The chapters address the following questions:  
+Editing and imputation are both methods of data processing. Editing refers to the detection and correction of errors in the data, whilst imputation is a method of correcting errors in a dataset. This document presents findings from work carried out on the use of machine learning in imputation. The chapters address the following questions:  
   
 1) What is imputation?  
 2) What is machine learning?  

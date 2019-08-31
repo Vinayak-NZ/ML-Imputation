@@ -4,8 +4,7 @@ bookdown::gitbook:
     toc:
       collapse: subsection
       before: |
-        <li><img src="images/ONS.png"></li>
-        <li><a href="https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts">Office for National Statistics</a></li>
+        <li><p style="text-align:center;"><img src="images/open.png" style="width:100px;height:100px"></p></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
